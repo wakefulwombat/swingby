@@ -1,5 +1,4 @@
-#ifndef _SCENEMANAGER_
-#define _SCENEMANAGER_
+#pragma once
 
 #include "common.h"
 #include "base_taskBase.h"
@@ -41,5 +40,3 @@ public:
 
 	void setNextScene(SceneKind nextScene) override { this->nextScene = nextScene; }
 };
-
-#endif

@@ -1,5 +1,4 @@
-#ifndef _BASE_OBJECTBASE_
-#define _BASE_OBJECTBASE_
+#pragma once
 
 #include "common.h"
 #include "base_taskBase.h"
@@ -66,5 +65,3 @@ public:
 
 	bool operator<(const ObjectBase* obj){ return this->z_sort < obj->z_sort; }
 };
-
-#endif

@@ -1,5 +1,4 @@
-#ifndef _SOUND_
-#define _SOUND_
+#pragma once
 
 enum class SoundList{
 	OK,
@@ -22,5 +21,3 @@ public:
 
 	static void playAll();
 };
-
-#endif

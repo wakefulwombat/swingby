@@ -1,5 +1,4 @@
-#ifndef _MUSIC_
-#define _MUSIC_
+#pragma once
 
 #include <string>
 
@@ -26,5 +25,3 @@ public:
 	static void setVolume(int volume);
 	static void setSpeedRatio(double ratio);
 };
-
-#endif

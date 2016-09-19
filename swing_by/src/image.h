@@ -1,5 +1,4 @@
-#ifndef _IMAGE_
-#define _IMAGE_
+#pragma once
 
 class Image{
 private:
@@ -14,5 +13,3 @@ public:
 	static void loadGameScene();
 	static void loadOtherScene();
 };
-
-#endif

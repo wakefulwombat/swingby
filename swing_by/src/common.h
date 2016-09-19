@@ -1,5 +1,4 @@
-#ifndef _COMMON_
-#define _COMMON_
+#pragma once
 #define _USE_MATH_DEFINES
 
 class Size{
@@ -28,5 +27,3 @@ public:
 };
 
 int Round(double x);
-
-#endif

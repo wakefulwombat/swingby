@@ -1,5 +1,4 @@
-#ifndef _INTERFACE_SETNEXTSCENE_
-#define _INTERFACE_SETNEXTSCENE_
+#pragma once
 
 enum class SceneKind;
 
@@ -8,5 +7,3 @@ public:
 	virtual ~ISetNextScene(){}
 	virtual void setNextScene(SceneKind kind) = 0;
 };
-
-#endif

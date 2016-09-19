@@ -1,5 +1,4 @@
-#ifndef _BASE_TASKBASE_
-#define _BASE_TASKBASE_
+#pragma once
 
 class TaskBase{
 public:
@@ -9,5 +8,3 @@ public:
 	virtual void draw() const = 0;
 	virtual void finalize(){};
 };
-
-#endif

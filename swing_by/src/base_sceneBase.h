@@ -1,5 +1,4 @@
-#ifndef _BASE_SCENEBASE_
-#define _BASE_SCENEBASE_
+#pragma once
 
 #include "base_taskBase.h"
 #include "interface_setNextScene.h"
@@ -12,5 +11,3 @@ public:
 	SceneBase(ISetNextScene* changer){ this->sceneChanger = changer; }
 	virtual ~SceneBase(){}
 };
-
-#endif

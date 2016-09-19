@@ -1,5 +1,4 @@
-#ifndef _SCREEN_
-#define _SCREEN_
+#pragma once
 
 #include "common.h"
 
@@ -35,5 +34,3 @@ public:
 
 	static Size getWindowSize(){ return Screen::windowSize; }
 };
-
-#endif

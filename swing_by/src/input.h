@@ -1,5 +1,4 @@
-#ifndef _INPUT_
-#define _INPUT_
+#pragma once
 
 struct RegistedKeyCode {
 	unsigned int mouse[6];
@@ -68,5 +67,3 @@ public:
 	static void setRegistedKeyCodeJoyPad(KeyType keyCode, unsigned int registKeyCode);
 	static void setRegistedKeyCodeMouse(KeyType keyCode, unsigned int registKeyCode);
 };
-
-#endif
