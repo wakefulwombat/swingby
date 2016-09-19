@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\common.cpp" />
+    <ClCompile Include="src\image.cpp" />
+    <ClCompile Include="src\input.cpp" />
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\music.cpp" />
+    <ClCompile Include="src\scene_ending.cpp" />
+    <ClCompile Include="src\scene_gameMain.cpp" />
+    <ClCompile Include="src\scene_gameMainEvent.cpp" />
+    <ClCompile Include="src\scene_gameMainPause.cpp" />
+    <ClCompile Include="src\scene_gameMainResult.cpp" />
+    <ClCompile Include="src\scene_gameMainStage.cpp" />
+    <ClCompile Include="src\scene_gameMainStageSelect.cpp" />
+    <ClCompile Include="src\scene_manager.cpp" />
+    <ClCompile Include="src\scene_musicRoom.cpp" />
+    <ClCompile Include="src\scene_opening.cpp" />
+    <ClCompile Include="src\scene_option.cpp" />
+    <ClCompile Include="src\screen.cpp" />
+    <ClCompile Include="src\sound.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\base_objectBase.h" />
+    <ClInclude Include="src\base_sceneBase.h" />
+    <ClInclude Include="src\base_sceneInGameMainBase.h" />
+    <ClInclude Include="src\base_taskBase.h" />
+    <ClInclude Include="src\common.h" />
+    <ClInclude Include="src\image.h" />
+    <ClInclude Include="src\input.h" />
+    <ClInclude Include="src\interface_setNextScene.h" />
+    <ClInclude Include="src\interface_setNextSceneInGameMain.h" />
+    <ClInclude Include="src\music.h" />
+    <ClInclude Include="src\scene_ending.h" />
+    <ClInclude Include="src\scene_gameMain.h" />
+    <ClInclude Include="src\scene_gameMainEvent.h" />
+    <ClInclude Include="src\scene_gameMainPause.h" />
+    <ClInclude Include="src\scene_gameMainResult.h" />
+    <ClInclude Include="src\scene_gameMainStage.h" />
+    <ClInclude Include="src\scene_gameMainStageSelect.h" />
+    <ClInclude Include="src\scene_manager.h" />
+    <ClInclude Include="src\scene_musicRoom.h" />
+    <ClInclude Include="src\scene_opening.h" />
+    <ClInclude Include="src\scene_option.h" />
+    <ClInclude Include="src\screen.h" />
+    <ClInclude Include="src\sound.h" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{D7DA6774-1282-4C97-A621-9F116C9A90D9}</ProjectGuid>
+    <RootNamespace>swing_by</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>..\..\..\..\Library\DxLib_VC\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>..\..\..\..\Library\DxLib_VC\include;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>..\..\..\..\Library\DxLib_VC\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories>..\..\..\..\Library\DxLib_VC\include;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

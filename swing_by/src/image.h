@@ -1,0 +1,18 @@
+#ifndef _IMAGE_
+#define _IMAGE_
+
+class Image{
+private:
+	static void clearAll();
+
+	static int map_chip[26];
+	static int item[10];
+	static int textBox[9];
+public:
+	
+
+	static void loadGameScene();
+	static void loadOtherScene();
+};
+
+#endif
