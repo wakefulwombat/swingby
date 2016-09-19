@@ -1,8 +1,8 @@
 #pragma once
 
-class TaskBase{
+class RequiredFunc{
 public:
-	virtual ~TaskBase(){};
+	virtual ~RequiredFunc(){};
 	virtual void initialize(){};
 	virtual void update() = 0;
 	virtual void draw() const = 0;

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "common.h"
-#include "base_taskBase.h"
+#include "base_requiredFunc.h"
 #include "base_externalObjectControllerBase.h"
 #include "base_internalObjectControllerBase.h"
 
@@ -35,7 +35,7 @@ public:
 	virtual ~AnimationObjectProperty(){}
 };
 
-class ObjectBase : public TaskBase, public ExternalObjectControllerBase{
+class ObjectBase : public RequiredFunc, public ExternalObjectControllerBase{
 protected:
 	Point position;
 	Size size;

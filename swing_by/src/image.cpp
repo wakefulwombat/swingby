@@ -1,7 +1,7 @@
 #include "image.h"
 #include "DxLib.h"
 
-int Image::map_chip[26];
+int Image::map_chip[22];
 int Image::item[10];
 int Image::textBox[9];
 
@@ -32,10 +32,6 @@ void Image::loadGameScene(){
 	Image::map_chip[19] = LoadGraph("asset\\mapchip\\20.bmp");
 	Image::map_chip[20] = LoadGraph("asset\\mapchip\\21.bmp");
 	Image::map_chip[21] = LoadGraph("asset\\mapchip\\22.bmp");
-	Image::map_chip[22] = LoadGraph("asset\\mapchip\\23.bmp");
-	Image::map_chip[23] = LoadGraph("asset\\mapchip\\24.bmp");
-	Image::map_chip[24] = LoadGraph("asset\\mapchip\\25.bmp");
-	Image::map_chip[25] = LoadGraph("asset\\mapchip\\26.bmp");
 
 	LoadDivGraph("asset\\text_box.png", 9, 3, 3, 10, 10, Image::textBox);
 }

@@ -4,7 +4,7 @@ class Image{
 private:
 	static void clearAll();
 
-	static int map_chip[26];
+	static int map_chip[22];
 	static int item[10];
 	static int textBox[9];
 public:

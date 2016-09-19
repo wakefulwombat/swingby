@@ -1,7 +1,7 @@
 #pragma once
 
 #include "common.h"
-#include "base_taskBase.h"
+#include "base_requiredFunc.h"
 #include "base_sceneBase.h"
 #include "interface_setNextScene.h"
 
@@ -26,7 +26,7 @@ public:
 };
 
 
-class SceneManager : public TaskBase, public ISetNextScene{
+class SceneManager : public RequiredFunc, public ISetNextScene{
 private:
 	SceneKind nextScene;
 	SceneBase* nowScene;

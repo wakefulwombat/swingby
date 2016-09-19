@@ -33,6 +33,8 @@ public:
 		for (auto it = this->obj_list.begin(); it != this->obj_list; ++it) (*it)->finalize();
 		for (auto it = this->obj_list.begin(); it != this->obj_list; ++it) delete(*it);
 	}
+
+	virtual ~ObjectManagerBase() {};
 };
 
 #endif

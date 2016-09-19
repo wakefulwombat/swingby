@@ -1,9 +1,9 @@
 #pragma once
 
-#include "base_taskBase.h"
+#include "base_requiredFunc.h"
 #include "interface_setNextSceneInGameMain.h"
 
-class SceneInGameMainBase : public TaskBase {
+class SceneInGameMainBase : public RequiredFunc {
 protected:
 	ISetNextSceneInGameMain* sceneChanger;
 

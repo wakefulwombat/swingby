@@ -16,6 +16,7 @@
     <ClCompile Include="src\input.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\music.cpp" />
+    <ClCompile Include="src\player.cpp" />
     <ClCompile Include="src\scene_ending.cpp" />
     <ClCompile Include="src\scene_gameMain.cpp" />
     <ClCompile Include="src\scene_gameMainEvent.cpp" />
@@ -31,16 +32,20 @@
     <ClCompile Include="src\sound.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\base_externalObjectControllerBase.h" />
+    <ClInclude Include="src\base_internalObjectControllerBase.h" />
     <ClInclude Include="src\base_objectBase.h" />
+    <ClInclude Include="src\base_objectManagerBase.h" />
     <ClInclude Include="src\base_sceneBase.h" />
     <ClInclude Include="src\base_sceneInGameMainBase.h" />
-    <ClInclude Include="src\base_taskBase.h" />
+    <ClInclude Include="src\base_requiredFunc.h" />
     <ClInclude Include="src\common.h" />
     <ClInclude Include="src\image.h" />
     <ClInclude Include="src\input.h" />
     <ClInclude Include="src\interface_setNextScene.h" />
     <ClInclude Include="src\interface_setNextSceneInGameMain.h" />
     <ClInclude Include="src\music.h" />
+    <ClInclude Include="src\player.h" />
     <ClInclude Include="src\scene_ending.h" />
     <ClInclude Include="src\scene_gameMain.h" />
     <ClInclude Include="src\scene_gameMainEvent.h" />
