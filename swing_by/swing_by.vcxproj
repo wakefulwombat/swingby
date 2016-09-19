@@ -44,6 +44,9 @@
     <ClInclude Include="src\input.h" />
     <ClInclude Include="src\interface_setNextScene.h" />
     <ClInclude Include="src\interface_setNextSceneInGameMain.h" />
+    <ClInclude Include="src\item.h" />
+    <ClInclude Include="src\map.h" />
+    <ClInclude Include="src\mapchip.h" />
     <ClInclude Include="src\music.h" />
     <ClInclude Include="src\player.h" />
     <ClInclude Include="src\scene_ending.h" />
