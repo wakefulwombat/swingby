@@ -100,3 +100,21 @@ Point Point::getCircleRandomPoint(Point center, double r, Point leftup, Point ri
 int Round(double x){
 	return (int)(x < 0.0 ? x - 0.4999 : x + 0.4999);
 }
+
+bool fileExistT(char* filepath) {
+	FILE* fp;
+	if ((fopen_s(&fp, filepath, "r")) != 0) {
+		return false;
+	}
+	fclose(fp);
+	return true;
+}
+
+bool fileExistB(char* filepath) {
+	FILE* fp;
+	if ((fopen_s(&fp, filepath, "rb")) != 0) {
+		return false;
+	}
+	fclose(fp);
+	return true;
+}

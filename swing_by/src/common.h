@@ -27,3 +27,5 @@ public:
 };
 
 int Round(double x);
+bool fileExistT(char* filepath);//テキスト
+bool fileExistB(char* filepath);//バイナリ

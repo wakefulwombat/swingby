@@ -1,4 +1,5 @@
 #include "DxLib.h"
+#include "input.h"
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
@@ -27,7 +28,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 	while (1) {
 		ClearDrawScreen();
-
+		Input::keyUpdate();
 
 		ScreenFlip();
 
