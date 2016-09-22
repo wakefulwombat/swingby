@@ -89,3 +89,36 @@ int Input::getMouseWheelRotation() {
 Point Input::getNowMousePoint() {
 	return Input::now_mouse;
 }
+
+bool Input::isObjectOnMouse(Point leftup, Size size) {
+	if (Input::now_mouse.x < leftup.x) return false;
+	if (Input::now_mouse.y < leftup.y) return false;
+	if (Input::now_mouse.x + size.width > leftup.x) return false;
+	if (Input::now_mouse.y + size.height > leftup.y) return false;
+	return true;
+}
+
+bool Input::isObjectLeftClicked(Point leftup, Size size) {
+	if (Input::getKeyCodeDownOnce(KeyType::Game_Swing_OK) != 0)return;
+
+	if (Input::now_mouse.x < leftup.x) return false;
+	if (Input::now_mouse.y < leftup.y) return false;
+	if (Input::now_mouse.x + size.width > leftup.x) return false;
+	if (Input::now_mouse.y + size.height > leftup.y) return false;
+	return true;
+}
+
+bool Input::isObjectRightClicked(Point leftup, Size size) {
+	if (Input::getKeyCodeDownOnce(KeyType::Game_VectorTrans_CANCEL) != 0)return;
+
+	if (Input::now_mouse.x < leftup.x) return false;
+	if (Input::now_mouse.y < leftup.y) return false;
+	if (Input::now_mouse.x + size.width > leftup.x) return false;
+	if (Input::now_mouse.y + size.height > leftup.y) return false;
+	return true;
+}
+
+void Input::setNowMousePoint(Point pos) {
+	Input::now_mouse = pos;
+	SetMousePoint(pos.x, pos.y);
+}
