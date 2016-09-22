@@ -1,5 +1,4 @@
-#ifndef _BASE_EXTERNALOBJECTCONTROLLERBASE_
-#define _BASE_EXTERNALOBJECTCONTROLLERBASE_
+#pragma once
 
 #include "common.h"
 
@@ -54,4 +53,3 @@ public:
 	virtual ~ExternalCharactorActionObjectControllerBase(){}
 	virtual void setNextAction() = 0;
 };
-#endif

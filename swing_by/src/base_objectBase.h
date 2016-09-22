@@ -40,6 +40,7 @@ protected:
 	Point position;
 	Size size;
 	bool validation;
+	int count;
 	
 	ControlStatus control_status;//êßå‰å†
 	InternalObjectControllerBase* internalController;//ì‡ïîêßå‰óp

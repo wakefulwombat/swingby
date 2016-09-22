@@ -1,5 +1,4 @@
-#ifndef _BASE_INTERNALOBJECTCONTROLLERBASE_
-#define _BASE_INTERNALOBJECTCONTROLLERBASE_
+#pragma once
 
 #include "common.h"
 
@@ -59,5 +58,3 @@ public:
 	virtual ~InternalCharactorActionObjectControllerBase(){}
 	virtual ChipActionKind getNextAction() = 0;
 };
-
-#endif
