@@ -17,6 +17,7 @@ public:
 	Point();
 	Point(double x, double y);
 	Point operator+(const Point& obj);
+	Point operator-(const Point& obj);
 	Point& operator+=(const Point& obj);
 	Point operator+(const Size& obj);
 	Point operator*(const double& d);

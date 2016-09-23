@@ -12,6 +12,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\common.cpp" />
+    <ClCompile Include="src\controller.cpp" />
+    <ClCompile Include="src\controllerFactory.cpp" />
     <ClCompile Include="src\image.cpp" />
     <ClCompile Include="src\input.cpp" />
     <ClCompile Include="src\main.cpp" />
@@ -40,11 +42,14 @@
     <ClInclude Include="src\base_sceneInGameMainBase.h" />
     <ClInclude Include="src\base_requiredFunc.h" />
     <ClInclude Include="src\common.h" />
+    <ClInclude Include="src\controller.h" />
     <ClInclude Include="src\image.h" />
     <ClInclude Include="src\input.h" />
+    <ClInclude Include="src\interface_getController.h" />
     <ClInclude Include="src\interface_setNextScene.h" />
     <ClInclude Include="src\interface_setNextSceneInGameMain.h" />
     <ClInclude Include="src\item.h" />
+    <ClInclude Include="src\controllerFactory.h" />
     <ClInclude Include="src\map.h" />
     <ClInclude Include="src\mapchip.h" />
     <ClInclude Include="src\music.h" />

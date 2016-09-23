@@ -4,6 +4,7 @@
 #include "base_requiredFunc.h"
 #include "base_externalObjectControllerBase.h"
 #include "base_internalObjectControllerBase.h"
+#include <memory>
 
 enum class ControlStatus{
 	Movable,//©—¥ˆÚ“®‰Â”\
@@ -43,7 +44,7 @@ protected:
 	int count;
 	
 	ControlStatus control_status;//§ŒäŒ 
-	InternalObjectControllerBase* internalController;//“à•”§Œä—p
+	std::unique_ptr<InternalObjectController> internalController;//“à•”§Œä—p
 
 	//for image
 	double expansion;//‰æ‘œŠg‘å—¦

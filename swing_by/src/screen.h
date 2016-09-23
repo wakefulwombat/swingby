@@ -33,4 +33,5 @@ public:
 	static void update();
 
 	static Size getWindowSize(){ return Screen::windowSize; }
+	static Point getPositionOfWindowCoordinate(Point pos) { return pos - Screen::center; }
 };
