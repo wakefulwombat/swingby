@@ -8,5 +8,6 @@
 class IGetController {
 public:
 	virtual ~IGetController(){}
+	virtual std::unique_ptr<InternalObjectController> getInternalMoveObjectController_None() = 0;
 	virtual std::unique_ptr<InternalObjectController> getInternalMoveObjectController_GoStraight(ObjectBase* obj, MoveObjectProperty* prop) = 0;
 };

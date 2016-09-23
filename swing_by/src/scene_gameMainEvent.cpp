@@ -12,10 +12,6 @@ void SceneGameMainEvent::update() {
 
 }
 
-void SceneGameMainEvent::draw() const {
-
-}
-
 void SceneGameMainEvent::finalize() {
 
 }

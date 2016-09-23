@@ -12,10 +12,6 @@ void SceneGameMainStageSelect::update() {
 
 }
 
-void SceneGameMainStageSelect::draw() const {
-
-}
-
 void SceneGameMainStageSelect::finalize() {
 
 }

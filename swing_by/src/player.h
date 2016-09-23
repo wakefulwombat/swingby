@@ -5,10 +5,10 @@
 
 class Player : public ObjectBase, public AnimationObjectProperty, public MoveObjectProperty {
 private:
-	IGetController* controller;
+	IGetController* ctrl_mgr;
 
 public:
-	Player();
+	Player(IGetController* ctrl_mgr);
 	void initialize() override;
 	void update() override;
 	void draw() const override;

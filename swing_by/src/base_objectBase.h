@@ -66,4 +66,6 @@ public:
 	void setControlRights(ControlStatus status) override final { this->control_status = status; }
 
 	bool operator<(const ObjectBase* obj){ return this->z_sort < obj->z_sort; }
+
+	virtual void draw() const = 0;
 };

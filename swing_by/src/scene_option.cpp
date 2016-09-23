@@ -12,10 +12,6 @@ void SceneOption::update() {
 
 }
 
-void SceneOption::draw() const {
-
-}
-
 void SceneOption::finalize() {
 
 }

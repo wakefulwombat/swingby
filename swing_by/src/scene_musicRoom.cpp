@@ -12,10 +12,6 @@ void SceneMusicRoom::update() {
 
 }
 
-void SceneMusicRoom::draw() const {
-
-}
-
 void SceneMusicRoom::finalize() {
 
 }

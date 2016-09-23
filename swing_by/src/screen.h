@@ -1,6 +1,8 @@
 #pragma once
 
 #include "common.h"
+#include "base_objectBase.h"
+#include <vector>
 
 class Screen{
 private:
@@ -8,7 +10,7 @@ private:
 	static Point center;
 	static double zoom;
 	static Point sway;
-
+	static std::vector<ObjectBase*> draw_list;
 
 	static int center_move_count, center_move_count_max;
 	static Point centerTergetPosition_start, centerTergetPosition_goal;
@@ -31,6 +33,9 @@ public:
 
 	static void init(int window_width, int window_height);
 	static void update();
+
+	static void drawAll();
+	static void addDrawObject(ObjectBase* obj);
 
 	static Size getWindowSize(){ return Screen::windowSize; }
 	static Point getPositionOfWindowCoordinate(Point pos) { return pos - Screen::center; }

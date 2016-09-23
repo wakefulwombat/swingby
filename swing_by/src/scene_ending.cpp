@@ -12,10 +12,6 @@ void SceneEnding::update() {
 
 }
 
-void SceneEnding::draw() const {
-
-}
-
 void SceneEnding::finalize() {
 
 }

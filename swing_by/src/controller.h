@@ -4,6 +4,13 @@
 #include "base_externalObjectControllerBase.h"
 #include "base_objectBase.h"
 
+class InternalMoveObjectController_None : public InternalObjectController {
+public:
+	InternalMoveObjectController_None();
+	void update() override;
+	void end() override;
+};
+
 class InternalMoveObjectController_GoStraight : public InternalObjectController {
 private:
 	ObjectBase* obj;

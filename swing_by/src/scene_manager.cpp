@@ -11,8 +11,10 @@ SceneManager::SceneManager(){
 
 void SceneManager::update(){
 	if (this->nextScene != SceneKind::None){
-		this->nowScene->finalize();
-		delete(this->nowScene);
+		if (this->nowScene != nullptr) {
+			this->nowScene->finalize();
+			delete(this->nowScene);
+		}
 
 		switch (this->nextScene){
 		case SceneKind::Ending:
@@ -42,10 +44,6 @@ void SceneManager::update(){
 	else{
 		this->nowScene->update();
 	}
-}
-
-void SceneManager::draw() const{
-	this->nowScene->draw();
 }
 
 void SceneManager::finalize(){

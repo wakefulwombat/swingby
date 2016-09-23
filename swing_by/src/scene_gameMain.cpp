@@ -15,8 +15,10 @@ void SceneGameMain::initialize() {
 
 void SceneGameMain::update() {
 	if (this->nextSceneInGameMain != SceneInGameMainKind::None) {
-		this->nowSceneInGameMain->finalize();
-		delete(this->nowSceneInGameMain);
+		if (this->nowSceneInGameMain != nullptr) {
+			this->nowSceneInGameMain->finalize();
+			delete(this->nowSceneInGameMain);
+		}
 
 		switch (this->nextSceneInGameMain) {
 		case SceneInGameMainKind::Event:
@@ -42,10 +44,6 @@ void SceneGameMain::update() {
 	else {
 		this->nowSceneInGameMain->update();
 	}
-}
-
-void SceneGameMain::draw() const {
-	this->nowSceneInGameMain->draw();
 }
 
 void SceneGameMain::finalize() {

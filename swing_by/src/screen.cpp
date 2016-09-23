@@ -1,11 +1,12 @@
 #include "screen.h"
 #include "DxLib.h"
+#include <algorithm>
 
 Size Screen::windowSize, Screen::stageSize;
 Point Screen::center;
 double Screen::zoom;
 Point Screen::sway;
-
+std::vector<ObjectBase*> Screen::draw_list;
 
 int Screen::center_move_count, Screen::center_move_count_max;
 Point Screen::centerTergetPosition_start, Screen::centerTergetPosition_goal;
@@ -89,4 +90,17 @@ void Screen::update(){
 	if (Screen::center.y < 1.0*Screen::windowSize.height / 2.0 / Screen::zoom) Screen::center.y = 1.0*Screen::windowSize.height / 2.0 / Screen::zoom;
 	if (Screen::center.x > 1.0*Screen::stageSize.width - 1.0*Screen::windowSize.width / 2.0 / Screen::zoom) Screen::center.x = 1.0*Screen::stageSize.width - 1.0*Screen::windowSize.width / 2.0 / Screen::zoom;
 	if (Screen::center.y > 1.0*Screen::stageSize.height - 1.0*Screen::windowSize.height / 2.0 / Screen::zoom) Screen::center.y = 1.0*Screen::stageSize.height - 1.0*Screen::windowSize.height / 2.0 / Screen::zoom;
+}
+
+void Screen::drawAll() {
+	std::sort(Screen::draw_list.begin(), Screen::draw_list.end());
+	for(auto var : Screen::draw_list)
+	{
+		var->draw();
+	}
+	Screen::draw_list.clear();
+}
+
+void Screen::addDrawObject(ObjectBase* obj) {
+	Screen::draw_list.push_back(obj);
 }

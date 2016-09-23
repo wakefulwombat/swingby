@@ -17,7 +17,6 @@ public:
 	SceneGameMain(ISetNextScene* isetNextScene);
 	void initialize() override;
 	void update() override;
-	void draw() const override;
 	void finalize() override;
 
 	void setNextSceneInGameMain(SceneInGameMainKind nextScene) override { this->nextSceneInGameMain = nextScene; }

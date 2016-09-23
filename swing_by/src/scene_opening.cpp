@@ -12,10 +12,6 @@ void SceneOpening::update() {
 
 }
 
-void SceneOpening::draw() const {
-
-}
-
 void SceneOpening::finalize() {
 
 }

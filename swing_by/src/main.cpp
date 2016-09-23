@@ -1,5 +1,7 @@
 #include "DxLib.h"
 #include "input.h"
+#include "screen.h"
+#include "scene_manager.h"
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
@@ -18,7 +20,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	SetGraphMode(640, 480, 16);
 	SetDrawMode(DX_DRAWMODE_BILINEAR);
 	SetWindowText("Swing By");
-
+	SceneManager* mgr = new SceneManager();
+	mgr->initialize();
 
 	if (DxLib_Init() == -1) return -1;
 
@@ -29,12 +32,16 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	while (1) {
 		ClearDrawScreen();
 		Input::keyUpdate();
+		mgr->update();
 
+
+		Screen::drawAll();
 		ScreenFlip();
 
 		if (ProcessMessage() == -1) break;
 	}
-
+	mgr->finalize();
+	delete mgr;
 
 	//#ifndef _DEBUG
 	DxLib_End();

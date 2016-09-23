@@ -35,7 +35,6 @@ public:
 	SceneManager();
 
 	void update() override;
-	void draw() const override;
 	void finalize() override;
 
 	void setNextScene(SceneKind nextScene) override { this->nextScene = nextScene; }

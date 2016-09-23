@@ -12,10 +12,6 @@ void SceneGameMainPause::update() {
 
 }
 
-void SceneGameMainPause::draw() const {
-
-}
-
 void SceneGameMainPause::finalize() {
 
 }
