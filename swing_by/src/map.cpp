@@ -8,6 +8,10 @@ MapChip::MapChip(Point pos, Size size, int chip_index) {
 	this->z_sort = 1000;
 }
 
+void MapChip::update() {
+
+}
+
 void MapChip::draw() const {
 	//Screen::drawMutable(this->position,this->size,)
 }
