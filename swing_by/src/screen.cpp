@@ -45,21 +45,11 @@ void Screen::setSway(double intensity, int count_max){
 }
 
 void Screen::drawMutable(Point center_pos, Size size, int graphHandle, double expansion, double rotation, bool turn, double opacity){
-	if (center_pos.x + expansion * size.width / 2 < Screen::window_center_world_pos.x - Screen::windowSize.width / Screen::zoom / 2) return;
-	if (center_pos.x - expansion * size.width / 2 > Screen::window_center_world_pos.x + Screen::windowSize.width / Screen::zoom / 2) return;
-	if (center_pos.y + expansion * size.height / 2 < Screen::window_center_world_pos.y - Screen::windowSize.height / Screen::zoom / 2) return;
-	if (center_pos.y - expansion * size.height / 2 > Screen::window_center_world_pos.y + Screen::windowSize.height / Screen::zoom / 2) return;
-	
 	SetDrawBlendMode(DX_BLENDMODE_ALPHA, (int)(opacity * 255));
 	DrawRotaGraph2((int)(Screen::sway.x + center_pos.x - Screen::window_center_world_pos.x + Screen::windowSize.width / Screen::zoom / 2), (int)(Screen::sway.y + center_pos.y - Screen::window_center_world_pos.y + Screen::windowSize.height / Screen::zoom / 2), size.width / 2, size.height / 2, expansion*Screen::zoom, rotation, graphHandle, true, turn);
 }
 
 void Screen::drawMutable(Point center_pos, Size size, int graphHandle, double expansion_x, double expansion_y, double rotation, bool turn, double opacity){
-	if (center_pos.x + expansion_x * size.width / 2 < Screen::window_center_world_pos.x - Screen::windowSize.width / Screen::zoom / 2) return;
-	if (center_pos.x - expansion_x * size.width / 2 > Screen::window_center_world_pos.x + Screen::windowSize.width / Screen::zoom / 2) return;
-	if (center_pos.y + expansion_y * size.height / 2 < Screen::window_center_world_pos.y - Screen::windowSize.height / Screen::zoom / 2) return;
-	if (center_pos.y - expansion_y * size.height / 2 > Screen::window_center_world_pos.y + Screen::windowSize.height / Screen::zoom / 2) return;
-
 	SetDrawBlendMode(DX_BLENDMODE_ALPHA, (int)(opacity * 255));
 	DrawRotaGraph3((int)(Screen::sway.x + center_pos.x - Screen::window_center_world_pos.x + Screen::windowSize.width / Screen::zoom / 2), (int)(Screen::sway.y + center_pos.y - Screen::window_center_world_pos.y + Screen::windowSize.height / Screen::zoom / 2), size.width / 2, size.height / 2, expansion_x*Screen::zoom, expansion_y*Screen::zoom, rotation, graphHandle, true, turn);
 }
@@ -118,5 +108,10 @@ void Screen::drawAll() {
 }
 
 void Screen::addDrawObject(ObjectBase* obj) {
+	if (obj->getPosition().x + obj->getExpansion() * obj->getSize().width / 2 < Screen::window_center_world_pos.x - Screen::windowSize.width / Screen::zoom / 2) return;
+	if (obj->getPosition().x - obj->getExpansion() * obj->getSize().width / 2 > Screen::window_center_world_pos.x + Screen::windowSize.width / Screen::zoom / 2) return;
+	if (obj->getPosition().y + obj->getExpansion() * obj->getSize().height / 2 < Screen::window_center_world_pos.y - Screen::windowSize.height / Screen::zoom / 2) return;
+	if (obj->getPosition().y - obj->getExpansion() * obj->getSize().height / 2 > Screen::window_center_world_pos.y + Screen::windowSize.height / Screen::zoom / 2) return;
+	
 	Screen::draw_list.push_back(obj);
 }

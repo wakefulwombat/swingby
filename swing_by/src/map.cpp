@@ -1,5 +1,6 @@
 #include "map.h"
 #include "screen.h"
+#include "image.h"
 
 MapChip::MapChip(Point pos, Size size, int chip_index) {
 	this->position = pos;
@@ -13,7 +14,7 @@ void MapChip::update() {
 }
 
 void MapChip::draw() const {
-	//Screen::drawMutable(this->position,this->size,)
+	Screen::drawMutable(this->position, this->size, Image::getMapChip(this->chip_index), this->expansion, this->img_rotation, false, this->img_opacity);
 }
 
 

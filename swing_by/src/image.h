@@ -16,4 +16,5 @@ public:
 
 	static int getMousePointer() { return Image::mouse_pointer; }
 	static int getPlayer(int index) { return Image::player[index]; }
+	static int getMapChip(int index){ return Image::map_chip[index]; }
 };
