@@ -30,6 +30,7 @@ public:
 	static void drawMutable(Point center_pos, Size size, int graphHandle, double expansion, double rotation, bool turn);
 	static void drawMutable(Point center_pos, Size size, int graphHandle, double expansion_x, double expansion_y, double rotation, bool turn);
 	static void drawOnWindow(Point center_pos, Size size, int graphHandle, double expansion, double rotation);
+	static void drawOnWindowForMouse(Point leftup_pos, int graphHandle);
 
 	static void init(int window_width, int window_height);
 	static void update();

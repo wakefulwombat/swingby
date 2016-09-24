@@ -2,8 +2,6 @@
 
 #include "common.h"
 
-enum class ControlStatus;
-
 class InternalObjectController{
 public:
 	virtual ~InternalObjectController(){}

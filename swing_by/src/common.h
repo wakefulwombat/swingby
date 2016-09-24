@@ -23,6 +23,7 @@ public:
 	Point operator*(const double& d);
 	Point operator/(const double& d);
 
+	double getDistance(Point p2);
 	static Point getRandomPoint(Point leftup, Point rightdown);
 	static Point getCircleRandomPoint(Point center, double r, Point leftup, Point rightdown);
 };

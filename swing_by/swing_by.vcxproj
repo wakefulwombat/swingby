@@ -11,12 +11,14 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\base_objectBase.cpp" />
     <ClCompile Include="src\common.cpp" />
     <ClCompile Include="src\controller.cpp" />
     <ClCompile Include="src\controllerFactory.cpp" />
     <ClCompile Include="src\image.cpp" />
     <ClCompile Include="src\input.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\mousePointer.cpp" />
     <ClCompile Include="src\music.cpp" />
     <ClCompile Include="src\player.cpp" />
     <ClCompile Include="src\scene_ending.cpp" />
@@ -52,6 +54,7 @@
     <ClInclude Include="src\controllerFactory.h" />
     <ClInclude Include="src\map.h" />
     <ClInclude Include="src\mapchip.h" />
+    <ClInclude Include="src\mousePointer.h" />
     <ClInclude Include="src\music.h" />
     <ClInclude Include="src\player.h" />
     <ClInclude Include="src\scene_ending.h" />

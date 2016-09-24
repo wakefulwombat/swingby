@@ -27,8 +27,8 @@ public:
 	static bool getKeyCodeDownOnce(KeyType key);
 	static bool getKeyCodeUpOnce(KeyType key);
 	static int getMouseWheelRotation();
-	static Point getNowMousePoint();
 
+	static Point getNowMousePoint();
 	static void setNowMousePoint(Point pos);
 
 	static bool isObjectOnMouse(Point leftup, Size size);

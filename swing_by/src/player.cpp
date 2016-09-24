@@ -6,7 +6,9 @@
 Player::Player(IGetController* ctrl_mgr) {
 	this->count = 0;
 	this->ctrl_mgr = ctrl_mgr;
+	this->control_status = ControlStatus::InternalControlled;
 	this->internalController = this->ctrl_mgr->getInternalMoveObjectController_None();
+	this->z_sort = 5000;
 }
 
 void Player::initialize() {

@@ -87,18 +87,22 @@ Point Point::operator/(const double& d){
 	return tmp;
 }
 
-Point Point::getRandomPoint(Point leftup, Point rightdown){
+double Point::getDistance(Point p2) {
+	return sqrt(((this->x - p2.x)*(this->x - p2.x) + (this->y - p2.y)*(this->y - p2.y)));
+}
+
+Point Point::getRandomPoint(Point leftup, Point rightdown) {
 	Point tmp;
 	tmp.x = leftup.x + GetRand((int)(rightdown.x - leftup.x));
 	tmp.y = leftup.y + GetRand((int)(rightdown.y - leftup.y));
 	return tmp;
 }
 
-Point Point::getCircleRandomPoint(Point center, double r, Point leftup, Point rightdown){
+Point Point::getCircleRandomPoint(Point center, double r, Point leftup, Point rightdown) {
 	double ang;
-	while (true){
+	while (true) {
 		ang = M_PI*GetRand(3600) / 1800;
-		if ((center.x + r*cos(ang) > leftup.x) && (center.x + r*cos(ang) < rightdown.x) && (center.y + r*sin(ang) > leftup.y) && (center.y + r*sin(ang) < rightdown.y)){
+		if ((center.x + r*cos(ang) > leftup.x) && (center.x + r*cos(ang) < rightdown.x) && (center.y + r*sin(ang) > leftup.y) && (center.y + r*sin(ang) < rightdown.y)) {
 			break;
 		}
 	}

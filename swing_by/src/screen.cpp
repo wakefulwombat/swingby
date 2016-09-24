@@ -66,6 +66,10 @@ void Screen::drawOnWindow(Point center_pos, Size size, int graphHandle, double e
 	DrawRotaGraph2((int)center_pos.x, (int)center_pos.y, size.width / 2, size.height / 2, expansion, rotation, graphHandle, true);
 }
 
+void Screen::drawOnWindowForMouse(Point leftup_pos, int graphHandle) {
+	DrawGraph((int)leftup_pos.x, (int)leftup_pos.y, graphHandle, false);
+}
+
 void Screen::init(int window_width, int window_height){
 	Screen::windowSize.width = window_width;
 	Screen::windowSize.height = window_height;

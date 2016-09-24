@@ -7,9 +7,10 @@
 #include <memory>
 
 enum class ControlStatus{
+	None,//制御なし
 	Movable,//自律移動可能
-	InternalControled,//自律移動不可、内部自動制御(制限解除は条件により制御可能)
-	ExternalControled//自律移動不可、外部制御(制限解除は外部が行う)
+	InternalControlled,//自律移動不可、内部自動制御(制限解除は条件により制御可能)
+	ExternalControlled//自律移動不可、外部制御(制限解除は外部が行う)
 };
 
 //移動属性
@@ -49,15 +50,18 @@ protected:
 	//for image
 	double expansion;//画像拡大率
 	double img_rotation;//画像回転角度
+	double img_opacity;//画像透明度(0.0~1.0)
 
 	unsigned int z_sort;//zソート
 
 public:
-	virtual ~ObjectBase(){};
+	ObjectBase();
+	ObjectBase(Point pos, Size size);
+	virtual ~ObjectBase(){}
 
-	Point getPosition(){ return this->position; };
-	Size getSize(){ return this->size; };
-	bool getValidation(){ return this->validation; };
+	Point getPosition(){ return this->position; }
+	Size getSize(){ return this->size; }
+	bool getValidation(){ return this->validation; }
 	double getExpansion(){ return this->expansion; }
 	double getImageRotationRad(){ return this->img_rotation; }
 
