@@ -18,6 +18,7 @@
     <ClCompile Include="src\image.cpp" />
     <ClCompile Include="src\input.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\map.cpp" />
     <ClCompile Include="src\mousePointer.cpp" />
     <ClCompile Include="src\music.cpp" />
     <ClCompile Include="src\player.cpp" />
@@ -53,7 +54,6 @@
     <ClInclude Include="src\item.h" />
     <ClInclude Include="src\controllerFactory.h" />
     <ClInclude Include="src\map.h" />
-    <ClInclude Include="src\mapchip.h" />
     <ClInclude Include="src\mousePointer.h" />
     <ClInclude Include="src\music.h" />
     <ClInclude Include="src\player.h" />

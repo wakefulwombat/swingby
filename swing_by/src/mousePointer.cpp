@@ -33,7 +33,7 @@ void MousePointer::update() {
 void MousePointer::draw() const {
 	if (this->validation == false) return;
 
-	Screen::drawOnWindowForMouse(this->position, Image::getMousePointer());
+	Screen::drawOnWindowForMouse(this->position, Image::getMousePointer(), this->img_opacity);
 }
 
 void MousePointer::moveMousePointer(Point start, Point end, double move_pixel) {

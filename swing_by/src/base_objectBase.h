@@ -30,6 +30,7 @@ class AnimationObjectProperty{
 protected:
 	int chip_switch_time;//キャラチップのアニメーション時間間隔
 	int chip_count;//キャラチップ用カウンタ
+	int show_chip_index;//表示するキャラチップ番号
 	bool repeat;//アニメーションを繰り返すか
 	int chipSize;//アニメーションチップの個数
 

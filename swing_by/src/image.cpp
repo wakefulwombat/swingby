@@ -5,6 +5,7 @@ int Image::map_chip[22];
 int Image::item[10];
 int Image::textBox[9];
 int Image::mouse_pointer;
+int Image::player[2];
 
 void Image::clearAll(){
 	InitGraph();
@@ -37,6 +38,8 @@ void Image::loadGameScene(){
 	LoadDivGraph("asset\\text_box.png", 9, 3, 3, 10, 10, Image::textBox);
 
 	Image::mouse_pointer = LoadGraph("asset\\pointer.png");
+
+	LoadDivGraph("asset\\player.png", 2, 2, 1, 56, 24, Image::player);
 }
 
 void Image::loadOtherScene(){

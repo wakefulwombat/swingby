@@ -17,7 +17,7 @@ class Input{
 private:
 	static KeyCodeState keyCodeDownCount;//キーを押している時間
 	static KeyCodeState keyCodeUpCount;//キーを押していない時間
-	static unsigned int mouse_wheel_rotation;//マウスホイールの回転状態
+	static int mouse_wheel_rotation;//マウスホイールの回転状態
 	static Point now_mouse;
 
 public:

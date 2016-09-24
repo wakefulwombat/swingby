@@ -7,7 +7,7 @@
 class Screen{
 private:
 	static Size windowSize, stageSize;
-	static Point center;
+	static Point window_center_world_pos, zoom_center_world_pos;
 	static double zoom;
 	static Point sway;
 	static std::vector<ObjectBase*> draw_list;
@@ -27,10 +27,10 @@ public:
 	static void setZoomOut(int zoomout_count_max);
 	static void setSway(double intensity, int count_max);
 
-	static void drawMutable(Point center_pos, Size size, int graphHandle, double expansion, double rotation, bool turn);
-	static void drawMutable(Point center_pos, Size size, int graphHandle, double expansion_x, double expansion_y, double rotation, bool turn);
-	static void drawOnWindow(Point center_pos, Size size, int graphHandle, double expansion, double rotation);
-	static void drawOnWindowForMouse(Point leftup_pos, int graphHandle);
+	static void drawMutable(Point center_pos, Size size, int graphHandle, double expansion, double rotation, bool turn, double opacity);
+	static void drawMutable(Point center_pos, Size size, int graphHandle, double expansion_x, double expansion_y, double rotation, bool turn, double opacity);
+	static void drawOnWindow(Point center_pos, Size size, int graphHandle, double expansion, double rotation, double opacity);
+	static void drawOnWindowForMouse(Point leftup_pos, int graphHandle, double opacity);
 
 	static void init(int window_width, int window_height);
 	static void update();
@@ -39,5 +39,5 @@ public:
 	static void addDrawObject(ObjectBase* obj);
 
 	static Size getWindowSize(){ return Screen::windowSize; }
-	static Point getPositionOfWindowCoordinate(Point pos) { return pos - Screen::center; }
+	static Point getPositionOfWindowCoordinate(Point pos) { return pos - Screen::window_center_world_pos; }
 };

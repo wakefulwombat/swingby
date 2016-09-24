@@ -1,12 +1,13 @@
 #include "input.h"
 #include "common.h"
+#include "screen.h"
 #include "DxLib.h"
 #include <stdio.h>
 #include <math.h>
 
 KeyCodeState Input::keyCodeDownCount;
 KeyCodeState Input::keyCodeUpCount;
-unsigned int Input::mouse_wheel_rotation = 0;
+int Input::mouse_wheel_rotation = 0;
 Point Input::now_mouse = Point(-1, -1);
 
 
@@ -68,6 +69,9 @@ void Input::keyUpdate() {
 	}
 
 	Input::mouse_wheel_rotation = GetMouseWheelRotVol();
+	if (Input::mouse_wheel_rotation > 0) {
+		Screen::setZoomIn(2.0, 60);
+	}
 }
 
 bool Input::getKeyCodeDown(KeyType key){

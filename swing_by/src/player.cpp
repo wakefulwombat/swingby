@@ -1,6 +1,7 @@
 #include "player.h"
 #include "input.h"
 #include "screen.h"
+#include "image.h"
 #include <math.h>
 
 Player::Player(IGetController* ctrl_mgr) {
@@ -9,6 +10,12 @@ Player::Player(IGetController* ctrl_mgr) {
 	this->control_status = ControlStatus::InternalControlled;
 	this->internalController = this->ctrl_mgr->getInternalMoveObjectController_None();
 	this->z_sort = 5000;
+	this->size = Size(56, 24);
+	this->position = Point(100, 200);
+
+	this->chip_count = 0;
+	this->chip_switch_time = 10;
+	this->show_chip_index = 0;
 }
 
 void Player::initialize() {
@@ -16,7 +23,6 @@ void Player::initialize() {
 }
 
 void Player::update() {
-	this->count++;
 	this->internalController->update();
 
 	if (Input::getKeyCodeDownOnce(KeyType::Game_Swing_OK) == 0) {
@@ -39,11 +45,14 @@ void Player::update() {
 
 	}
 
+	this->count++;
+	this->chip_count++;
+	if (this->chip_count%this->chip_switch_time == 0) this->show_chip_index = (this->show_chip_index + 1) % 2;
 	Screen::addDrawObject(this);
 }
 
 void Player::draw() const {
-
+	Screen::drawMutable(this->position, this->size, Image::getPlayer(this->show_chip_index), this->expansion, this->img_rotation, false, this->img_opacity);
 }
 
 void Player::finalize() {

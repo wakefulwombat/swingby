@@ -27,6 +27,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 	SetDrawScreen(DX_SCREEN_BACK);
 
+	Screen::init(960, 540);
 	Image::loadGameScene();
 	SceneManager* mgr = new SceneManager();
 	mgr->initialize();
@@ -36,8 +37,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		
 		Input::keyUpdate();
 		mgr->update();
-
-
+		//Screen::update();
+		
 		Screen::drawAll();
 		ScreenFlip();
 
