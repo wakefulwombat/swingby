@@ -30,6 +30,7 @@ void Player::initialize(Point start) {
 	this->chip_count = 0;
 	this->chip_switch_time = 10;
 	this->show_chip_index = 0;
+	Screen::initTargetPositionDeltaCenter(Point(-200.0, 0.0));
 }
 
 void Player::update() {
@@ -58,7 +59,9 @@ void Player::update() {
 	this->count++;
 	this->chip_count++;
 	if (this->chip_count%this->chip_switch_time == 0) this->show_chip_index = (this->show_chip_index + 1) % 2;
-	Screen::addDrawObject(this);
+	Screen::addDrawObjectMutable(this);
+
+	Screen::setTargetWorldPosition(this->position, 30);
 }
 
 void Player::draw() const {

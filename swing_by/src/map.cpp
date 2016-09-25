@@ -13,7 +13,7 @@ MapChip::MapChip(Point pos, Size size, int chip_index) {
 }
 
 void MapChip::update() {
-	Screen::addDrawObject(this);
+	Screen::addDrawObjectMutable(this);
 }
 
 void MapChip::draw() const {

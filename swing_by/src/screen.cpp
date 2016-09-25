@@ -4,12 +4,13 @@
 
 Size Screen::windowSize, Screen::stageSize;
 Point Screen::window_center_world_pos;
+Point Screen::target_pos_delta;
 double Screen::zoom;
 Point Screen::sway;
 std::vector<ObjectBase*> Screen::draw_list;
 
-int Screen::center_move_count, Screen::center_move_count_max;
-Point Screen::centerTergetPosition_start, Screen::centerTergetPosition_goal;
+int Screen::move_count, Screen::move_count_max;
+Point Screen::tergetPosition_start, Screen::tergetPosition_goal;
 
 int Screen::zoom_count, Screen::zoom_count_max;
 double Screen::zoom_magnification_start, Screen::zoom_magnification_end;
@@ -17,11 +18,15 @@ double Screen::zoom_magnification_start, Screen::zoom_magnification_end;
 int Screen::sway_count, Screen::sway_count_max;
 double Screen::sway_intensity_max;
 
-void Screen::setCenterTargetPosition(Point target, int count_max){
-	Screen::center_move_count = 0;
-	Screen::center_move_count_max = count_max;
-	Screen::centerTergetPosition_goal = target;
-	Screen::centerTergetPosition_start = Screen::window_center_world_pos;
+void Screen::initTargetPositionDeltaCenter(Point delta) {
+	Screen::target_pos_delta = delta;
+}
+
+void Screen::setTargetWorldPosition(Point target, int count_max){
+	Screen::move_count = 0;
+	Screen::move_count_max = count_max;
+	Screen::tergetPosition_goal = target;
+	Screen::tergetPosition_start = Screen::window_center_world_pos + Screen::target_pos_delta;
 }
 
 void Screen::setZoomIn(double zoom_max, int zoomin_count_max){
@@ -42,6 +47,10 @@ void Screen::setSway(double intensity, int count_max){
 	Screen::sway_count = 0;
 	Screen::sway_count_max = count_max;
 	Screen::sway_intensity_max = intensity;
+}
+
+void Screen::setStageSize(Size size) {
+	Screen::stageSize = size;
 }
 
 void Screen::drawMutable(Point center_pos, Size size, int graphHandle, double expansion, double rotation, bool turn, double opacity){
@@ -68,26 +77,28 @@ void Screen::init(int window_width, int window_height){
 	Screen::windowSize.width = window_width;
 	Screen::windowSize.height = window_height;
 	Screen::window_center_world_pos = Point(window_width / 2, window_height / 2);
-	Screen::center_move_count_max = 100;
-	Screen::center_move_count = Screen::center_move_count_max;
-	Screen::centerTergetPosition_start = Point(window_width / 2, window_height / 2);
-	Screen::centerTergetPosition_goal = Point(window_width / 2, window_height / 2);
+	Screen::move_count_max = 100;
+	Screen::move_count = Screen::move_count_max;
+	Screen::tergetPosition_start = Point(window_width / 2, window_height / 2);
+	Screen::tergetPosition_goal = Point(window_width / 2, window_height / 2);
+	Screen::target_pos_delta = Point();
 	Screen::zoom = 1.0;
 	Screen::zoom_magnification_end = 1.0;
 	Screen::zoom_magnification_start = 1.0;
 }
 
 void Screen::update(){
-	Screen::center_move_count++;
+	Screen::move_count++;
 	Screen::zoom_count++;
 	Screen::sway_count++;
 
-	if (Screen::zoom_count <= Screen::zoom_count_max){
-		Screen::zoom = (Screen::zoom_magnification_end - Screen::zoom_magnification_start)*Screen::zoom_count / Screen::zoom_count_max + Screen::zoom_magnification_start;
+	if (Screen::move_count <= Screen::move_count_max) {
+		Screen::window_center_world_pos = Screen::tergetPosition_start + (Screen::tergetPosition_goal - Screen::tergetPosition_start)*(1.0*Screen::move_count/ Screen::move_count_max) + Screen::target_pos_delta;
 	}
-	Screen::window_center_world_pos.x = Screen::centerTergetPosition_start.x + (Screen::centerTergetPosition_goal.x - Screen::centerTergetPosition_start.x)*Screen::center_move_count / Screen::center_move_count_max;
-	Screen::window_center_world_pos.y = Screen::centerTergetPosition_start.y + (Screen::centerTergetPosition_goal.y - Screen::centerTergetPosition_start.y)*Screen::center_move_count / Screen::center_move_count_max;
-
+	else {
+		Screen::window_center_world_pos = Screen::tergetPosition_goal + Screen::target_pos_delta;
+	}
+	
 	if (Screen::sway_count > Screen::sway_count_max) Screen::sway = Point();
 	else Screen::sway = Point::getCircleRandomPoint(Point(), Screen::sway_intensity_max*(Screen::sway_count_max - Screen::sway_count) / Screen::sway_count_max, Point(-100, -100), Point(100, 100));
 
@@ -107,11 +118,15 @@ void Screen::drawAll() {
 	Screen::draw_list.clear();
 }
 
-void Screen::addDrawObject(ObjectBase* obj) {
+void Screen::addDrawObjectMutable(ObjectBase* obj) {
 	if (obj->getPosition().x + obj->getExpansion() * obj->getSize().width / 2 < Screen::window_center_world_pos.x - Screen::windowSize.width / Screen::zoom / 2) return;
 	if (obj->getPosition().x - obj->getExpansion() * obj->getSize().width / 2 > Screen::window_center_world_pos.x + Screen::windowSize.width / Screen::zoom / 2) return;
 	if (obj->getPosition().y + obj->getExpansion() * obj->getSize().height / 2 < Screen::window_center_world_pos.y - Screen::windowSize.height / Screen::zoom / 2) return;
 	if (obj->getPosition().y - obj->getExpansion() * obj->getSize().height / 2 > Screen::window_center_world_pos.y + Screen::windowSize.height / Screen::zoom / 2) return;
 	
+	Screen::draw_list.push_back(obj);
+}
+
+void Screen::addDrawObjectWindow(ObjectBase* obj) {
 	Screen::draw_list.push_back(obj);
 }

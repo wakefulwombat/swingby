@@ -27,7 +27,7 @@ void MousePointer::update() {
 	}
 
 	this->count++;
-	Screen::addDrawObject(this);
+	Screen::addDrawObjectWindow(this);
 }
 
 void MousePointer::draw() const {

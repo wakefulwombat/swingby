@@ -1,4 +1,5 @@
 #include "scene_gameMainStage.h"
+#include "screen.h"
 
 SceneGameMainStage::SceneGameMainStage(ISetNextSceneInGameMain* i) : SceneInGameMainBase(i) {
 	this->control_factory = new ControllerFactory();
@@ -9,6 +10,7 @@ SceneGameMainStage::SceneGameMainStage(ISetNextSceneInGameMain* i) : SceneInGame
 
 void SceneGameMainStage::initialize() {
 	this->player->initialize(this->map->getStartPosition());
+	Screen::setStageSize(this->map->getStageSize());
 }
 
 void SceneGameMainStage::update() {

@@ -37,7 +37,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		
 		Input::keyUpdate();
 		mgr->update();
-		//Screen::update();
+		Screen::update();
 		
 		Screen::drawAll();
 		ScreenFlip();

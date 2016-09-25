@@ -30,4 +30,5 @@ public:
 	void update() override;
 
 	Point getStartPosition() { return this->start_pos * 64 + Point(32, 32); }
+	Size getStageSize() { return this->map_size * 64; }
 };
