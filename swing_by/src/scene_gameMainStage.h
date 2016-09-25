@@ -5,6 +5,7 @@
 #include "controllerFactory.h"
 #include "player.h"
 #include "mousePointer.h"
+#include "map.h"
 #include <vector>
 #include <memory>
 
@@ -13,6 +14,7 @@ private:
 	ControllerFactory* control_factory;
 	std::unique_ptr<Player> player;
 	std::unique_ptr<MousePointer> mouse_pointer;
+	std::unique_ptr<Map> map;
 
 public:
 	SceneGameMainStage(ISetNextSceneInGameMain* isetNextScene);

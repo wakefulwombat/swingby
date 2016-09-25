@@ -9,8 +9,10 @@ private:
 
 public:
 	Player(IGetController* ctrl_mgr);
-	void initialize() override;
+	void initialize() override {}
 	void update() override;
 	void draw() const override;
 	void finalize() override;
+
+	void initialize(Point start);
 };

@@ -21,7 +21,13 @@ private:
 	Point start_pos;
 	std::vector<std::vector<std::unique_ptr<MapChip>>> map_chip;//[y][x]
 
+	Size loadMapSize(std::string filename);
+	Point loadMapStartPoint(std::string filename);
+	void loadMapChipData(std::string filename);
+
 public:
 	Map(std::string filename);
 	void update() override;
+
+	Point getStartPosition() { return this->start_pos * 64 + Point(32, 32); }
 };

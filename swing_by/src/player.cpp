@@ -11,15 +11,25 @@ Player::Player(IGetController* ctrl_mgr) {
 	this->internalController = this->ctrl_mgr->getInternalMoveObjectController_None();
 	this->z_sort = 5000;
 	this->size = Size(56, 24);
-	this->position = Point(100, 200);
+	this->position = Point();
 
 	this->chip_count = 0;
 	this->chip_switch_time = 10;
 	this->show_chip_index = 0;
 }
 
-void Player::initialize() {
+void Player::initialize(Point start) {
+	this->count = 0;
+	this->ctrl_mgr = ctrl_mgr;
+	this->control_status = ControlStatus::InternalControlled;
+	this->internalController = this->ctrl_mgr->getInternalMoveObjectController_None();
+	this->z_sort = 5000;
+	this->size = Size(56, 24);
+	this->position = start;
 
+	this->chip_count = 0;
+	this->chip_switch_time = 10;
+	this->show_chip_index = 0;
 }
 
 void Player::update() {
