@@ -15,10 +15,10 @@ InternalMoveObjectController_GoStraight::InternalMoveObjectController_GoStraight
 }
 
 void InternalMoveObjectController_GoStraight::update() {
-	
+	this->obj->setPosition(this->obj->getPosition() + this->prop->getTransVelVec());
 }
 
 void InternalMoveObjectController_GoStraight::end() {
-
+	this->obj->setControlRights(ControlStatus::Movable);
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

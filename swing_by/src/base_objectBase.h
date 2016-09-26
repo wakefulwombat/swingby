@@ -19,10 +19,14 @@ protected:
 	//for moving
 	double trans_vel, trans_acc, trans_rad, trans_omega;//直進運動
 	double rotate_vel, rotate_acc, rotate_rad, rotate_omega;//回転運動
-	double gravity_move;//重力による落下移動量
 
 public:
 	virtual ~MoveObjectProperty(){}
+	double getTransVelNorm() { return this->trans_vel; }
+	Point getTransVelVec() { return Point(this->trans_vel*cos(this->trans_rad), this->trans_vel*sin(this->trans_rad)); }
+	double getTransRad() { return this->trans_rad; }
+	double getRotateVel() { return this->rotate_vel; }
+	double getRotateRad() { return this->rotate_rad; }
 };
 
 //アニメーション属性
@@ -36,6 +40,9 @@ protected:
 
 public:
 	virtual ~AnimationObjectProperty(){}
+
+	bool isChipSwitchTime() { return (this->chip_count%this->chip_switch_time == 0); }
+	bool isRepeatable() { return this->repeat; }
 };
 
 class ObjectBase : public RequiredFunc, public ExternalObjectControllerBase{
@@ -69,6 +76,10 @@ public:
 	//外部操作用
 	void setInvalid() override final { this->validation = false; }
 	void setControlRights(ControlStatus status) override final { this->control_status = status; }
+	void setPosition(Point pos) { this->position = pos; }
+	void setImageRotationRad(double rad) { this->img_rotation = rad; }
+	void setImageOpacity(double opacity) { this->img_opacity = opacity; }//0.0~1.0
+
 
 	bool operator<(const ObjectBase* obj){ return this->z_sort < obj->z_sort; }
 
