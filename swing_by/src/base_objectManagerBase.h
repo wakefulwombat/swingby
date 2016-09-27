@@ -8,7 +8,7 @@
 template <class T>
 class ObjectManagerBase : public TaskBase{
 private:
-	std::vector<std::unique_ptr<T>> obj_list;
+	std::vector<std::shared_ptr<T>> obj_list;
 
 public:
 	int getVectorListSize(){ return this->obj_list.size(); }

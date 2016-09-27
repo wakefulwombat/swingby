@@ -19,7 +19,7 @@ class Map : public RequiredFunc{
 private:
 	Size map_size;
 	Point start_pos;
-	std::vector<std::vector<std::unique_ptr<MapChip>>> map_chip;//[y][x]
+	std::vector<std::vector<std::shared_ptr<MapChip>>> map_chip;//[y][x]
 
 	Size loadMapSize(std::string filename);
 	Point loadMapStartPoint(std::string filename);
@@ -31,4 +31,7 @@ public:
 
 	Point getStartPosition() { return this->start_pos * 64 + Point(32, 32); }
 	Size getStageSize() { return this->map_size * 64; }
+
+	bool isMapChipVisible(int x_index, int y_index);
+	Point getCrossPosition(Point line_p1, Point line_p2);
 };

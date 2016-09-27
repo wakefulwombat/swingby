@@ -56,6 +56,7 @@
     <ClInclude Include="src\map.h" />
     <ClInclude Include="src\mousePointer.h" />
     <ClInclude Include="src\music.h" />
+    <ClInclude Include="src\orbit.h" />
     <ClInclude Include="src\player.h" />
     <ClInclude Include="src\scene_ending.h" />
     <ClInclude Include="src\scene_gameMain.h" />

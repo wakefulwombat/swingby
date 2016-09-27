@@ -130,3 +130,12 @@ void Screen::addDrawObjectMutable(ObjectBase* obj) {
 void Screen::addDrawObjectWindow(ObjectBase* obj) {
 	Screen::draw_list.push_back(obj);
 }
+
+bool Screen::isVisible(ObjectBase* obj) {
+	if (obj->getPosition().x + obj->getExpansion() * obj->getSize().width / 2 < Screen::window_center_world_pos.x - Screen::windowSize.width / Screen::zoom / 2) return false;
+	if (obj->getPosition().x - obj->getExpansion() * obj->getSize().width / 2 > Screen::window_center_world_pos.x + Screen::windowSize.width / Screen::zoom / 2) return false;
+	if (obj->getPosition().y + obj->getExpansion() * obj->getSize().height / 2 < Screen::window_center_world_pos.y - Screen::windowSize.height / Screen::zoom / 2) return false;
+	if (obj->getPosition().y - obj->getExpansion() * obj->getSize().height / 2 > Screen::window_center_world_pos.y + Screen::windowSize.height / Screen::zoom / 2) return false;
+
+	return true;
+}

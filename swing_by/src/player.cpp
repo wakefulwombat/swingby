@@ -4,9 +4,10 @@
 #include "image.h"
 #include <math.h>
 
-Player::Player(IGetController* ctrl_mgr) {
+Player::Player(IGetController* ctrl_mgr, std::shared_ptr<ObjectBase> mouse_pointer) {
 	this->count = 0;
 	this->ctrl_mgr = ctrl_mgr;
+	this->mouse_pointer = mouse_pointer;
 	this->control_status = ControlStatus::InternalControlled;
 	this->internalController = this->ctrl_mgr->getInternalMoveObjectController_None();
 	this->z_sort = 5000;
@@ -43,7 +44,7 @@ void Player::update() {
 		this->internalController = this->ctrl_mgr->getInternalMoveObjectController_GoStraight(this, this);
 	}
 	if (Input::getKeyCodeDown(KeyType::Game_Swing_OK) == 0) {
-		this->internalController = this->ctrl_mgr->getInternalMoveObjectController_Ellipse(this, this, this->position, Point(), this->getTransVelVec());
+		this->internalController = this->ctrl_mgr->getInternalMoveObjectController_Ellipse(this, this, this->position, this->mouse_pointer->getPosition(), this->getTransVelVec());
 	}
 
 	if (Input::getKeyCodeDownOnce(KeyType::Game_VectorTrans_CANCEL) == 0) {

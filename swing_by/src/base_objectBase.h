@@ -53,7 +53,7 @@ protected:
 	int count;
 	
 	ControlStatus control_status;//§ŒäŒ 
-	std::unique_ptr<InternalObjectController> internalController;//“à•”§Œä—p
+	std::shared_ptr<InternalObjectController> internalController;//“à•”§Œä—p
 
 	//for image
 	double expansion;//‰æ‘œŠg‘å—¦

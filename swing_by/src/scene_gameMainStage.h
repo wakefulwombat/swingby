@@ -12,9 +12,9 @@
 class SceneGameMainStage : public SceneInGameMainBase {
 private:
 	ControllerFactory* control_factory;
-	std::unique_ptr<Player> player;
-	std::unique_ptr<MousePointer> mouse_pointer;
-	std::unique_ptr<Map> map;
+	std::shared_ptr<Player> player;
+	std::shared_ptr<MousePointer> mouse_pointer;
+	std::shared_ptr<Map> map;
 
 public:
 	SceneGameMainStage(ISetNextSceneInGameMain* isetNextScene);

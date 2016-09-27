@@ -8,7 +8,7 @@
 class IGetController {
 public:
 	virtual ~IGetController(){}
-	virtual std::unique_ptr<InternalObjectController> getInternalMoveObjectController_None() = 0;
-	virtual std::unique_ptr<InternalObjectController> getInternalMoveObjectController_GoStraight(ObjectBase* obj, MoveObjectProperty* prop) = 0;
-	virtual std::unique_ptr<InternalObjectController> getInternalMoveObjectController_Ellipse(ObjectBase* obj, MoveObjectProperty* prop, Point start_pos, Point clicked_pos, Point start_vel) = 0;
+	virtual std::shared_ptr<InternalObjectController> getInternalMoveObjectController_None() = 0;
+	virtual std::shared_ptr<InternalObjectController> getInternalMoveObjectController_GoStraight(ObjectBase* obj, MoveObjectProperty* prop) = 0;
+	virtual std::shared_ptr<InternalObjectController> getInternalMoveObjectController_Ellipse(ObjectBase* obj, MoveObjectProperty* prop, Point start_pos, Point clicked_pos, Point start_vel) = 0;
 };

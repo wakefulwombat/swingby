@@ -2,13 +2,15 @@
 
 #include "base_objectBase.h"
 #include "interface_getController.h"
+#include <memory>
 
 class Player : public ObjectBase, public AnimationObjectProperty, public MoveObjectProperty {
 private:
 	IGetController* ctrl_mgr;
+	std::shared_ptr<ObjectBase> mouse_pointer;
 
 public:
-	Player(IGetController* ctrl_mgr);
+	Player(IGetController* ctrl_mgr, std::shared_ptr<ObjectBase> mouse_pointer);
 	void initialize() override {}
 	void update() override;
 	void draw() const override;

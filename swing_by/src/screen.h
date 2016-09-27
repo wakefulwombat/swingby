@@ -45,4 +45,6 @@ public:
 
 	static Size getWindowSize(){ return Screen::windowSize; }
 	static Point getPositionOfWindowCoordinate(Point pos) { return pos - Screen::window_center_world_pos; }
+
+	static bool isVisible(ObjectBase* obj);
 };
