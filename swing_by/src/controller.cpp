@@ -22,3 +22,21 @@ void InternalMoveObjectController_GoStraight::end() {
 	this->obj->setControlRights(ControlStatus::Movable);
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+InternalMoveObjectController_Ellipse::InternalMoveObjectController_Ellipse(ObjectBase* obj, MoveObjectProperty* prop, Point start_pos, Point clicked_pos, Point start_vel) {
+	this->obj = obj;
+	this->prop = prop;
+	this->start_pos = start_pos;
+	this->clicked_pos = clicked_pos;
+	this->start_vel = start_vel;
+}
+
+void InternalMoveObjectController_Ellipse::update() {
+	
+}
+
+void InternalMoveObjectController_Ellipse::end() {
+	this->obj->setControlRights(ControlStatus::Movable);
+}
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

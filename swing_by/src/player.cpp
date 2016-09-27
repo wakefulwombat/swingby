@@ -43,7 +43,7 @@ void Player::update() {
 		this->internalController = this->ctrl_mgr->getInternalMoveObjectController_GoStraight(this, this);
 	}
 	if (Input::getKeyCodeDown(KeyType::Game_Swing_OK) == 0) {
-
+		this->internalController = this->ctrl_mgr->getInternalMoveObjectController_Ellipse(this, this, this->position, Point(), this->getTransVelVec());
 	}
 
 	if (Input::getKeyCodeDownOnce(KeyType::Game_VectorTrans_CANCEL) == 0) {
