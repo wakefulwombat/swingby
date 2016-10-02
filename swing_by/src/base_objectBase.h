@@ -45,7 +45,7 @@ public:
 	bool isRepeatable() { return this->repeat; }
 };
 
-class ObjectBase : public RequiredFunc, public ExternalObjectControllerBase{
+class ObjectBase : public RequiredFunc, public ExternalObjectControllerBase, public std::enable_shared_from_this<ObjectBase> {
 protected:
 	Point position;
 	Size size;
@@ -73,15 +73,14 @@ public:
 	double getExpansion(){ return this->expansion; }
 	double getImageRotationRad(){ return this->img_rotation; }
 
+	unsigned int getZSort() { return this->z_sort; }
+
 	//ŠO•”‘€ì—p
 	void setInvalid() override final { this->validation = false; }
 	void setControlRights(ControlStatus status) override final { this->control_status = status; }
 	void setPosition(Point pos) { this->position = pos; }
 	void setImageRotationRad(double rad) { this->img_rotation = rad; }
 	void setImageOpacity(double opacity) { this->img_opacity = opacity; }//0.0~1.0
-
-
-	bool operator<(const ObjectBase* obj){ return this->z_sort < obj->z_sort; }
 
 	virtual void draw() const = 0;
 };

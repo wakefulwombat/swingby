@@ -60,7 +60,7 @@ void Player::update() {
 	this->count++;
 	this->chip_count++;
 	if (this->chip_count%this->chip_switch_time == 0) this->show_chip_index = (this->show_chip_index + 1) % 2;
-	Screen::addDrawObjectMutable(this);
+	Screen::addDrawObjectMutable(this->shared_from_this());
 
 	Screen::setTargetWorldPosition(this->position, 30);
 }

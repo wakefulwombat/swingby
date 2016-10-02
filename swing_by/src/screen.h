@@ -3,6 +3,7 @@
 #include "common.h"
 #include "base_objectBase.h"
 #include <vector>
+#include <memory>
 
 class Screen{
 private:
@@ -11,7 +12,7 @@ private:
 	static Point target_pos_delta;
 	static double zoom;
 	static Point sway;
-	static std::vector<ObjectBase*> draw_list;
+	static std::vector<std::shared_ptr<ObjectBase>> draw_list;
 
 	static int move_count, move_count_max;
 	static Point tergetPosition_start, tergetPosition_goal;
@@ -40,11 +41,11 @@ public:
 	static void update();
 
 	static void drawAll();
-	static void addDrawObjectMutable(ObjectBase* obj);
-	static void addDrawObjectWindow(ObjectBase* obj);
+	static void addDrawObjectMutable(const std::shared_ptr<ObjectBase> &obj);
+	static void addDrawObjectWindow(const std::shared_ptr<ObjectBase> &obj);
 
 	static Size getWindowSize(){ return Screen::windowSize; }
 	static Point getPositionOfWindowCoordinate(Point pos) { return pos - Screen::window_center_world_pos; }
 
-	static bool isVisible(ObjectBase* obj);
+	static bool isVisible(const std::shared_ptr<ObjectBase> &obj);
 };

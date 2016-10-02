@@ -13,6 +13,8 @@ public:
 	MapChip(Point pos, Size size, int chip_index);
 	void update() override;
 	void draw() const override;
+
+	int getChipKindIndex() { return this->chip_index; }
 };
 
 class Map : public RequiredFunc{
@@ -24,6 +26,10 @@ private:
 	Size loadMapSize(std::string filename);
 	Point loadMapStartPoint(std::string filename);
 	void loadMapChipData(std::string filename);
+	
+	bool intersect(Point lp1, Point lp2, Point mp1, Point mp2);
+	bool isCross(int chip_x, int chip_y, Point p1, Point p2);
+	Point getCrossPointInMapChip(int chip_x, int chip_y, double a, double b);
 
 public:
 	Map(std::string filename);

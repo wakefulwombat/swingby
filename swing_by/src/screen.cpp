@@ -7,7 +7,7 @@ Point Screen::window_center_world_pos;
 Point Screen::target_pos_delta;
 double Screen::zoom;
 Point Screen::sway;
-std::vector<ObjectBase*> Screen::draw_list;
+std::vector<std::shared_ptr<ObjectBase>> Screen::draw_list;
 
 int Screen::move_count, Screen::move_count_max;
 Point Screen::tergetPosition_start, Screen::tergetPosition_goal;
@@ -110,7 +110,7 @@ void Screen::update(){
 }
 
 void Screen::drawAll() {
-	std::sort(Screen::draw_list.begin(), Screen::draw_list.end());
+	std::sort(Screen::draw_list.begin(), Screen::draw_list.end(), [](const std::shared_ptr<ObjectBase> &left, const std::shared_ptr<ObjectBase> &right) {return left->getZSort() < right->getZSort(); });
 	for(auto var : Screen::draw_list)
 	{
 		var->draw();
@@ -118,7 +118,7 @@ void Screen::drawAll() {
 	Screen::draw_list.clear();
 }
 
-void Screen::addDrawObjectMutable(ObjectBase* obj) {
+void Screen::addDrawObjectMutable(const std::shared_ptr<ObjectBase> &obj) {
 	if (obj->getPosition().x + obj->getExpansion() * obj->getSize().width / 2 < Screen::window_center_world_pos.x - Screen::windowSize.width / Screen::zoom / 2) return;
 	if (obj->getPosition().x - obj->getExpansion() * obj->getSize().width / 2 > Screen::window_center_world_pos.x + Screen::windowSize.width / Screen::zoom / 2) return;
 	if (obj->getPosition().y + obj->getExpansion() * obj->getSize().height / 2 < Screen::window_center_world_pos.y - Screen::windowSize.height / Screen::zoom / 2) return;
@@ -127,11 +127,11 @@ void Screen::addDrawObjectMutable(ObjectBase* obj) {
 	Screen::draw_list.push_back(obj);
 }
 
-void Screen::addDrawObjectWindow(ObjectBase* obj) {
+void Screen::addDrawObjectWindow(const std::shared_ptr<ObjectBase> &obj) {
 	Screen::draw_list.push_back(obj);
 }
 
-bool Screen::isVisible(ObjectBase* obj) {
+bool Screen::isVisible(const std::shared_ptr<ObjectBase> &obj) {
 	if (obj->getPosition().x + obj->getExpansion() * obj->getSize().width / 2 < Screen::window_center_world_pos.x - Screen::windowSize.width / Screen::zoom / 2) return false;
 	if (obj->getPosition().x - obj->getExpansion() * obj->getSize().width / 2 > Screen::window_center_world_pos.x + Screen::windowSize.width / Screen::zoom / 2) return false;
 	if (obj->getPosition().y + obj->getExpansion() * obj->getSize().height / 2 < Screen::window_center_world_pos.y - Screen::windowSize.height / Screen::zoom / 2) return false;
