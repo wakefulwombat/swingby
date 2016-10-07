@@ -1,6 +1,6 @@
 #include "scene_musicRoom.h"
 
-SceneMusicRoom::SceneMusicRoom(ISetNextScene* i) : SceneBase(i){
+SceneMusicRoom::SceneMusicRoom(std::shared_ptr<ISetNextScene> &i) : SceneBase(i){
 	
 }
 

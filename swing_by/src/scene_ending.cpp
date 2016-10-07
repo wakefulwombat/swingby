@@ -1,6 +1,6 @@
 #include "scene_ending.h"
 
-SceneEnding::SceneEnding(ISetNextScene* i) : SceneBase(i){
+SceneEnding::SceneEnding(std::shared_ptr<ISetNextScene> &i) : SceneBase(i){
 	
 }
 

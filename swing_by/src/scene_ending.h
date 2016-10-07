@@ -6,7 +6,7 @@ class SceneEnding : public SceneBase {
 private:
 
 public:
-	SceneEnding(ISetNextScene* isetNextScene);
+	SceneEnding(std::shared_ptr<ISetNextScene> &isetNextScene);
 	void initialize() override;
 	void update() override;
 	void finalize() override;

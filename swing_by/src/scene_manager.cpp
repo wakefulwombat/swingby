@@ -13,28 +13,27 @@ void SceneManager::update(){
 	if (this->nextScene != SceneKind::None){
 		if (this->nowScene != nullptr) {
 			this->nowScene->finalize();
-			delete(this->nowScene);
 		}
 
 		switch (this->nextScene){
 		case SceneKind::Ending:
-			this->nowScene = new SceneEnding(this);
+			this->nowScene = std::make_shared<SceneEnding>(this->shared_from_this());
 			break;
 
 		case SceneKind::GameMain:
-			this->nowScene = new SceneGameMain(this);
+			this->nowScene = std::make_shared<SceneGameMain>(this->shared_from_this());
 			break;
 
 		case SceneKind::MusicRoom:
-			this->nowScene = new SceneMusicRoom(this);
+			this->nowScene = std::make_shared<SceneMusicRoom>(this->shared_from_this());
 			break;
 
 		case SceneKind::Opening:
-			this->nowScene = new SceneOpening(this);
+			this->nowScene = std::make_shared<SceneOpening>(this->shared_from_this());
 			break;
 
 		case SceneKind::Option:
-			this->nowScene = new SceneOption(this);
+			this->nowScene = std::make_shared<SceneOption>(this->shared_from_this());
 			break;
 		}
 
@@ -47,5 +46,5 @@ void SceneManager::update(){
 }
 
 void SceneManager::finalize(){
-	delete this->nowScene;
+	
 }

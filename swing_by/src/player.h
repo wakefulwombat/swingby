@@ -6,11 +6,11 @@
 
 class Player : public ObjectBase, public AnimationObjectProperty, public MoveObjectProperty {
 private:
-	IGetController* ctrl_mgr;
+	std::shared_ptr<IGetController> ctrl_mgr;
 	std::shared_ptr<ObjectBase> mouse_pointer;
 
 public:
-	Player(IGetController* ctrl_mgr, std::shared_ptr<ObjectBase> mouse_pointer);
+	Player(std::shared_ptr<IGetController> &ctrl_mgr, std::shared_ptr<ObjectBase> &mouse_pointer);
 	void initialize() override {}
 	void update() override;
 	void draw() const override;

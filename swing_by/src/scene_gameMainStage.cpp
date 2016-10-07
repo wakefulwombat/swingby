@@ -1,11 +1,12 @@
 #include "scene_gameMainStage.h"
 #include "screen.h"
 
-SceneGameMainStage::SceneGameMainStage(ISetNextSceneInGameMain* i) : SceneInGameMainBase(i) {
-	this->control_factory = new ControllerFactory();
-	this->mouse_pointer = std::shared_ptr<MousePointer>(new MousePointer());
-	this->player = std::shared_ptr<Player>(new Player(this->control_factory, this->mouse_pointer));
-	this->map = std::shared_ptr<Map>(new Map("asset\\map\\map_001.csv"));
+SceneGameMainStage::SceneGameMainStage(std::shared_ptr<ISetNextSceneInGameMain> &i) : SceneInGameMainBase(i) {
+	this->control_factory = std::make_shared<ControllerFactory>();
+	this->mouse_pointer = std::make_shared<MousePointer>();
+	this->player = std::make_shared<Player>(this->control_factory, this->mouse_pointer);
+	this->map = std::make_shared<Map>("asset\\map\\map_001.csv");
+	this->orbit = std::make_shared<Orbit>(this->player, this->mouse_pointer, this->map);
 }
 
 void SceneGameMainStage::initialize() {
@@ -17,8 +18,9 @@ void SceneGameMainStage::update() {
 	this->player->update();
 	this->mouse_pointer->update();
 	this->map->update();
+	this->orbit->update();
 }
 
 void SceneGameMainStage::finalize() {
-	delete this->control_factory;
+
 }

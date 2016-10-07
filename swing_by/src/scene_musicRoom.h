@@ -6,7 +6,7 @@ class SceneMusicRoom : public SceneBase {
 private:
 
 public:
-	SceneMusicRoom(ISetNextScene* isetNextScene);
+	SceneMusicRoom(std::shared_ptr<ISetNextScene> &isetNextScene);
 	void initialize() override;
 	void update() override;
 	void finalize() override;

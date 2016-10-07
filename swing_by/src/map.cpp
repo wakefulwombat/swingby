@@ -94,7 +94,7 @@ void Map::loadMapChipData(std::string filename) {
 		std::istringstream stream(str);
 		for (int x = 0; x < this->map_size.width; ++x) {
 			getline(stream, cell, ',');
-			tmp.push_back(std::shared_ptr<MapChip>(new MapChip(Point(x * 64 + 32, y * 64 + 32), Size(64, 64), std::stoi(cell))));
+			tmp.push_back(std::make_shared<MapChip>(Point(x * 64 + 32, y * 64 + 32), Size(64, 64), std::stoi(cell)));
 		}
 		this->map_chip.push_back(std::move(tmp));
 	}

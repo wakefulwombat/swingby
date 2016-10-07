@@ -3,6 +3,7 @@
 #include "screen.h"
 #include "image.h"
 #include "scene_manager.h"
+#include <memory>
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
@@ -29,7 +30,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 	Screen::init(960, 540);
 	Image::loadGameScene();
-	SceneManager* mgr = new SceneManager();
+	std::shared_ptr<SceneManager> mgr = std::make_shared<SceneManager>();
 	mgr->initialize();
 
 	while (1) {
@@ -45,7 +46,6 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		if (ProcessMessage() == -1) break;
 	}
 	mgr->finalize();
-	delete mgr;
 
 	//#ifndef _DEBUG
 	DxLib_End();

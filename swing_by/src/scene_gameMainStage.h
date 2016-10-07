@@ -6,18 +6,19 @@
 #include "player.h"
 #include "mousePointer.h"
 #include "map.h"
+#include "orbit.h"
 #include <vector>
-#include <memory>
 
 class SceneGameMainStage : public SceneInGameMainBase {
 private:
-	ControllerFactory* control_factory;
+	std::shared_ptr<ControllerFactory> control_factory;
 	std::shared_ptr<Player> player;
 	std::shared_ptr<MousePointer> mouse_pointer;
 	std::shared_ptr<Map> map;
+	std::shared_ptr<Orbit> orbit;
 
 public:
-	SceneGameMainStage(ISetNextSceneInGameMain* isetNextScene);
+	SceneGameMainStage(std::shared_ptr<ISetNextSceneInGameMain> &isetNextScene);
 	void initialize() override;
 	void update() override;
 	void finalize() override;

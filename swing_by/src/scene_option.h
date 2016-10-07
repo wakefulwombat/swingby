@@ -6,7 +6,7 @@ class SceneOption : public SceneBase {
 private:
 
 public:
-	SceneOption(ISetNextScene* isetNextScene);
+	SceneOption(std::shared_ptr<ISetNextScene> &isetNextScene);
 	void initialize() override;
 	void update() override;
 	void finalize() override;

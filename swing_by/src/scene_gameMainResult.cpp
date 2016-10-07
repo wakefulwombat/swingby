@@ -1,6 +1,6 @@
 #include "scene_gameMainResult.h"
 
-SceneGameMainResult::SceneGameMainResult(ISetNextSceneInGameMain* i) : SceneInGameMainBase(i) {
+SceneGameMainResult::SceneGameMainResult(std::shared_ptr<ISetNextSceneInGameMain> &i) : SceneInGameMainBase(i) {
 
 }
 

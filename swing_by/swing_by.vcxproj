@@ -21,6 +21,7 @@
     <ClCompile Include="src\map.cpp" />
     <ClCompile Include="src\mousePointer.cpp" />
     <ClCompile Include="src\music.cpp" />
+    <ClCompile Include="src\orbit.cpp" />
     <ClCompile Include="src\player.cpp" />
     <ClCompile Include="src\scene_ending.cpp" />
     <ClCompile Include="src\scene_gameMain.cpp" />
@@ -49,6 +50,7 @@
     <ClInclude Include="src\image.h" />
     <ClInclude Include="src\input.h" />
     <ClInclude Include="src\interface_getController.h" />
+    <ClInclude Include="src\interface_getCrossPosition.h" />
     <ClInclude Include="src\interface_setNextScene.h" />
     <ClInclude Include="src\interface_setNextSceneInGameMain.h" />
     <ClInclude Include="src\item.h" />

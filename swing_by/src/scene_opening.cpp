@@ -1,6 +1,6 @@
 #include "scene_opening.h"
 
-SceneOpening::SceneOpening(ISetNextScene* i) : SceneBase(i){
+SceneOpening::SceneOpening(std::shared_ptr<ISetNextScene> &i) : SceneBase(i){
 	
 }
 

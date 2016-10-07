@@ -4,6 +4,7 @@
 #include "base_requiredFunc.h"
 #include "base_sceneBase.h"
 #include "interface_setNextScene.h"
+#include <memory>
 
 enum class SceneKind{
 	Opening,
@@ -26,10 +27,10 @@ public:
 };
 
 
-class SceneManager : public RequiredFunc, public ISetNextScene{
+class SceneManager : public RequiredFunc, public ISetNextScene, public std::enable_shared_from_this<SceneManager> {
 private:
 	SceneKind nextScene;
-	SceneBase* nowScene;
+	std::shared_ptr<SceneBase> nowScene;
 
 public:
 	SceneManager();

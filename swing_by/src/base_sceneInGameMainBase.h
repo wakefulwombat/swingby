@@ -2,12 +2,13 @@
 
 #include "base_requiredFunc.h"
 #include "interface_setNextSceneInGameMain.h"
+#include <memory>
 
 class SceneInGameMainBase : public RequiredFunc {
 protected:
-	ISetNextSceneInGameMain* sceneChanger;
+	std::shared_ptr<ISetNextSceneInGameMain> sceneChanger;
 
 public:
-	SceneInGameMainBase(ISetNextSceneInGameMain* changer) { this->sceneChanger = changer; }
+	SceneInGameMainBase(std::shared_ptr<ISetNextSceneInGameMain> &changer) { this->sceneChanger = changer; }
 	virtual ~SceneInGameMainBase() {}
 };

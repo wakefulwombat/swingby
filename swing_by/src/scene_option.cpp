@@ -1,6 +1,6 @@
 #include "scene_option.h"
 
-SceneOption::SceneOption(ISetNextScene* i) : SceneBase(i){
+SceneOption::SceneOption(std::shared_ptr<ISetNextScene> &i) : SceneBase(i){
 	
 }
 

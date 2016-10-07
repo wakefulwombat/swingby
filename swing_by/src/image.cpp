@@ -6,6 +6,7 @@ int Image::item[10];
 int Image::textBox[9];
 int Image::mouse_pointer;
 int Image::player[2];
+int Image::cross_target[3];
 
 void Image::clearAll(){
 	InitGraph();
@@ -40,6 +41,10 @@ void Image::loadGameScene(){
 	Image::mouse_pointer = LoadGraph("asset\\pointer.png");
 
 	LoadDivGraph("asset\\player.png", 2, 2, 1, 56, 24, Image::player);
+
+	Image::cross_target[0] = LoadGraph("asset\\crosstarget\\1.png");
+	Image::cross_target[1] = LoadGraph("asset\\crosstarget\\2.png");
+	Image::cross_target[2] = LoadGraph("asset\\crosstarget\\3.png");
 }
 
 void Image::loadOtherScene(){
