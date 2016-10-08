@@ -68,7 +68,7 @@ public:
 	virtual ~ObjectBase(){}
 
 	Point getPosition(){ return this->position; }
-	Size getSize(){ return this->size; }
+	Size getSize() { return this->size*this->expansion; }
 	bool getValidation(){ return this->validation; }
 	double getExpansion(){ return this->expansion; }
 	double getImageRotationRad(){ return this->img_rotation; }

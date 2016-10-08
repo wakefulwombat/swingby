@@ -4,7 +4,7 @@
 #include "scene_gameMainStage.h"
 #include "scene_gameMainStageSelect.h"
 
-SceneGameMain::SceneGameMain(std::shared_ptr<ISetNextScene> &i) : SceneBase(i){
+SceneGameMain::SceneGameMain(const std::shared_ptr<ISetNextScene> &i) : SceneBase(i){
 	this->nextSceneInGameMain = SceneInGameMainKind::Stage;
 	this->pause = std::make_shared<SceneGameMainPause>(i);
 }

@@ -4,7 +4,7 @@
 #include "DxLib.h"
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
-CrossTarget::CrossTarget(std::shared_ptr<ObjectBase> &player, std::shared_ptr<ObjectBase> &mouse_pointer, std::shared_ptr<IGetCrossPosition> &map) {
+CrossTarget::CrossTarget(const std::shared_ptr<ObjectBase> &player, const std::shared_ptr<ObjectBase> &mouse_pointer, const std::shared_ptr<IGetCrossPosition> &map) {
 	this->z_sort = 90000;
 	this->size = Size(64, 64);
 	for (int i = 0; i < 3; ++i)this->target_spin[i] = 0.000000;
@@ -65,7 +65,7 @@ void OrbitPoint::finalize() {
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
-Orbit::Orbit(std::shared_ptr<ObjectBase> &player, std::shared_ptr<ObjectBase> &mouse_pointer, std::shared_ptr<IGetCrossPosition> &map) {
+Orbit::Orbit(const std::shared_ptr<ObjectBase> &player, const std::shared_ptr<ObjectBase> &mouse_pointer, const std::shared_ptr<IGetCrossPosition> &map) {
 	this->player = player;
 	this->mouse_pointer = mouse_pointer;
 	this->crossTarget = std::make_shared<CrossTarget>(player, mouse_pointer, map);

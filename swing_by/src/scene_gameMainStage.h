@@ -18,7 +18,7 @@ private:
 	std::shared_ptr<Orbit> orbit;
 
 public:
-	SceneGameMainStage(std::shared_ptr<ISetNextSceneInGameMain> &isetNextScene);
+	SceneGameMainStage(const std::shared_ptr<ISetNextSceneInGameMain> &isetNextScene);
 	void initialize() override;
 	void update() override;
 	void finalize() override;

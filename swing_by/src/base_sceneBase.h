@@ -9,6 +9,6 @@ protected:
 	std::shared_ptr<ISetNextScene> sceneChanger;
 
 public:
-	SceneBase(std::shared_ptr<ISetNextScene> &changer){ this->sceneChanger = changer; }
+	SceneBase(const std::shared_ptr<ISetNextScene> &changer){ this->sceneChanger = changer; }
 	virtual ~SceneBase(){}
 };

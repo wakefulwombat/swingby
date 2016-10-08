@@ -4,7 +4,7 @@
 #include "image.h"
 #include <math.h>
 
-Player::Player(std::shared_ptr<IGetController> &ctrl_mgr, std::shared_ptr<ObjectBase> &mouse_pointer) {
+Player::Player(const std::shared_ptr<IGetController> &ctrl_mgr, const std::shared_ptr<ObjectBase> &mouse_pointer) {
 	this->count = 0;
 	this->ctrl_mgr = ctrl_mgr;
 	this->mouse_pointer = mouse_pointer;

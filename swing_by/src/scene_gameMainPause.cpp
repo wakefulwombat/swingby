@@ -1,6 +1,6 @@
 #include "scene_gameMainPause.h"
 
-SceneGameMainPause::SceneGameMainPause(std::shared_ptr<ISetNextScene> &i) : SceneBase(i) {
+SceneGameMainPause::SceneGameMainPause(const std::shared_ptr<ISetNextScene> &i) : SceneBase(i) {
 
 }
 

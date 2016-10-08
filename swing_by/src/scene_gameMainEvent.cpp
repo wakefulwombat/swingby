@@ -1,6 +1,6 @@
 #include "scene_gameMainEvent.h"
 
-SceneGameMainEvent::SceneGameMainEvent(std::shared_ptr<ISetNextSceneInGameMain> &i) : SceneInGameMainBase(i) {
+SceneGameMainEvent::SceneGameMainEvent(const std::shared_ptr<ISetNextSceneInGameMain> &i) : SceneInGameMainBase(i) {
 
 }
 

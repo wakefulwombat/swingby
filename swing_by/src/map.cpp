@@ -94,13 +94,18 @@ void Map::loadMapChipData(std::string filename) {
 		std::istringstream stream(str);
 		for (int x = 0; x < this->map_size.width; ++x) {
 			getline(stream, cell, ',');
-			tmp.push_back(std::make_shared<MapChip>(Point(x * 64 + 32, y * 64 + 32), Size(64, 64), std::stoi(cell)));
+			tmp.push_back(std::make_shared<MapChip>(Point(x * 64 + 32, y * 64 + 32), Size(32, 32), std::stoi(cell)));
 		}
 		this->map_chip.push_back(std::move(tmp));
 	}
 }
 
 bool Map::isMapChipVisible(int x_index, int y_index) {
+	if (x_index < 0) return false;
+	if (y_index < 0) return false;
+	if (x_index >= this->map_size.width) return false;
+	if (y_index >= this->map_size.height) return false;
+
 	return Screen::isVisible(this->map_chip[y_index][x_index]);
 }
 
@@ -134,7 +139,7 @@ Point Map::getCrossPosition(Point p1, Point p2) {
 	while (this->isMapChipVisible(map_x, map_y)) {
 		while (this->isMapChipVisible(map_x, map_y)) {
 			map_x += map_x_inc;
-			if (abs(-a*(64.0*map_x+32.0) + (64.0*map_y+32.0) - b) / sqrt(a*a + b*b) < 64.0*sqrt(2.0)) {
+			if (abs(-a*(64.0*map_x+32.0) + (64.0*map_y+32.0) - b) / sqrt(a*a + 1) < 64.0*sqrt(2.0)) {
 				candidate.push_back(Point(map_x, map_y));
 			}
 			else {
@@ -144,7 +149,7 @@ Point Map::getCrossPosition(Point p1, Point p2) {
 		}
 		while (this->isMapChipVisible(map_x, map_y)) {
 			map_y += map_y_inc;
-			if (abs(-a*(64.0*map_x + 32.0) + (64.0*map_y + 32.0) - b) / sqrt(a*a + b*b) < 64.0*sqrt(2.0)) {
+			if (abs(-a*(64.0*map_x + 32.0) + (64.0*map_y + 32.0) - b) / sqrt(a*a + 1) < 64.0*sqrt(2.0)) {
 				candidate.push_back(Point(map_x, map_y));
 			}
 			else {
@@ -159,10 +164,12 @@ Point Map::getCrossPosition(Point p1, Point p2) {
 
 	for (Point p : candidate) {
 		tmp.clear();
-		if ((a*(p.x*64.0) + b >= p.y*64.0) && (a*(p.x*64.0) + b <= (p.y + 1.0)*64.0)) tmp.push_back(p);
-		if ((a*((p.x + 1)*64.0) + b >= p.y*64.0) && (a*((p.x + 1)*64.0) + b <= (p.y + 1.0)*64.0)) tmp.push_back(p);
-		if (((p.y*64.0 - b) / a >= p.x*64.0) && ((p.y*64.0 - b) / a <= (p.x + 1.0)*64.0)) tmp.push_back(p);
-		if ((((p.y + 1)*64.0 - b) / a >= p.x*64.0) && (((p.y + 1)*64.0 - b) / a <= (p.x + 1.0)*64.0)) tmp.push_back(p);
+		if ((a*(p.x*64.0) + b >= p.y*64.0) && (a*(p.x*64.0) + b <= (p.y + 1.0)*64.0)) tmp.push_back(Point(p.x*64.0, a*(p.x*64.0) + b));
+		if ((a*((p.x + 1)*64.0) + b >= p.y*64.0) && (a*((p.x + 1)*64.0) + b <= (p.y + 1.0)*64.0)) tmp.push_back(Point((p.x + 1.0)*64.0, a*(p.x*64.0) + b));
+		if (((p.y*64.0 - b) / a >= p.x*64.0) && ((p.y*64.0 - b) / a <= (p.x + 1.0)*64.0)) tmp.push_back(Point((p.y*64.0 - b) / a, p.y*64.0));
+		if ((((p.y + 1)*64.0 - b) / a >= p.x*64.0) && (((p.y + 1)*64.0 - b) / a <= (p.x + 1.0)*64.0)) tmp.push_back(Point((p.y*64.0 - b) / a, (p.y + 1.0)*64.0));
+
+		if (tmp.size() != 2) continue;
 
 		if (this->isCross((int)p.x, (int)p.y, tmp[0], tmp[1])) {
 			cross = this->getCrossPointInMapChip((int)p.x, (int)p.y, a, b);

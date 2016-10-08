@@ -14,7 +14,7 @@ private:
 	std::shared_ptr<IGetCrossPosition> map;
 
 public:
-	CrossTarget(std::shared_ptr<ObjectBase> &player, std::shared_ptr<ObjectBase> &mouse_pointer, std::shared_ptr<IGetCrossPosition> &map);
+	CrossTarget(const std::shared_ptr<ObjectBase> &player, const std::shared_ptr<ObjectBase> &mouse_pointer, const std::shared_ptr<IGetCrossPosition> &map);
 	void initialize() override;
 	void update() override;
 	void draw() const override;
@@ -42,7 +42,7 @@ private:
 	std::shared_ptr<ObjectBase> player;
 
 public:
-	Orbit(std::shared_ptr<ObjectBase> &player, std::shared_ptr<ObjectBase> &mouse_pointer, std::shared_ptr<IGetCrossPosition> &map);
+	Orbit(const std::shared_ptr<ObjectBase> &player, const std::shared_ptr<ObjectBase> &mouse_pointer, const std::shared_ptr<IGetCrossPosition> &map);
 	void initialize() override;
 	void update() override;
 	void finalize() override;

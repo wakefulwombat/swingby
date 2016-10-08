@@ -1,7 +1,7 @@
 #include "scene_gameMainStage.h"
 #include "screen.h"
 
-SceneGameMainStage::SceneGameMainStage(std::shared_ptr<ISetNextSceneInGameMain> &i) : SceneInGameMainBase(i) {
+SceneGameMainStage::SceneGameMainStage(const std::shared_ptr<ISetNextSceneInGameMain> &i) : SceneInGameMainBase(i) {
 	this->control_factory = std::make_shared<ControllerFactory>();
 	this->mouse_pointer = std::make_shared<MousePointer>();
 	this->player = std::make_shared<Player>(this->control_factory, this->mouse_pointer);
