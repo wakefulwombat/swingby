@@ -22,17 +22,17 @@ void CrossTarget::update() {
 	this->position = this->map->getCrossPosition(this->player->getPosition(), Screen::getPositionOfWorldCoordinate(this->mouse_pointer->getPosition()));
 
 	this->target_spin[0] += M_PI / 30;
-	this->target_spin[0] -= M_PI / 50;
+	this->target_spin[1] -= M_PI / 40;
 	for (int i = 0; i < 2; ++i) {
-		if (this->target_spin[i] < 0) this->target_spin[i] += M_PI * 2;
 		if (this->target_spin[i] > M_PI * 2) this->target_spin[i] -= M_PI * 2;
+		if (this->target_spin[i] < 0) this->target_spin[i] += M_PI * 2;
 	}
 
 	Screen::addDrawObjectMutable(this->shared_from_this());
 }
 
 void CrossTarget::draw() const {
-	for (int i = 0; i < 3; ++i) Screen::drawMutable(this->position, this->size, Image::getCrossTarget(i), 1.0, this->target_spin[i], false, 1.0);
+	for (int i = 2; i >= 0; --i) Screen::drawMutable(this->position, this->size, Image::getCrossTarget(i), 1.0, this->target_spin[i], false, 1.0);
 }
 
 void CrossTarget::finalize() {

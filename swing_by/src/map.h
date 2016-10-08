@@ -30,7 +30,7 @@ private:
 	
 	bool intersect(Point lp1, Point lp2, Point mp1, Point mp2);
 	bool isCross(int chip_x, int chip_y, Point p1, Point p2);
-	Point getCrossPointInMapChip(int chip_x, int chip_y, double a, double b);
+	Point getCrossPointInMapChip(int chip_x, int chip_y, double a, double b, Point player);
 
 public:
 	Map(std::string filename);
