@@ -1,6 +1,7 @@
 #include "map.h"
 #include "screen.h"
 #include "image.h"
+#include "debug.h"
 #include <fstream>
 #include <sstream>
 #include <vector>
@@ -163,6 +164,9 @@ Point Map::getCrossPosition(Point p1, Point p2) {
 	std::vector<Point> tmp;
 
 	for (Point p : candidate) {
+		std::shared_ptr<Debug_Square> dbg = std::make_shared<Debug_Square>(Point(64.0*p.x+32, 64.0*p.y+32), Size(64, 64), Color(255, 0, 0));
+		dbg->update();
+
 		tmp.clear();
 		if ((a*(p.x*64.0) + b >= p.y*64.0) && (a*(p.x*64.0) + b <= (p.y + 1.0)*64.0)) tmp.push_back(Point(p.x*64.0, a*(p.x*64.0) + b));
 		if ((a*((p.x + 1)*64.0) + b >= p.y*64.0) && (a*((p.x + 1)*64.0) + b <= (p.y + 1.0)*64.0)) tmp.push_back(Point((p.x + 1.0)*64.0, a*(p.x*64.0) + b));
@@ -190,6 +194,11 @@ bool Map::intersect(Point lp1, Point lp2, Point mp1, Point mp2) {
 }
 
 bool Map::isCross(int chip_x, int chip_y, Point p1, Point p2) {
+	if (chip_x < 0) return false;
+	if (chip_y < 0) return false;
+	if (chip_x >= this->map_size.width / 64) return false;
+	if (chip_y >= this->map_size.height / 64) return false;
+
 	switch (this->map_chip[chip_y][chip_x]->getChipKindIndex()) {
 	case 0:
 		return this->intersect(p1, p2, this->map_chip[chip_y][chip_x]->getPosition() + Point(-32.0, -32.0), this->map_chip[chip_y][chip_x]->getPosition() + Point(32.0, -32.0));

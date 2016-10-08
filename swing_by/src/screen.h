@@ -2,6 +2,7 @@
 
 #include "common.h"
 #include "base_objectBase.h"
+#include "debug.h"
 #include <vector>
 #include <memory>
 
@@ -36,6 +37,8 @@ public:
 	static void drawMutable(Point center_pos, Size size, int graphHandle, double expansion_x, double expansion_y, double rotation, bool turn, double opacity);
 	static void drawOnWindow(Point center_pos, Size size, int graphHandle, double expansion, double rotation, double opacity);
 	static void drawOnWindowForMouse(Point leftup_pos, int graphHandle, double opacity);
+	static void drawSquare(Point center_pos, Size size, Color color);
+	static void drawLine(Point start, Point end, Color color);
 
 	static void init(int window_width, int window_height);
 	static void update();
@@ -45,7 +48,8 @@ public:
 	static void addDrawObjectWindow(const std::shared_ptr<ObjectBase> &obj);
 
 	static Size getWindowSize(){ return Screen::windowSize; }
-	static Point getPositionOfWindowCoordinate(Point pos) { return pos - Screen::window_center_world_pos; }
+	static Point getPositionOfWindowCoordinate(Point world_pos) { return world_pos - Screen::window_center_world_pos + Screen::windowSize / 2; }
+	static Point getPositionOfWorldCoordinate(Point window_pos) { return window_pos + Screen::window_center_world_pos - Screen::windowSize / 2; }
 
 	static bool isVisible(const std::shared_ptr<ObjectBase> &obj);
 };

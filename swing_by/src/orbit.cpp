@@ -19,7 +19,7 @@ void CrossTarget::initialize() {
 }
 
 void CrossTarget::update() {
-	this->position = this->map->getCrossPosition(this->player->getPosition(), this->mouse_pointer->getPosition());
+	this->position = this->map->getCrossPosition(this->player->getPosition(), Screen::getPositionOfWorldCoordinate(this->mouse_pointer->getPosition()));
 
 	this->target_spin[0] += M_PI / 30;
 	this->target_spin[0] -= M_PI / 50;

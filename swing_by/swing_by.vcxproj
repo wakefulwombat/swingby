@@ -15,6 +15,7 @@
     <ClCompile Include="src\common.cpp" />
     <ClCompile Include="src\controller.cpp" />
     <ClCompile Include="src\controllerFactory.cpp" />
+    <ClCompile Include="src\debug.cpp" />
     <ClCompile Include="src\image.cpp" />
     <ClCompile Include="src\input.cpp" />
     <ClCompile Include="src\main.cpp" />
@@ -47,6 +48,7 @@
     <ClInclude Include="src\base_requiredFunc.h" />
     <ClInclude Include="src\common.h" />
     <ClInclude Include="src\controller.h" />
+    <ClInclude Include="src\debug.h" />
     <ClInclude Include="src\image.h" />
     <ClInclude Include="src\input.h" />
     <ClInclude Include="src\interface_getController.h" />

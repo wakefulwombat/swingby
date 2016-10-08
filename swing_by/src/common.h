@@ -20,6 +20,7 @@ public:
 	Point operator-(const Point& obj);
 	Point& operator+=(const Point& obj);
 	Point operator+(const Size& obj);
+	Point operator-(const Size& obj);
 	Point operator*(const double& d);
 	Point operator/(const double& d);
 

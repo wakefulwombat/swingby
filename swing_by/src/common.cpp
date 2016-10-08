@@ -65,6 +65,14 @@ Point Point::operator+(const Size& obj){
 	return tmp;
 }
 
+Point Point::operator-(const Size& obj) {
+	Point tmp;
+	tmp.x = this->x - (double)obj.width;
+	tmp.y = this->y - (double)obj.height;
+
+	return tmp;
+}
+
 Point &Point::operator+=(const Point& obj){
 	this->x += obj.x;
 	this->y += obj.y;
