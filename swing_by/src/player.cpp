@@ -17,6 +17,9 @@ Player::Player(const std::shared_ptr<IGetController> &ctrl_mgr, const std::share
 	this->chip_count = 0;
 	this->chip_switch_time = 10;
 	this->show_chip_index = 0;
+
+	this->trans_vel = 1.0;
+	this->trans_rad = 0.000000;
 }
 
 void Player::initialize(Point start) {

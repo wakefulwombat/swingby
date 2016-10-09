@@ -54,4 +54,5 @@ public:
 	static Point getPositionOfWorldCoordinate(Point window_pos) { return window_pos + Screen::window_center_world_pos - Screen::windowSize / 2; }
 
 	static bool isVisible(const std::shared_ptr<ObjectBase> &obj);
+	static bool isVisiblePoint(Point pos);
 };

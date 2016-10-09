@@ -153,3 +153,12 @@ bool Screen::isVisible(const std::shared_ptr<ObjectBase> &obj) {
 
 	return true;
 }
+
+bool Screen::isVisiblePoint(Point pos) {
+	if (pos.x < Screen::window_center_world_pos.x - Screen::windowSize.width / Screen::zoom / 2) return false;
+	if (pos.x > Screen::window_center_world_pos.x + Screen::windowSize.width / Screen::zoom / 2) return false;
+	if (pos.y < Screen::window_center_world_pos.y - Screen::windowSize.height / Screen::zoom / 2) return false;
+	if (pos.y > Screen::window_center_world_pos.y + Screen::windowSize.height / Screen::zoom / 2) return false;
+
+	return true;
+}

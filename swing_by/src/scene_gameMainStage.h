@@ -15,7 +15,7 @@ private:
 	std::shared_ptr<Player> player;
 	std::shared_ptr<MousePointer> mouse_pointer;
 	std::shared_ptr<Map> map;
-	std::shared_ptr<Orbit> orbit;
+	std::shared_ptr<OrbitManager> orbit_manager;
 
 public:
 	SceneGameMainStage(const std::shared_ptr<ISetNextSceneInGameMain> &isetNextScene);

@@ -1,7 +1,6 @@
 #include "map.h"
 #include "screen.h"
 #include "image.h"
-#include "debug.h"
 #include <fstream>
 #include <sstream>
 #include <vector>

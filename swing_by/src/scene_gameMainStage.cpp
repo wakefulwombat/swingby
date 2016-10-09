@@ -6,7 +6,7 @@ SceneGameMainStage::SceneGameMainStage(const std::shared_ptr<ISetNextSceneInGame
 	this->mouse_pointer = std::make_shared<MousePointer>();
 	this->player = std::make_shared<Player>(this->control_factory, this->mouse_pointer);
 	this->map = std::make_shared<Map>("asset\\map\\map_001.csv");
-	this->orbit = std::make_shared<Orbit>(this->player, this->mouse_pointer, this->map);
+	this->orbit_manager = std::make_shared<OrbitManager>(this->player, this->player, this->mouse_pointer, this->map);
 }
 
 void SceneGameMainStage::initialize() {
@@ -18,7 +18,7 @@ void SceneGameMainStage::update() {
 	this->player->update();
 	this->mouse_pointer->update();
 	this->map->update();
-	this->orbit->update();
+	this->orbit_manager->update();
 }
 
 void SceneGameMainStage::finalize() {
