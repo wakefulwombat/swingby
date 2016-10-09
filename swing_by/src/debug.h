@@ -25,7 +25,7 @@ private:
 	Color col;
 
 public:
-	Debug_Square(Point center, Size size, Color col);
+	Debug_Square(Point center, Size size, Color col, int z_sort = 200000);
 	void initialize() override {};
 	void update() override;
 	void draw() const override;
@@ -38,7 +38,20 @@ private:
 	Point end;
 
 public:
-	Debug_Line(Point start, Point end, Color col);
+	Debug_Line(Point start, Point end, Color col, int z_sort = 200001);
+	void initialize() override {};
+	void update() override;
+	void draw() const override;
+	void finalize() override {}
+};
+
+class Debug_Point : public ObjectBase {
+private:
+	Color col;
+	int r;
+
+public:
+	Debug_Point(Point pos, int r, Color col, int z_sort = 200001);
 	void initialize() override {};
 	void update() override;
 	void draw() const override;
