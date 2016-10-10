@@ -9,7 +9,7 @@ void InternalMoveObjectController_None::end() {}
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-InternalMoveObjectController_GoStraight::InternalMoveObjectController_GoStraight(ObjectBase* obj, MoveObjectProperty* prop) {
+InternalMoveObjectController_GoStraight::InternalMoveObjectController_GoStraight(const std::shared_ptr<ObjectBase> &obj, const std::shared_ptr<MoveObjectProperty> &prop) {
 	this->obj = obj;
 	this->prop = prop;
 }
@@ -24,7 +24,7 @@ void InternalMoveObjectController_GoStraight::end() {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-InternalMoveObjectController_Ellipse::InternalMoveObjectController_Ellipse(ObjectBase* obj, MoveObjectProperty* prop, Point start_pos, Point clicked_pos, Point start_vel) {
+InternalMoveObjectController_Ellipse::InternalMoveObjectController_Ellipse(const std::shared_ptr<ObjectBase> &obj, const std::shared_ptr<MoveObjectProperty> &prop, Point start_pos, Point clicked_pos, Point start_vel) {
 	this->obj = obj;
 	this->prop = prop;
 	this->start_pos = start_pos;

@@ -60,7 +60,8 @@
     <ClInclude Include="src\image.h" />
     <ClInclude Include="src\input.h" />
     <ClInclude Include="src\interface_getController.h" />
-    <ClInclude Include="src\interface_getCrossPosition.h" />
+    <ClInclude Include="src\interface_getMapCrossPosition.h" />
+    <ClInclude Include="src\interface_getOrbit.h" />
     <ClInclude Include="src\interface_setNextScene.h" />
     <ClInclude Include="src\interface_setNextSceneInGameMain.h" />
     <ClInclude Include="src\item.h" />

@@ -20,7 +20,12 @@ public:
 	}
 };
 
-class Debug_Square : public ObjectBase {
+class Debug_Base : public ObjectBase, public std::enable_shared_from_this<Debug_Base> {
+private:
+	Color col;
+};
+
+class Debug_Square : public Debug_Base {
 private:
 	Color col;
 
@@ -32,7 +37,7 @@ public:
 	void finalize() override {}
 };
 
-class Debug_Line : public ObjectBase {
+class Debug_Line : public Debug_Base {
 private:
 	Color col;
 	Point end;
@@ -45,7 +50,7 @@ public:
 	void finalize() override {}
 };
 
-class Debug_Point : public ObjectBase {
+class Debug_Point : public Debug_Base {
 private:
 	Color col;
 	int r;

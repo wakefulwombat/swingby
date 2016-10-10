@@ -2,20 +2,21 @@
 
 #include "common.h"
 #include "base_objectBase.h"
-#include "interface_getCrossPosition.h"
+#include "interface_getMapCrossPosition.h"
+#include "interface_getOrbit.h"
 #include <vector>
 #include <memory>
 
-class CrossTarget : public ObjectBase {
+class CrossTarget : public ObjectBase, public std::enable_shared_from_this<CrossTarget> {
 private:
 	double target_spin[3];
 
 	std::shared_ptr<ObjectBase> player;
 	std::shared_ptr<ObjectBase> mouse_pointer;
-	std::shared_ptr<IGetCrossPosition> map;
+	std::shared_ptr<IGetMapCrossPosition> map;
 
 public:
-	CrossTarget(const std::shared_ptr<ObjectBase> &player, const std::shared_ptr<ObjectBase> &mouse_pointer, const std::shared_ptr<IGetCrossPosition> &map);
+	CrossTarget(const std::shared_ptr<ObjectBase> &player, const std::shared_ptr<ObjectBase> &mouse_pointer, const std::shared_ptr<IGetMapCrossPosition> &map);
 	void initialize() override;
 	void update() override;
 	void draw() const override;
@@ -29,9 +30,11 @@ private:
 	std::shared_ptr<MoveObjectProperty> pl_vel;
 
 	double ell_a, ell_b, ell_e;
-	Point ell_center_pos;
-	Point ell_start_pos, ell_start_vel, ell_f_pos;
+	Point ell_center_pos, ell_f_pos;
 	double ell_rotate_rad;
+
+	double move_vel, rotate_rad;
+	bool go_front, go_accele;
 
 	Point spin(Point pos, Point center, double rad);
 
@@ -43,10 +46,12 @@ public:
 	void finalize() override;
 
 	std::vector<Point> getNavigationPoints(Point player_pos, Point player_vel, Point cross_target);
-	void resetParams(Point player_pos, Point player_vel, Point cross_target);
+	
+	void resetParams(Point under_f_pos, Point under_f_vel, Point f_pos);
+	Point getNextVelocityVector(Point now);
 };
 
-class OrbitManager : public RequiredFunc{
+class OrbitManager : public RequiredFunc, public IGetOrbit{
 private:
 	std::shared_ptr<CrossTarget> crossTarget;
 	std::shared_ptr<Orbit> orbit;
@@ -54,8 +59,11 @@ private:
 	std::shared_ptr<ObjectBase> mouse_pointer;
 
 public:
-	OrbitManager(const std::shared_ptr<ObjectBase> &player, const std::shared_ptr<MoveObjectProperty> &pl_vel, const std::shared_ptr<ObjectBase> &mouse_pointer, const std::shared_ptr<IGetCrossPosition> &map);
+	OrbitManager(const std::shared_ptr<ObjectBase> &player, const std::shared_ptr<MoveObjectProperty> &pl_vel, const std::shared_ptr<ObjectBase> &mouse_pointer, const std::shared_ptr<IGetMapCrossPosition> &map);
 	void initialize() override;
 	void update() override;
 	void finalize() override;
+
+	void resetOrbitParams(Point player_pos, Point player_vel, Point target_pos) override;
+	Point getOrbitNextVelocityVector(Point player_now_pos) override;
 };

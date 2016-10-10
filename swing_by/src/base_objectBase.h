@@ -45,7 +45,7 @@ public:
 	bool isRepeatable() { return this->repeat; }
 };
 
-class ObjectBase : public RequiredFunc, public ExternalObjectControllerBase, public std::enable_shared_from_this<ObjectBase> {
+class ObjectBase : public RequiredFunc, public ExternalObjectControllerBase{
 protected:
 	Point position;
 	Size size;

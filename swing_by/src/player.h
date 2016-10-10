@@ -4,7 +4,7 @@
 #include "interface_getController.h"
 #include <memory>
 
-class Player : public ObjectBase, public AnimationObjectProperty, public MoveObjectProperty {
+class Player : public ObjectBase, public AnimationObjectProperty, public MoveObjectProperty, public std::enable_shared_from_this<Player> {
 private:
 	std::shared_ptr<IGetController> ctrl_mgr;
 	std::shared_ptr<ObjectBase> mouse_pointer;

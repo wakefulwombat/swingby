@@ -7,7 +7,7 @@
 #include "screen.h"
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
-CrossTarget::CrossTarget(const std::shared_ptr<ObjectBase> &player, const std::shared_ptr<ObjectBase> &mouse_pointer, const std::shared_ptr<IGetCrossPosition> &map) {
+CrossTarget::CrossTarget(const std::shared_ptr<ObjectBase> &player, const std::shared_ptr<ObjectBase> &mouse_pointer, const std::shared_ptr<IGetMapCrossPosition> &map) {
 	this->z_sort = 90000;
 	this->size = Size(64, 64);
 	for (int i = 0; i < 3; ++i)this->target_spin[i] = 0.000000;
@@ -22,7 +22,7 @@ void CrossTarget::initialize() {
 }
 
 void CrossTarget::update() {
-	this->position = this->map->getCrossPosition(this->player->getPosition(), Screen::getPositionOfWorldCoordinate(this->mouse_pointer->getPosition()));
+	this->position = this->map->getMapCrossPosition(this->player->getPosition(), Screen::getPositionOfWorldCoordinate(this->mouse_pointer->getPosition()));
 
 	this->target_spin[0] += M_PI / 30;
 	this->target_spin[1] -= M_PI / 40;
@@ -110,27 +110,51 @@ std::vector<Point> Orbit::getNavigationPoints(Point player_pos, Point player_vel
 	return p;
 }
 
-void Orbit::resetParams(Point player_pos, Point player_vel, Point cross_target) {
-	this->ell_f_pos = cross_target;
-	this->ell_rotate_rad = atan2(cross_target.y - player_pos.y, cross_target.x - player_pos.x);
+void Orbit::resetParams(Point under_f_pos, Point under_f_vel, Point f_pos) {
+	this->ell_rotate_rad = atan2(f_pos.y - under_f_pos.y, f_pos.x - under_f_pos.x);
 
-	//mouse Šî€‚Å-ell_rotate_rad‰ñ“]
-	this->ell_start_pos = this->spin(player_pos, cross_target, -this->ell_rotate_rad);
-	this->ell_start_vel = this->spin(player_vel, Point(0, 0), -this->ell_rotate_rad);
+	Point under_f_pos_ = this->spin(under_f_pos, f_pos, -this->ell_rotate_rad);
+	Point under_f_vel_ = this->spin(under_f_vel, Point(0, 0), -this->ell_rotate_rad);
+	double r0 = under_f_pos_.y - f_pos.y;
 
-	double r0 = abs(this->ell_f_pos.y - this->ell_start_pos.y);
-
-	this->ell_a = (this->ell_start_pos.y - this->ell_f_pos.y)*(this->ell_start_pos.y - this->ell_f_pos.y) / (r0*(1 - (this->ell_start_vel.y*this->ell_start_vel.y / (r0*r0*this->ell_start_vel.x*this->ell_start_vel.x))*(this->ell_start_pos.y - this->ell_f_pos.y)*(this->ell_start_pos.y - this->ell_f_pos.y)));
+	this->ell_a = abs((under_f_pos_.y - f_pos.y)*(under_f_pos_.y - f_pos.y) / (r0*(1 - (under_f_vel_.y*under_f_vel_.y / (r0*r0*under_f_vel_.x*under_f_vel_.x))*(under_f_pos_.y - f_pos.y)*(under_f_pos_.y - f_pos.y))));
 	this->ell_b = sqrt(r0*this->ell_a);
-	this->ell_center_pos.x = this->ell_start_pos.x + (this->ell_a*this->ell_start_vel.y)*(this->ell_start_pos.y - this->ell_f_pos.y) / (r0*this->ell_start_vel.x);
-	this->ell_center_pos.y = this->ell_start_pos.y;
 	this->ell_e = sqrt(this->ell_a*this->ell_a + this->ell_b*this->ell_b) / this->ell_a;
+
+	this->ell_center_pos.x = under_f_pos_.x + (this->ell_a*under_f_vel_.y)*(under_f_pos_.y - f_pos.y) / (r0*under_f_vel_.x);
+	this->ell_center_pos.y = f_pos.y;
+	this->ell_f_pos = f_pos;
+
+	this->go_front = under_f_vel_.x >= 0.0;
+	this->go_accele = abs(atan2(under_f_vel_.y, under_f_vel_.x) + M_PI / 2) < M_PI / 2;
+	this->move_vel = sqrt(under_f_vel.x*under_f_vel.x + under_f_vel.y*under_f_vel.y);
+	this->rotate_rad = 0.000000;
+}
+
+Point Orbit::getNextVelocityVector(Point now) {
+	double dx, dy;
+	
+	if (this->rotate_rad < M_PI / 2) {
+		if (this->go_accele) this->move_vel *= 1.05;
+		else this->move_vel /= 1.05;
+
+		if (this->go_front) dx = this->move_vel / sqrt(1 + pow(this->ell_b, 4.0)*pow(now.x - this->ell_center_pos.x, 2.0) / pow(this->ell_a, 4.0) / pow(now.y - this->ell_center_pos.y, 2.0));
+		else dx = -this->move_vel / sqrt(1 + pow(this->ell_b, 4.0)*pow(now.x - this->ell_center_pos.x, 2.0) / pow(this->ell_a, 4.0) / pow(now.y - this->ell_center_pos.y, 2.0));
+		dy = -this->ell_b*this->ell_b / this->ell_a / this->ell_a * (now.x - this->ell_center_pos.x) / (now.y - this->ell_center_pos.y)*dx;
+		this->rotate_rad += abs(atan2(now.y + dy - this->ell_f_pos.y, now.x + dx - this->ell_f_pos.x) - atan2(now.y - this->ell_f_pos.y, now.x - this->ell_f_pos.x));
+	}
+	else {
+		if (this->go_front) dx = this->move_vel / sqrt(1 + pow(now.x - this->ell_center_pos.x, 2.0) / pow(now.y - this->ell_center_pos.y, 2.0));
+		else dx = -this->move_vel / sqrt(1 + pow(now.x - this->ell_center_pos.x, 2.0) / pow(now.y - this->ell_center_pos.y, 2.0));
+		dy = -(now.x - this->ell_center_pos.x) / (now.y - this->ell_center_pos.y)*dx;
+	}
+	return Point(dx, dy);
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
-OrbitManager::OrbitManager(const std::shared_ptr<ObjectBase> &player, const std::shared_ptr<MoveObjectProperty> &pl_vel, const std::shared_ptr<ObjectBase> &mouse_pointer, const std::shared_ptr<IGetCrossPosition> &map) {
+OrbitManager::OrbitManager(const std::shared_ptr<ObjectBase> &player, const std::shared_ptr<MoveObjectProperty> &pl_vel, const std::shared_ptr<ObjectBase> &mouse_pointer, const std::shared_ptr<IGetMapCrossPosition> &map) {
 	this->mouse_pointer = mouse_pointer;
 	this->crossTarget = std::make_shared<CrossTarget>(player, mouse_pointer, map);
 	this->orbit = std::make_shared<Orbit>(player, pl_vel, this->crossTarget);
@@ -155,5 +179,13 @@ void OrbitManager::update() {
 
 void OrbitManager::finalize() {
 
+}
+
+void OrbitManager::resetOrbitParams(Point player_pos, Point player_vel, Point target_pos) {
+	this->orbit->resetParams(player_pos, player_vel, target_pos);
+}
+
+Point OrbitManager::getOrbitNextVelocityVector(Point player_now_pos) {
+	return this->orbit->getNextVelocityVector(player_now_pos);
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////

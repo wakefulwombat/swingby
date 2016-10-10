@@ -2,12 +2,12 @@
 
 #include "base_requiredFunc.h"
 #include "base_objectBase.h"
-#include "interface_getCrossPosition.h"
+#include "interface_getMapCrossPosition.h"
 #include <vector>
 #include <memory>
 #include <string>
 
-class MapChip : public ObjectBase {
+class MapChip : public ObjectBase, public std::enable_shared_from_this<MapChip> {
 private:
 	int chip_index;
 public:
@@ -18,7 +18,7 @@ public:
 	int getChipKindIndex() { return this->chip_index; }
 };
 
-class Map : public RequiredFunc, public IGetCrossPosition{
+class Map : public RequiredFunc, public IGetMapCrossPosition{
 private:
 	Size map_size;
 	Point start_pos;
@@ -38,5 +38,5 @@ public:
 	Size getStageSize() { return this->map_size * 64; }
 
 	bool isMapChipVisible(int x_index, int y_index);
-	Point getCrossPosition(Point line_p1, Point line_p2) override;
+	Point getMapCrossPosition(Point line_p1, Point line_p2) override;
 };

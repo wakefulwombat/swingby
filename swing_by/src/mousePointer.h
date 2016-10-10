@@ -3,7 +3,7 @@
 #include "base_objectBase.h"
 #include "common.h"
 
-class MousePointer : public ObjectBase {
+class MousePointer : public ObjectBase, public std::enable_shared_from_this<MousePointer> {
 private:
 	bool move_rocked;
 

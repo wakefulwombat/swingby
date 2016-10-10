@@ -41,13 +41,13 @@ void Player::update() {
 	this->internalController->update();
 
 	if (Input::getKeyCodeDownOnce(KeyType::Game_Swing_OK) == 0) {
-
+		this->internalController = this->ctrl_mgr->getInternalMoveObjectController_Ellipse(this->shared_from_this(), this->shared_from_this(), this->position, this->mouse_pointer->getPosition(), this->getTransVelVec());
 	}
 	if (Input::getKeyCodeUpOnce(KeyType::Game_Swing_OK) == 0) {
-		this->internalController = this->ctrl_mgr->getInternalMoveObjectController_GoStraight(this, this);
+		this->internalController = this->ctrl_mgr->getInternalMoveObjectController_GoStraight(this->shared_from_this(), this->shared_from_this());
 	}
 	if (Input::getKeyCodeDown(KeyType::Game_Swing_OK) == 0) {
-		this->internalController = this->ctrl_mgr->getInternalMoveObjectController_Ellipse(this, this, this->position, this->mouse_pointer->getPosition(), this->getTransVelVec());
+		
 	}
 
 	if (Input::getKeyCodeDownOnce(KeyType::Game_VectorTrans_CANCEL) == 0) {

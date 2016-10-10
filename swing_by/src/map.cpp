@@ -110,7 +110,7 @@ bool Map::isMapChipVisible(int x_index, int y_index) {
 	return Screen::isVisible(this->map_chip[y_index][x_index]);
 }
 
-Point Map::getCrossPosition(Point p1, Point p2) {
+Point Map::getMapCrossPosition(Point p1, Point p2) {
 	double a, b, ang;//y=ax+b
 	if (p1.x == p2.x) a = 0.0;
 	else a = (p2.y - p1.y) / (p2.x - p1.x);
