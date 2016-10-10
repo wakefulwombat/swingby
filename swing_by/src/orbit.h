@@ -24,7 +24,7 @@ public:
 
 class Orbit : public ObjectBase {
 private:
-	std::shared_ptr<ObjectBase> mouse_pointer;
+	std::shared_ptr<ObjectBase> cross_target;
 	std::shared_ptr<ObjectBase> player;
 	std::shared_ptr<MoveObjectProperty> pl_vel;
 
@@ -36,14 +36,14 @@ private:
 	Point spin(Point pos, Point center, double rad);
 
 public:
-	Orbit(const std::shared_ptr<ObjectBase> &player, const std::shared_ptr<MoveObjectProperty> &pl_vel, const std::shared_ptr<ObjectBase> &mouse_pointer);
+	Orbit(const std::shared_ptr<ObjectBase> &player, const std::shared_ptr<MoveObjectProperty> &pl_vel, const std::shared_ptr<ObjectBase> &cross_target);
 	void initialize() override;
 	void update() override;
 	void draw() const override;
 	void finalize() override;
 
-	std::vector<Point> getNavigationPoints(Point player_pos, Point player_vel, Point mouse_pos);
-	void resetParams(Point player_pos, Point player_vel, Point mouse_world_pos);
+	std::vector<Point> getNavigationPoints(Point player_pos, Point player_vel, Point cross_target);
+	void resetParams(Point player_pos, Point player_vel, Point cross_target);
 };
 
 class OrbitManager : public RequiredFunc{

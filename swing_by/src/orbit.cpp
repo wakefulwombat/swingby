@@ -4,6 +4,7 @@
 #include "DxLib.h"
 #include "input.h"
 #include "debug.h"
+#include "screen.h"
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 CrossTarget::CrossTarget(const std::shared_ptr<ObjectBase> &player, const std::shared_ptr<ObjectBase> &mouse_pointer, const std::shared_ptr<IGetCrossPosition> &map) {
@@ -44,10 +45,10 @@ void CrossTarget::finalize() {
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
-Orbit::Orbit(const std::shared_ptr<ObjectBase> &player, const std::shared_ptr<MoveObjectProperty> &pl_vel, const std::shared_ptr<ObjectBase> &mouse_pointer) {
+Orbit::Orbit(const std::shared_ptr<ObjectBase> &player, const std::shared_ptr<MoveObjectProperty> &pl_vel, const std::shared_ptr<ObjectBase> &cross_target) {
 	this->player = player;
 	this->pl_vel = pl_vel;
-	this->mouse_pointer = mouse_pointer;
+	this->cross_target = cross_target;
 }
 
 void Orbit::initialize() {
@@ -55,8 +56,8 @@ void Orbit::initialize() {
 }
 
 void Orbit::update() {
-	for (Point p : this->getNavigationPoints(this->player->getPosition(), this->pl_vel->getTransVelVec(), Screen::getPositionOfWorldCoordinate(this->mouse_pointer->getPosition()))) {
-		std::shared_ptr<Debug_Point> dp = std::make_shared<Debug_Point>(p, 2, Color(255, 255, 0));
+	for (Point p : this->getNavigationPoints(this->player->getPosition(), this->pl_vel->getTransVelVec(), this->cross_target->getPosition())) {
+		std::shared_ptr<Debug_Point> dp = std::make_shared<Debug_Point>(p, 2, Color(255, 130, 0));
 		dp->update();
 	}
 }
@@ -76,39 +77,45 @@ Point Orbit::spin(Point pos, Point center, double rad) {
 	return t;
 }
 
-std::vector<Point> Orbit::getNavigationPoints(Point player_pos, Point player_vel, Point mouse_world_pos) {
-	double rotate_rad = atan2(mouse_world_pos.y - player_pos.y, mouse_world_pos.x - player_pos.x) - M_PI / 2;
+std::vector<Point> Orbit::getNavigationPoints(Point player_pos, Point player_vel, Point cross_target) {
+	double rotate_rad =atan2(cross_target.y - player_pos.y, cross_target.x - player_pos.x) + M_PI / 2;
 
-	Point pl_pos_ = this->spin(player_pos, mouse_world_pos, -rotate_rad);
+	Point pl_pos_ = this->spin(player_pos, cross_target, -rotate_rad);
 	Point pl_vel_ = this->spin(player_vel, Point(0, 0), -rotate_rad);
-	double r0 = abs(mouse_world_pos.y - pl_pos_.y);
+	double r0 = pl_pos_.y - cross_target.y;
 
-	double a = abs((pl_pos_.y - mouse_world_pos.y)*(pl_pos_.y - mouse_world_pos.y) / (r0*(1 - (pl_vel_.y*pl_vel_.y / (r0*r0*pl_vel_.x*pl_vel_.x))*(pl_pos_.y - mouse_world_pos.y)*(pl_pos_.y - mouse_world_pos.y))));
+	double a = abs((pl_pos_.y - cross_target.y)*(pl_pos_.y - cross_target.y) / (r0*(1 - (pl_vel_.y*pl_vel_.y / (r0*r0*pl_vel_.x*pl_vel_.x))*(pl_pos_.y - cross_target.y)*(pl_pos_.y - cross_target.y))));
 	double b = sqrt(r0*a);
 	double e = sqrt(a*a + b*b) / a;
 
+	double ell_center_x = pl_pos_.x + (a*pl_vel_.y)*(pl_pos_.y - cross_target.y) / (r0*pl_vel_.x);
+	double ell_center_y = cross_target.y;
+
 	std::vector<Point> p;
-	for (double theta = M_PI / 2, theta_pre = M_PI / 2; abs(theta - M_PI / 2) <= M_PI / 2; theta += 0.005*player_vel.x / abs(player_vel.x)) {
-		double r = r0 / (1 + e*sin(theta));
-		Point pre = pl_pos_ + Point(r*sin(theta_pre), r*cos(theta_pre));
-		Point next = pl_pos_ + Point(r*sin(theta), r*cos(theta));
-		if (!Screen::isVisiblePoint(next)) break;
-		if (next.getDistance(pre) > 10.0) {
-			theta_pre = theta;
-			p.push_back(next);
-		}
+	double theta = 0.000000;
+	for (Point pre = pl_pos_, next = pl_pos_;;) {
+		double dx;
+		if(pl_vel_.x>=0.0) dx = 50.0 / sqrt(1 + pow(b, 4.0)*pow(pre.x - ell_center_x, 2.0) / pow(a, 4.0) / pow(pre.y - ell_center_y, 2.0));
+		else dx = -50.0 / sqrt(1 + pow(b, 4.0)*pow(pre.x - ell_center_x, 2.0) / pow(a, 4.0) / pow(pre.y - ell_center_y, 2.0));
+		double dy = -b*b / a / a * (pre.x - ell_center_x) / (pre.y - ell_center_y)*dx;
+		next = pre + Point(dx, dy);
+		theta += abs(atan2(next.y - cross_target.y, next.x - cross_target.x) - atan2(pre.y - cross_target.y, pre.x - cross_target.x));
+		
+		if (!Screen::isVisiblePoint(this->spin(next, cross_target, rotate_rad))) break;
+		if (theta > M_PI / 2) break;
+		p.push_back(this->spin(next, cross_target, rotate_rad));
+		pre = next;
 	}
 
-	for (auto i = p.begin(); i != p.end(); ++i) *i = this->spin(*i, mouse_world_pos, rotate_rad);
 	return p;
 }
 
-void Orbit::resetParams(Point player_pos, Point player_vel, Point mouse_pos) {
-	this->ell_f_pos = mouse_pos;
-	this->ell_rotate_rad = atan2(mouse_pos.y - player_pos.y, mouse_pos.x - player_pos.x);
+void Orbit::resetParams(Point player_pos, Point player_vel, Point cross_target) {
+	this->ell_f_pos = cross_target;
+	this->ell_rotate_rad = atan2(cross_target.y - player_pos.y, cross_target.x - player_pos.x);
 
 	//mouse Šî€‚Å-ell_rotate_rad‰ñ“]
-	this->ell_start_pos = this->spin(player_pos, mouse_pos, -this->ell_rotate_rad);
+	this->ell_start_pos = this->spin(player_pos, cross_target, -this->ell_rotate_rad);
 	this->ell_start_vel = this->spin(player_vel, Point(0, 0), -this->ell_rotate_rad);
 
 	double r0 = abs(this->ell_f_pos.y - this->ell_start_pos.y);
@@ -126,7 +133,7 @@ void Orbit::resetParams(Point player_pos, Point player_vel, Point mouse_pos) {
 OrbitManager::OrbitManager(const std::shared_ptr<ObjectBase> &player, const std::shared_ptr<MoveObjectProperty> &pl_vel, const std::shared_ptr<ObjectBase> &mouse_pointer, const std::shared_ptr<IGetCrossPosition> &map) {
 	this->mouse_pointer = mouse_pointer;
 	this->crossTarget = std::make_shared<CrossTarget>(player, mouse_pointer, map);
-	this->orbit = std::make_shared<Orbit>(player, pl_vel, mouse_pointer);
+	this->orbit = std::make_shared<Orbit>(player, pl_vel, this->crossTarget);
 }
 
 void OrbitManager::initialize() {
@@ -141,6 +148,7 @@ void OrbitManager::update() {
 
 	this->crossTarget->update();
 
+	if (!Screen::isVisible(this->crossTarget)) return;
 	if (Input::getKeyCodeDown(KeyType::Game_Swing_OK)) return;
 	this->orbit->update();
 }
