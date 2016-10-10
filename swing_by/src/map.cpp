@@ -15,7 +15,7 @@ MapChip::MapChip(Point pos, Size size, int chip_index) {
 }
 
 void MapChip::update() {
-	Screen::addDrawObjectMutable(this->shared_from_this());
+	this->addDraw();
 }
 
 void MapChip::draw() const {

@@ -23,7 +23,7 @@ void Explosion::update() {
 	if (this->chip_count%this->chip_switch_time == 0) this->show_chip_index++;
 	if (this->show_chip_index == this->chipSize) this->validation = false;
 
-	Screen::addDrawObjectMutable(this->shared_from_this());
+	this->addDraw();
 }
 
 void Explosion::draw() const {

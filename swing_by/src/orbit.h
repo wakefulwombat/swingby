@@ -20,6 +20,7 @@ public:
 	void initialize() override;
 	void update() override;
 	void draw() const override;
+	void addDraw() override { Screen::addDrawObjectMutable(this->shared_from_this()); }
 	void finalize() override;
 };
 
@@ -43,6 +44,7 @@ public:
 	void initialize() override;
 	void update() override;
 	void draw() const override;
+	void addDraw() override { for (Point p : this->getNavigationPoints(this->player->getPosition(), this->pl_vel->getTransVelVec(), this->cross_target->getPosition())) { std::shared_ptr<Debug_Point> dp = std::make_shared<Debug_Point>(p, 2, Color(255, 130, 0)); dp->update(); } }
 	void finalize() override;
 
 	std::vector<Point> getNavigationPoints(Point player_pos, Point player_vel, Point cross_target);

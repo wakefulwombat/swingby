@@ -34,6 +34,7 @@ public:
 	void initialize() override {};
 	void update() override;
 	void draw() const override;
+	void addDraw() override { Screen::addDrawObjectMutable(this->shared_from_this()); }
 	void finalize() override {}
 };
 
@@ -47,6 +48,7 @@ public:
 	void initialize() override {};
 	void update() override;
 	void draw() const override;
+	void addDraw() override { Screen::addDrawObjectMutable(this->shared_from_this()); }
 	void finalize() override {}
 };
 
@@ -60,5 +62,6 @@ public:
 	void initialize() override {};
 	void update() override;
 	void draw() const override;
+	void addDraw() override { Screen::addDrawObjectMutable(this->shared_from_this()); }
 	void finalize() override {}
 };

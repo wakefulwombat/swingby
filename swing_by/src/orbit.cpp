@@ -31,7 +31,7 @@ void CrossTarget::update() {
 		if (this->target_spin[i] < 0) this->target_spin[i] += M_PI * 2;
 	}
 
-	Screen::addDrawObjectMutable(this->shared_from_this());
+	this->addDraw();
 }
 
 void CrossTarget::draw() const {
@@ -56,10 +56,7 @@ void Orbit::initialize() {
 }
 
 void Orbit::update() {
-	for (Point p : this->getNavigationPoints(this->player->getPosition(), this->pl_vel->getTransVelVec(), this->cross_target->getPosition())) {
-		std::shared_ptr<Debug_Point> dp = std::make_shared<Debug_Point>(p, 2, Color(255, 130, 0));
-		dp->update();
-	}
+	this->addDraw();
 }
 
 void Orbit::draw() const {
@@ -139,6 +136,7 @@ Point Orbit::getNextVelocityVector(Point now) {
 	if(!this->run_circle) {
 		if (this->go_accele) this->move_vel *= 1.01;
 		else this->move_vel /= 1.005;
+		if (this->move_vel < 1.0) this->move_vel = 1.0;
 
 		if (this->go_front) dx = this->move_vel / sqrt(1 + pow(this->ell_b, 4.0)*pow(now_.x - this->ell_center_pos.x, 2.0) / pow(this->ell_a, 4.0) / pow(now_.y - this->ell_center_pos.y, 2.0));
 		else dx = -this->move_vel / sqrt(1 + pow(this->ell_b, 4.0)*pow(now_.x - this->ell_center_pos.x, 2.0) / pow(this->ell_a, 4.0) / pow(now_.y - this->ell_center_pos.y, 2.0));

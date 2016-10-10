@@ -12,7 +12,7 @@ Debug_Square::Debug_Square(Point center, Size size, Color color, int z_sort)
 }
 
 void Debug_Square::update() {
-	Screen::addDrawObjectMutable(this->shared_from_this());
+	this->addDraw();
 }
 
 void Debug_Square::draw() const {
@@ -32,7 +32,7 @@ Debug_Line::Debug_Line(Point start, Point end, Color col, int z_sort)
 }
 
 void Debug_Line::update() {
-	Screen::addDrawObjectMutable(this->shared_from_this());
+	this->addDraw();
 }
 
 void Debug_Line::draw() const {
@@ -52,7 +52,7 @@ Debug_Point::Debug_Point(Point pos, int r, Color col, int z_sort)
 }
 
 void Debug_Point::update() {
-	Screen::addDrawObjectMutable(this->shared_from_this());
+	this->addDraw();
 }
 
 void Debug_Point::draw() const {

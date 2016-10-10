@@ -88,4 +88,5 @@ public:
 	void setImageOpacity(double opacity) { this->img_opacity = opacity; }//0.0~1.0
 
 	virtual void draw() const = 0;
+	virtual void addDraw() = 0;
 };

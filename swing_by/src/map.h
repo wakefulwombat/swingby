@@ -14,6 +14,7 @@ public:
 	MapChip(Point pos, Size size, int chip_index);
 	void update() override;
 	void draw() const override;
+	void addDraw() override { Screen::addDrawObjectMutable(this->shared_from_this()); }
 
 	int getChipKindIndex() { return this->chip_index; }
 };
