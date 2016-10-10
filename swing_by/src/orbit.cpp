@@ -115,13 +115,13 @@ void Orbit::resetParams(Point under_f_pos, Point under_f_vel, Point f_pos) {
 
 	Point under_f_pos_ = this->spin(under_f_pos, f_pos, -this->ell_rotate_rad);
 	Point under_f_vel_ = this->spin(under_f_vel, Point(0, 0), -this->ell_rotate_rad);
-	double r0 = under_f_pos_.y - f_pos.y;
+	this->ell_r0 = under_f_pos_.y - f_pos.y;
 
-	this->ell_a = abs((under_f_pos_.y - f_pos.y)*(under_f_pos_.y - f_pos.y) / (r0*(1 - (under_f_vel_.y*under_f_vel_.y / (r0*r0*under_f_vel_.x*under_f_vel_.x))*(under_f_pos_.y - f_pos.y)*(under_f_pos_.y - f_pos.y))));
-	this->ell_b = sqrt(r0*this->ell_a);
+	this->ell_a = abs((under_f_pos_.y - f_pos.y)*(under_f_pos_.y - f_pos.y) / (this->ell_r0*(1 - (under_f_vel_.y*under_f_vel_.y / (this->ell_r0*this->ell_r0*under_f_vel_.x*under_f_vel_.x))*(under_f_pos_.y - f_pos.y)*(under_f_pos_.y - f_pos.y))));
+	this->ell_b = sqrt(this->ell_r0*this->ell_a);
 	this->ell_e = sqrt(this->ell_a*this->ell_a + this->ell_b*this->ell_b) / this->ell_a;
 
-	this->ell_center_pos.x = under_f_pos_.x + (this->ell_a*under_f_vel_.y)*(under_f_pos_.y - f_pos.y) / (r0*under_f_vel_.x);
+	this->ell_center_pos.x = under_f_pos_.x + (this->ell_a*under_f_vel_.y)*(under_f_pos_.y - f_pos.y) / (this->ell_r0*under_f_vel_.x);
 	this->ell_center_pos.y = f_pos.y;
 	this->ell_f_pos = f_pos;
 
@@ -129,25 +129,39 @@ void Orbit::resetParams(Point under_f_pos, Point under_f_vel, Point f_pos) {
 	this->go_accele = abs(atan2(under_f_vel_.y, under_f_vel_.x) + M_PI / 2) < M_PI / 2;
 	this->move_vel = sqrt(under_f_vel.x*under_f_vel.x + under_f_vel.y*under_f_vel.y);
 	this->total_rotate_rad = 0.000000;
+	this->run_circle = false;
 }
 
 Point Orbit::getNextVelocityVector(Point now) {
 	double dx, dy;
 	Point now_ = this->spin(now, this->ell_f_pos, -this->ell_rotate_rad);
 
-	if (this->total_rotate_rad < M_PI / 2) {
+	if(!this->run_circle) {
 		if (this->go_accele) this->move_vel *= 1.01;
-		else this->move_vel /= 1.01;
+		else this->move_vel /= 1.005;
 
 		if (this->go_front) dx = this->move_vel / sqrt(1 + pow(this->ell_b, 4.0)*pow(now_.x - this->ell_center_pos.x, 2.0) / pow(this->ell_a, 4.0) / pow(now_.y - this->ell_center_pos.y, 2.0));
 		else dx = -this->move_vel / sqrt(1 + pow(this->ell_b, 4.0)*pow(now_.x - this->ell_center_pos.x, 2.0) / pow(this->ell_a, 4.0) / pow(now_.y - this->ell_center_pos.y, 2.0));
 		dy = -this->ell_b*this->ell_b / this->ell_a / this->ell_a * (now_.x - this->ell_center_pos.x) / (now_.y - this->ell_center_pos.y)*dx;
-		this->total_rotate_rad += abs(atan2(now_.y + dy - this->ell_f_pos.y, now_.x + dx - this->ell_f_pos.x) - atan2(now_.y - this->ell_f_pos.y, now_.x - this->ell_f_pos.x));
+		this->total_rotate_rad += atan2(now_.y + dy - this->ell_f_pos.y, now_.x + dx - this->ell_f_pos.x) - atan2(now_.y - this->ell_f_pos.y, now_.x - this->ell_f_pos.x);
+		if (abs(this->total_rotate_rad) > M_PI / 2) this->run_circle = true;
 	}
 	else {
-		if (this->go_front) dx = this->move_vel / sqrt(1 + pow(now_.x - this->ell_center_pos.x, 2.0) / pow(now_.y - this->ell_center_pos.y, 2.0));
-		else dx = -this->move_vel / sqrt(1 + pow(now_.x - this->ell_center_pos.x, 2.0) / pow(now_.y - this->ell_center_pos.y, 2.0));
-		dy = -(now_.x - this->ell_center_pos.x) / (now_.y - this->ell_center_pos.y)*dx;
+		double r;
+		if (this->go_accele) r = this->ell_r0 / (1 + this->ell_e);
+		else r = this->ell_r0 / (1 - this->ell_e);
+
+		Point pre = Point(r*cos(this->total_rotate_rad + M_PI / 2), r*sin(this->total_rotate_rad + M_PI / 2));
+		
+		double omega;
+		if(this->go_front) omega = -this->move_vel / r;
+		else omega = this->move_vel / r;
+		this->total_rotate_rad += omega;
+		
+		Point aft = Point(r*cos(this->total_rotate_rad + M_PI / 2), r*sin(this->total_rotate_rad + M_PI / 2));
+
+		dx = aft.x - pre.x;
+		dy = aft.y - pre.y;
 	}
 	return this->spin(Point(dx, dy), Point(0, 0), this->ell_rotate_rad);
 }

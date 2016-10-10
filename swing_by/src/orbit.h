@@ -29,12 +29,12 @@ private:
 	std::shared_ptr<ObjectBase> player;
 	std::shared_ptr<MoveObjectProperty> pl_vel;
 
-	double ell_a, ell_b, ell_e;
+	double ell_a, ell_b, ell_e, ell_r0;
 	Point ell_center_pos, ell_f_pos;
 	double ell_rotate_rad;
 
 	double move_vel, total_rotate_rad;
-	bool go_front, go_accele;
+	bool go_front, go_accele, run_circle;
 
 	Point spin(Point pos, Point center, double rad);
 
