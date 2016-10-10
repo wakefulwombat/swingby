@@ -34,6 +34,19 @@ public:
 		}
 	}
 
+	void addDraw() {
+		if (this->obj_list.size() == 0) return;
+
+		for (auto it = this->obj_list.begin(); it != this->obj_list.end();){
+			if (!(*it)->getValidation()) {
+				it = this->obj_list.erase(it);
+				continue;
+			}
+			(*it)->addDraw();
+			++it;
+		}
+	}
+
 	virtual ~ObjectManagerBase() {};
 };
 

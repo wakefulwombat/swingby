@@ -288,3 +288,11 @@ bool Map::isHitWithWall(const std::shared_ptr<ObjectBase> &obj, Size hit_size) {
 	
 	return false;
 }
+
+void Map::addDraw() {
+	for (auto row = this->map_chip.begin(); row != this->map_chip.end(); ++row) {
+		for (auto chip = (*row).begin(); chip != (*row).end(); ++chip) {
+			(*chip)->addDraw();
+		}
+	}
+}

@@ -29,8 +29,24 @@ void SceneGameMainStage::update() {
 	this->orbit_manager->update();
 	this->explosion_manager->update();
 
-	if (this->isPaused) this->scene_pause->update();
-	if (this->isGameOverNow) this->scene_gameover->update();
+	if (this->isPaused) {
+		this->player->addDraw();
+		this->mouse_pointer->addDraw();
+		this->map->addDraw();
+		this->orbit_manager->addDraw();
+		this->explosion_manager->addDraw();
+
+		this->scene_pause->update();
+	}
+	if (this->isGameOverNow) {
+		this->player->addDraw();
+		this->mouse_pointer->addDraw();
+		this->map->addDraw();
+		this->orbit_manager->addDraw();
+		this->explosion_manager->addDraw();
+		
+		this->scene_gameover->update();
+	}
 
 	this->hitCheck();
 }

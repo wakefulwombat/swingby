@@ -66,6 +66,8 @@ public:
 	void update() override;
 	void finalize() override;
 
+	void addDraw(){ this->crossTarget->addDraw(); this->orbit->addDraw(); }
+
 	void resetOrbitParams(Point player_pos, Point player_vel, Point target_pos) override;
 	Point getOrbitNextVelocityVector(Point player_now_pos) override;
 
