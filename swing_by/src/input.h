@@ -21,6 +21,7 @@ private:
 	static Point now_mouse;
 
 public:
+	static void init();
 	static void keyUpdate();
 
 	static bool getKeyCodeDown(KeyType key);

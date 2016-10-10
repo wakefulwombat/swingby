@@ -2,11 +2,13 @@
 #include "screen.h"
 
 SceneGameMainStage::SceneGameMainStage(const std::shared_ptr<ISetNextSceneInGameMain> &i) : SceneInGameMainBase(i) {
+	this->player = std::make_shared<Player>();
 	this->control_factory = std::make_shared<ControllerFactory>();
 	this->mouse_pointer = std::make_shared<MousePointer>();
-	this->player = std::make_shared<Player>(this->control_factory, this->mouse_pointer);
 	this->map = std::make_shared<Map>("asset\\map\\map_001.csv");
 	this->orbit_manager = std::make_shared<OrbitManager>(this->player, this->player, this->mouse_pointer, this->map);
+
+	this->player->setInterface(this->control_factory, this->orbit_manager->getCrossTarget(), this->orbit_manager);
 }
 
 void SceneGameMainStage::initialize() {

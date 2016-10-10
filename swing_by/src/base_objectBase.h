@@ -27,6 +27,11 @@ public:
 	double getTransRad() { return this->trans_rad; }
 	double getRotateVel() { return this->rotate_vel; }
 	double getRotateRad() { return this->rotate_rad; }
+
+	//外部操作用
+	void setTransVelVec(Point vel) { this->trans_vel = sqrt(vel.x*vel.x + vel.y*vel.y); this->trans_rad = atan2(vel.y, vel.x); }
+	void setTransVelNorm(double vel) { this->trans_vel = vel; }
+	void setTransRad(double rad) { this->trans_rad = rad; }
 };
 
 //アニメーション属性

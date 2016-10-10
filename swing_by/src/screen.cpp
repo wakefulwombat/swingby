@@ -107,10 +107,10 @@ void Screen::update(){
 	Screen::sway_count++;
 
 	if (Screen::move_count <= Screen::move_count_max) {
-		Screen::window_center_world_pos = Screen::tergetPosition_start + (Screen::tergetPosition_goal - Screen::tergetPosition_start)*(1.0*Screen::move_count/ Screen::move_count_max) + Screen::target_pos_delta;
+		Screen::window_center_world_pos = Screen::tergetPosition_start + (Screen::tergetPosition_goal - Screen::tergetPosition_start)*(1.0*Screen::move_count/ Screen::move_count_max) - Screen::target_pos_delta;
 	}
 	else {
-		Screen::window_center_world_pos = Screen::tergetPosition_goal + Screen::target_pos_delta;
+		Screen::window_center_world_pos = Screen::tergetPosition_goal - Screen::target_pos_delta;
 	}
 	
 	if (Screen::sway_count > Screen::sway_count_max) Screen::sway = Point();

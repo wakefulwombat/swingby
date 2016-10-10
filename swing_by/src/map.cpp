@@ -165,6 +165,8 @@ Point Map::getMapCrossPosition(Point p1, Point p2) {
 	std::vector<Point> tmp;
 
 	for (Point p : candidate) {
+		if ((int)p.x >= this->map_size.width) continue;
+		if ((int)p.y >= this->map_size.height) continue;
 		tmp.clear();
 		
 		if ((a*(p.x*64.0) + b >= p.y*64.0) && (a*(p.x*64.0) + b <= (p.y + 1.0)*64.0)) tmp.push_back(Point(p.x*64.0, a*(p.x*64.0) + b));

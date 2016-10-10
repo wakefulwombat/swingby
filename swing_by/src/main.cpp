@@ -28,6 +28,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 	SetDrawScreen(DX_SCREEN_BACK);
 
+	Input::init();
 	Screen::init(960, 540);
 	Image::loadGameScene();
 	std::shared_ptr<SceneManager> mgr = std::make_shared<SceneManager>();

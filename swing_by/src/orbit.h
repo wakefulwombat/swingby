@@ -33,7 +33,7 @@ private:
 	Point ell_center_pos, ell_f_pos;
 	double ell_rotate_rad;
 
-	double move_vel, rotate_rad;
+	double move_vel, total_rotate_rad;
 	bool go_front, go_accele;
 
 	Point spin(Point pos, Point center, double rad);
@@ -66,4 +66,7 @@ public:
 
 	void resetOrbitParams(Point player_pos, Point player_vel, Point target_pos) override;
 	Point getOrbitNextVelocityVector(Point player_now_pos) override;
+
+	std::shared_ptr<ObjectBase> getCrossTarget() { return this->crossTarget; }
+
 };

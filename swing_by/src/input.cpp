@@ -11,6 +11,13 @@ int Input::mouse_wheel_rotation = 0;
 Point Input::now_mouse = Point(-1, -1);
 
 
+void Input::init() {
+	for (int i = 0; i < 4; ++i) {
+		Input::keyCodeDownCount.key[i] = 1;
+		Input::keyCodeUpCount.key[i] = 1;
+	}
+}
+
 void Input::keyUpdate() {
 	//キーボード
 	char key[256];

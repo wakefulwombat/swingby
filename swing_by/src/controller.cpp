@@ -24,16 +24,19 @@ void InternalMoveObjectController_GoStraight::end() {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-InternalMoveObjectController_Ellipse::InternalMoveObjectController_Ellipse(const std::shared_ptr<ObjectBase> &obj, const std::shared_ptr<MoveObjectProperty> &prop, Point start_pos, Point clicked_pos, Point start_vel) {
+InternalMoveObjectController_Ellipse::InternalMoveObjectController_Ellipse(const std::shared_ptr<ObjectBase> &obj, const std::shared_ptr<MoveObjectProperty> &prop, const std::shared_ptr<IGetOrbit> &orbit, Point target_pos) {
 	this->obj = obj;
 	this->prop = prop;
-	this->start_pos = start_pos;
-	this->clicked_pos = clicked_pos;
-	this->start_vel = start_vel;
+	this->orbit = orbit;
+
+	this->orbit->resetOrbitParams(obj->getPosition(), prop->getTransVelVec(), target_pos);
 }
 
 void InternalMoveObjectController_Ellipse::update() {
-	
+	Point vel = this->orbit->getOrbitNextVelocityVector(this->obj->getPosition());
+	this->obj->setImageRotationRad(atan2(vel.y, vel.x));
+	this->obj->setPosition(this->obj->getPosition() + vel);
+	this->prop->setTransVelVec(vel);
 }
 
 void InternalMoveObjectController_Ellipse::end() {

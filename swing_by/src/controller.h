@@ -28,8 +28,9 @@ private:
 	Point start_pos, clicked_pos, start_vel;
 	std::shared_ptr<ObjectBase> obj;
 	std::shared_ptr<MoveObjectProperty> prop;
+	std::shared_ptr<IGetOrbit> orbit;
 public:
-	InternalMoveObjectController_Ellipse(const std::shared_ptr<ObjectBase> &obj, const std::shared_ptr<MoveObjectProperty> &prop, Point start_pos, Point clicked_pos, Point start_vel);
+	InternalMoveObjectController_Ellipse(const std::shared_ptr<ObjectBase> &obj, const std::shared_ptr<MoveObjectProperty> &prop, const std::shared_ptr<IGetOrbit> &orbit, Point target_pos);
 	void update() override;
 	void end() override;
 };

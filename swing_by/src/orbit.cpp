@@ -111,7 +111,7 @@ std::vector<Point> Orbit::getNavigationPoints(Point player_pos, Point player_vel
 }
 
 void Orbit::resetParams(Point under_f_pos, Point under_f_vel, Point f_pos) {
-	this->ell_rotate_rad = atan2(f_pos.y - under_f_pos.y, f_pos.x - under_f_pos.x);
+	this->ell_rotate_rad = atan2(f_pos.y - under_f_pos.y, f_pos.x - under_f_pos.x) + M_PI / 2;
 
 	Point under_f_pos_ = this->spin(under_f_pos, f_pos, -this->ell_rotate_rad);
 	Point under_f_vel_ = this->spin(under_f_vel, Point(0, 0), -this->ell_rotate_rad);
@@ -128,27 +128,28 @@ void Orbit::resetParams(Point under_f_pos, Point under_f_vel, Point f_pos) {
 	this->go_front = under_f_vel_.x >= 0.0;
 	this->go_accele = abs(atan2(under_f_vel_.y, under_f_vel_.x) + M_PI / 2) < M_PI / 2;
 	this->move_vel = sqrt(under_f_vel.x*under_f_vel.x + under_f_vel.y*under_f_vel.y);
-	this->rotate_rad = 0.000000;
+	this->total_rotate_rad = 0.000000;
 }
 
 Point Orbit::getNextVelocityVector(Point now) {
 	double dx, dy;
-	
-	if (this->rotate_rad < M_PI / 2) {
-		if (this->go_accele) this->move_vel *= 1.05;
-		else this->move_vel /= 1.05;
+	Point now_ = this->spin(now, this->ell_f_pos, -this->ell_rotate_rad);
 
-		if (this->go_front) dx = this->move_vel / sqrt(1 + pow(this->ell_b, 4.0)*pow(now.x - this->ell_center_pos.x, 2.0) / pow(this->ell_a, 4.0) / pow(now.y - this->ell_center_pos.y, 2.0));
-		else dx = -this->move_vel / sqrt(1 + pow(this->ell_b, 4.0)*pow(now.x - this->ell_center_pos.x, 2.0) / pow(this->ell_a, 4.0) / pow(now.y - this->ell_center_pos.y, 2.0));
-		dy = -this->ell_b*this->ell_b / this->ell_a / this->ell_a * (now.x - this->ell_center_pos.x) / (now.y - this->ell_center_pos.y)*dx;
-		this->rotate_rad += abs(atan2(now.y + dy - this->ell_f_pos.y, now.x + dx - this->ell_f_pos.x) - atan2(now.y - this->ell_f_pos.y, now.x - this->ell_f_pos.x));
+	if (this->total_rotate_rad < M_PI / 2) {
+		if (this->go_accele) this->move_vel *= 1.01;
+		else this->move_vel /= 1.01;
+
+		if (this->go_front) dx = this->move_vel / sqrt(1 + pow(this->ell_b, 4.0)*pow(now_.x - this->ell_center_pos.x, 2.0) / pow(this->ell_a, 4.0) / pow(now_.y - this->ell_center_pos.y, 2.0));
+		else dx = -this->move_vel / sqrt(1 + pow(this->ell_b, 4.0)*pow(now_.x - this->ell_center_pos.x, 2.0) / pow(this->ell_a, 4.0) / pow(now_.y - this->ell_center_pos.y, 2.0));
+		dy = -this->ell_b*this->ell_b / this->ell_a / this->ell_a * (now_.x - this->ell_center_pos.x) / (now_.y - this->ell_center_pos.y)*dx;
+		this->total_rotate_rad += abs(atan2(now_.y + dy - this->ell_f_pos.y, now_.x + dx - this->ell_f_pos.x) - atan2(now_.y - this->ell_f_pos.y, now_.x - this->ell_f_pos.x));
 	}
 	else {
-		if (this->go_front) dx = this->move_vel / sqrt(1 + pow(now.x - this->ell_center_pos.x, 2.0) / pow(now.y - this->ell_center_pos.y, 2.0));
-		else dx = -this->move_vel / sqrt(1 + pow(now.x - this->ell_center_pos.x, 2.0) / pow(now.y - this->ell_center_pos.y, 2.0));
-		dy = -(now.x - this->ell_center_pos.x) / (now.y - this->ell_center_pos.y)*dx;
+		if (this->go_front) dx = this->move_vel / sqrt(1 + pow(now_.x - this->ell_center_pos.x, 2.0) / pow(now_.y - this->ell_center_pos.y, 2.0));
+		else dx = -this->move_vel / sqrt(1 + pow(now_.x - this->ell_center_pos.x, 2.0) / pow(now_.y - this->ell_center_pos.y, 2.0));
+		dy = -(now_.x - this->ell_center_pos.x) / (now_.y - this->ell_center_pos.y)*dx;
 	}
-	return Point(dx, dy);
+	return this->spin(Point(dx, dy), Point(0, 0), this->ell_rotate_rad);
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
