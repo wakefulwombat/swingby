@@ -283,3 +283,8 @@ std::vector<Point> Map::getCrossPointsInMapChip(int chip_x, int chip_y, double a
 	
 	return list;
 }
+
+bool Map::isHitWithWall(const std::shared_ptr<ObjectBase> &obj, Size hit_size) {
+	
+	return false;
+}

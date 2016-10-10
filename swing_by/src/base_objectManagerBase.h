@@ -1,13 +1,13 @@
 #ifndef _BASE_OBJECTMANAGERBASE_
 #define _BASE_OBJECTMANAGERBASE_
 
-#include "base_objectBase.h"
+#include "base_requiredFunc.h"
 #include <vector>
 #include <memory>
 
 template <class T>
-class ObjectManagerBase : public TaskBase{
-private:
+class ObjectManagerBase : public RequiredFunc{
+protected:
 	std::vector<std::shared_ptr<T>> obj_list;
 
 public:
@@ -22,16 +22,16 @@ public:
 
 	
 	void update() override {
-		for (auto it = this->obj_list.begin(); it != this->obj_list; ++it){
-			if ((*it)->getValidation()) (*it)->update();
+		if (this->obj_list.size() == 0) return;
+
+		for (auto it = this->obj_list.begin(); it != this->obj_list.end();){
+			if (!(*it)->getValidation()) {
+				it = this->obj_list.erase(it);
+				continue;
+			}
+			(*it)->update();
+			++it;
 		}
-	}
-
-	void draw() override { for (auto it = this->obj_list.begin(); it != this->obj_list; ++it) if ((*it)->getValidation()) (*it)->draw(); }
-
-	void finalize() override {
-		for (auto it = this->obj_list.begin(); it != this->obj_list; ++it) (*it)->finalize();
-		for (auto it = this->obj_list.begin(); it != this->obj_list; ++it) delete(*it);
 	}
 
 	virtual ~ObjectManagerBase() {};

@@ -39,4 +39,6 @@ public:
 
 	bool isMapChipVisible(int x_index, int y_index);
 	Point getMapCrossPosition(Point line_p1, Point line_p2) override;
+
+	bool isHitWithWall(const std::shared_ptr<ObjectBase> &obj, Size hit_size);
 };

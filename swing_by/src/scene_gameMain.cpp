@@ -6,7 +6,6 @@
 
 SceneGameMain::SceneGameMain(const std::shared_ptr<ISetNextScene> &i) : SceneBase(i){
 	this->nextSceneInGameMain = SceneInGameMainKind::Stage;
-	this->pause = std::make_shared<SceneGameMainPause>(i);
 }
 
 void SceneGameMain::initialize() {

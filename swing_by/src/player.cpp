@@ -49,10 +49,10 @@ void Player::update() {
 	}
 
 	if (Input::getKeyCodeDownOnce(KeyType::Game_VectorTrans_CANCEL)) {
-
+		
 	}
 	if (Input::getKeyCodeUpOnce(KeyType::Game_VectorTrans_CANCEL)) {
-
+		
 	}
 	if (Input::getKeyCodeDown(KeyType::Game_VectorTrans_CANCEL)) {
 

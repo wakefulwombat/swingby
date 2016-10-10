@@ -24,6 +24,7 @@
     <ClCompile Include="src\controller.cpp" />
     <ClCompile Include="src\controllerFactory.cpp" />
     <ClCompile Include="src\debug.cpp" />
+    <ClCompile Include="src\explosion.cpp" />
     <ClCompile Include="src\image.cpp" />
     <ClCompile Include="src\input.cpp" />
     <ClCompile Include="src\main.cpp" />
@@ -35,7 +36,8 @@
     <ClCompile Include="src\scene_ending.cpp" />
     <ClCompile Include="src\scene_gameMain.cpp" />
     <ClCompile Include="src\scene_gameMainEvent.cpp" />
-    <ClCompile Include="src\scene_gameMainPause.cpp" />
+    <ClCompile Include="src\scene_gameMainStageGameOver.cpp" />
+    <ClCompile Include="src\scene_gameMainStagePause.cpp" />
     <ClCompile Include="src\scene_gameMainResult.cpp" />
     <ClCompile Include="src\scene_gameMainStage.cpp" />
     <ClCompile Include="src\scene_gameMainStageSelect.cpp" />
@@ -57,11 +59,13 @@
     <ClInclude Include="src\common.h" />
     <ClInclude Include="src\controller.h" />
     <ClInclude Include="src\debug.h" />
+    <ClInclude Include="src\explosion.h" />
     <ClInclude Include="src\image.h" />
     <ClInclude Include="src\input.h" />
     <ClInclude Include="src\interface_getController.h" />
     <ClInclude Include="src\interface_getMapCrossPosition.h" />
     <ClInclude Include="src\interface_getOrbit.h" />
+    <ClInclude Include="src\interface_setSceneGameMainStageStatus.h" />
     <ClInclude Include="src\interface_setNextScene.h" />
     <ClInclude Include="src\interface_setNextSceneInGameMain.h" />
     <ClInclude Include="src\item.h" />
@@ -74,7 +78,8 @@
     <ClInclude Include="src\scene_ending.h" />
     <ClInclude Include="src\scene_gameMain.h" />
     <ClInclude Include="src\scene_gameMainEvent.h" />
-    <ClInclude Include="src\scene_gameMainPause.h" />
+    <ClInclude Include="src\scene_gameMainStageGameOver.h" />
+    <ClInclude Include="src\scene_gameMainStagePause.h" />
     <ClInclude Include="src\scene_gameMainResult.h" />
     <ClInclude Include="src\scene_gameMainStage.h" />
     <ClInclude Include="src\scene_gameMainStageSelect.h" />
