@@ -47,6 +47,7 @@
     <ClCompile Include="src\scene_option.cpp" />
     <ClCompile Include="src\screen.cpp" />
     <ClCompile Include="src\sound.cpp" />
+    <ClCompile Include="src\textBox.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\base_externalObjectControllerBase.h" />
@@ -88,6 +89,7 @@
     <ClInclude Include="src\scene_option.h" />
     <ClInclude Include="src\screen.h" />
     <ClInclude Include="src\sound.h" />
+    <ClInclude Include="src\textBox.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{D7DA6774-1282-4C97-A621-9F116C9A90D9}</ProjectGuid>
