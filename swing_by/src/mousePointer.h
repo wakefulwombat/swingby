@@ -2,6 +2,7 @@
 
 #include "base_objectBase.h"
 #include "common.h"
+#include "screen.h"
 
 class MousePointer : public ObjectBase, public std::enable_shared_from_this<MousePointer> {
 private:

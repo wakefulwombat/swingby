@@ -1,5 +1,6 @@
 #include "scene_gameMainStage.h"
 #include "screen.h"
+#include "input.h"
 
 SceneGameMainStage::SceneGameMainStage(const std::shared_ptr<ISetNextSceneInGameMain> &i) : SceneInGameMainBase(i) {
 	this->player = std::make_shared<Player>();
@@ -23,32 +24,36 @@ void SceneGameMainStage::initialize() {
 }
 
 void SceneGameMainStage::update() {
-	this->player->update();
-	this->mouse_pointer->update();
-	this->map->update();
-	this->orbit_manager->update();
-	this->explosion_manager->update();
-
 	if (this->isPaused) {
 		this->player->addDraw();
-		this->mouse_pointer->addDraw();
+		this->mouse_pointer->update();
 		this->map->addDraw();
 		this->orbit_manager->addDraw();
 		this->explosion_manager->addDraw();
 
 		this->scene_pause->update();
 	}
-	if (this->isGameOverNow) {
+	else if (this->isGameOverNow) {
 		this->player->addDraw();
-		this->mouse_pointer->addDraw();
-		this->map->addDraw();
-		this->orbit_manager->addDraw();
-		this->explosion_manager->addDraw();
+		this->mouse_pointer->update();
+		this->map->update();
+		this->explosion_manager->update();
 		
 		this->scene_gameover->update();
 	}
+	else {
+		this->player->update();
+		this->mouse_pointer->update();
+		this->map->update();
+		this->orbit_manager->update();
+		this->explosion_manager->update();
 
-	this->hitCheck();
+		this->hitCheck();
+	}
+
+	if (Input::getKeyCodeDownOnce(KeyType::Common_Pause)) {
+		this->isPaused = !this->isPaused;
+	}
 }
 
 void SceneGameMainStage::finalize() {

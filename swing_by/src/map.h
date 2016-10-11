@@ -3,6 +3,7 @@
 #include "base_requiredFunc.h"
 #include "base_objectBase.h"
 #include "interface_getMapCrossPosition.h"
+#include "screen.h"
 #include <vector>
 #include <memory>
 #include <string>

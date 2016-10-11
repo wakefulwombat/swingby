@@ -1,5 +1,4 @@
 #include "map.h"
-#include "screen.h"
 #include "image.h"
 #include <fstream>
 #include <sstream>

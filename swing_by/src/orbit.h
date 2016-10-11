@@ -4,6 +4,7 @@
 #include "base_objectBase.h"
 #include "interface_getMapCrossPosition.h"
 #include "interface_getOrbit.h"
+#include "screen.h"
 #include <vector>
 #include <memory>
 

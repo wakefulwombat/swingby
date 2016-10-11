@@ -1,8 +1,9 @@
 #include "debug.h"
 #include "screen.h"
 
-Debug_Square::Debug_Square(Point center, Size size, Color color, int z_sort)
-{
+void Debug_Base::addDraw() { Screen::addDrawObjectMutable(this->shared_from_this()); }
+
+Debug_Square::Debug_Square(Point center, Size size, Color color, int z_sort){
 	this->position = center;
 	this->size = size;
 	this->expansion = 1.0;

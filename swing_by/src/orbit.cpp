@@ -1,5 +1,4 @@
 #include "orbit.h"
-#include "screen.h"
 #include "image.h"
 #include "DxLib.h"
 #include "input.h"

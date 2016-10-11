@@ -23,6 +23,11 @@ public:
 class Debug_Base : public ObjectBase, public std::enable_shared_from_this<Debug_Base> {
 private:
 	Color col;
+
+public:
+	void initialize() override {};
+	void finalize() override {}
+	void addDraw() override;
 };
 
 class Debug_Square : public Debug_Base {
@@ -31,11 +36,8 @@ private:
 
 public:
 	Debug_Square(Point center, Size size, Color col, int z_sort = 200000);
-	void initialize() override {};
 	void update() override;
 	void draw() const override;
-	void addDraw() override { Screen::addDrawObjectMutable(this->shared_from_this()); }
-	void finalize() override {}
 };
 
 class Debug_Line : public Debug_Base {
@@ -45,11 +47,8 @@ private:
 
 public:
 	Debug_Line(Point start, Point end, Color col, int z_sort = 200001);
-	void initialize() override {};
 	void update() override;
 	void draw() const override;
-	void addDraw() override { Screen::addDrawObjectMutable(this->shared_from_this()); }
-	void finalize() override {}
 };
 
 class Debug_Point : public Debug_Base {
@@ -59,9 +58,6 @@ private:
 
 public:
 	Debug_Point(Point pos, int r, Color col, int z_sort = 200001);
-	void initialize() override {};
 	void update() override;
 	void draw() const override;
-	void addDraw() override { Screen::addDrawObjectMutable(this->shared_from_this()); }
-	void finalize() override {}
 };

@@ -3,6 +3,7 @@
 #include "base_objectBase.h"
 #include "interface_getController.h"
 #include "interface_getOrbit.h"
+#include "screen.h"
 #include <memory>
 
 class Player : public ObjectBase, public AnimationObjectProperty, public MoveObjectProperty, public std::enable_shared_from_this<Player> {

@@ -1,6 +1,5 @@
 #include "player.h"
 #include "input.h"
-#include "screen.h"
 #include "image.h"
 #include <math.h>
 

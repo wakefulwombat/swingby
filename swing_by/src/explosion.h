@@ -2,6 +2,7 @@
 
 #include "base_objectBase.h"
 #include "base_objectManagerBase.h"
+#include "screen.h"
 #include <memory>
 
 class Explosion : public ObjectBase, public AnimationObjectProperty, public std::enable_shared_from_this<Explosion> {

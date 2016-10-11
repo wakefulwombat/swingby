@@ -23,14 +23,14 @@ void Input::keyUpdate() {
 	char key[256];
 	GetHitKeyStateAll(key);
 
-	if (key[KEY_INPUT_P] != 0) {
+	/*if (key[KEY_INPUT_P] != 0) {
 		Input::keyCodeDownCount.key[(int)KeyType::Common_Pause]++;
 		Input::keyCodeUpCount.key[(int)KeyType::Common_Pause] = 0;
 	}
 	else {
 		Input::keyCodeUpCount.key[(int)KeyType::Common_Pause]++;
 		Input::keyCodeDownCount.key[(int)KeyType::Common_Pause] = 0;
-	}
+	}*/
 
 	if (key[KEY_INPUT_SPACE] != 0) {
 		Input::keyCodeDownCount.key[(int)KeyType::Game_Slow]++;
