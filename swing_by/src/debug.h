@@ -3,23 +3,6 @@
 #include "common.h"
 #include "base_objectBase.h"
 
-struct Color {
-public:
-	int r, g, b;
-
-	Color() {
-		this->r = 0;
-		this->g = 0;
-		this->b = 0;
-	}
-
-	Color(int r, int g, int b) {
-		this->r = r;
-		this->g = g;
-		this->b = b;
-	}
-};
-
 class Debug_Base : public ObjectBase, public std::enable_shared_from_this<Debug_Base> {
 private:
 	Color col;

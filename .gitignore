@@ -32,6 +32,7 @@
 *.suo
 *.vcxproj.user
 *.txt
+*.csv
 *.db
 *.opendb
 *.opensdf

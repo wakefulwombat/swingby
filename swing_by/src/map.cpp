@@ -9,7 +9,7 @@ MapChip::MapChip(Point pos, Size size, int chip_index) {
 	this->position = pos;
 	this->size = size;
 	this->chip_index = chip_index;
-	this->z_sort = 1000;
+	this->z_sort = 10;
 	this->expansion = 2.0;
 }
 
@@ -283,8 +283,89 @@ std::vector<Point> Map::getCrossPointsInMapChip(int chip_x, int chip_y, double a
 	return list;
 }
 
-bool Map::isHitWithWall(const std::shared_ptr<ObjectBase> &obj, Size hit_size) {
-	
+bool Map::isHitWithWall(const std::shared_ptr<ObjectBase> &obj, double r) {
+	std::vector<Point> candidate;
+	candidate.clear();
+
+	int map_x, map_y;
+	for (int i = 0;; ++i) {
+		if (obj->getPosition().x < 64 * (i + 1)) {
+			map_x = i;
+			break;
+		}
+	}
+	for (int i = 0;; ++i) {
+		if (obj->getPosition().y < 64 * (i + 1)) {
+			map_y = i;
+			break;
+		}
+	}
+
+	int c = (int)r / 64 + 1;
+
+	for (int x = -c; x <= c; ++x) {
+		for (int y = -c; y <= c; ++y) {
+			candidate.push_back(Point(map_x + c, map_y + c));
+		}
+	}
+
+	for each (Point p in candidate)
+	{
+		if ((int)p.x < 0) continue;
+		if ((int)p.y < 0) continue;
+		if ((int)p.x >= this->map_size.width) continue;
+		if ((int)p.y >= this->map_size.height) continue;
+
+		switch (this->map_chip[(int)p.y][(int)p.x]->getChipKindIndex())
+		{
+		case 0:
+			if (this->map_chip[(int)p.y][(int)p.x]->getPosition().y - 32.0 - obj->getPosition().y < r) return true;
+			break;
+		case 1:
+			if (obj->getPosition().x - (this->map_chip[(int)p.y][(int)p.x]->getPosition().x + 32.0) < r) return true;
+			break;
+		case 2:
+			if (obj->getPosition().y - (this->map_chip[(int)p.y][(int)p.x]->getPosition().y + 32.0) < r) return true;
+			break;
+		case 3:
+			if (this->map_chip[(int)p.y][(int)p.x]->getPosition().x - 32.0 - obj->getPosition().x < r) return true;
+			break;
+
+		case 4:
+		case 6:
+			if ((obj->getPosition().x + obj->getPosition().y - this->map_chip[(int)p.y][(int)p.x]->getPosition().x + this->map_chip[(int)p.y][(int)p.x]->getPosition().y) / sqrt(2) < r) return true;
+			break;
+		case 5:
+		case 7:
+			if ((obj->getPosition().y - obj->getPosition().x - this->map_chip[(int)p.y][(int)p.x]->getPosition().y + this->map_chip[(int)p.y][(int)p.x]->getPosition().x) / sqrt(2) < r) return true;
+			break;
+
+		case 12:
+			if (this->map_chip[(int)p.y][(int)p.x]->getPosition().y - 32.0 - obj->getPosition().y < r) return true;
+			if (this->map_chip[(int)p.y][(int)p.x]->getPosition().x - 32.0 - obj->getPosition().x < r) return true;
+			break;
+		case 13:
+			if (this->map_chip[(int)p.y][(int)p.x]->getPosition().y - 32.0 - obj->getPosition().y < r) return true;
+			if (obj->getPosition().x - (this->map_chip[(int)p.y][(int)p.x]->getPosition().x + 32.0) < r) return true;
+			break;
+		case 14:
+			if (obj->getPosition().x - (this->map_chip[(int)p.y][(int)p.x]->getPosition().x + 32.0) < r) return true;
+			if (obj->getPosition().y - (this->map_chip[(int)p.y][(int)p.x]->getPosition().y + 32.0) < r) return true;
+			break;
+		case 15:
+			if (obj->getPosition().y - (this->map_chip[(int)p.y][(int)p.x]->getPosition().y + 32.0) < r) return true;
+			if (this->map_chip[(int)p.y][(int)p.x]->getPosition().x - 32.0 - obj->getPosition().x < r) return true;
+			break;
+
+		case 20:
+			if (this->map_chip[(int)p.y][(int)p.x]->getPosition().y - 32.0 - obj->getPosition().y < r) return true;
+			if (obj->getPosition().x - (this->map_chip[(int)p.y][(int)p.x]->getPosition().x + 32.0) < r) return true;
+			if (obj->getPosition().y - (this->map_chip[(int)p.y][(int)p.x]->getPosition().y + 32.0) < r) return true;
+			if (this->map_chip[(int)p.y][(int)p.x]->getPosition().x - 32.0 - obj->getPosition().x < r) return true;
+			break;
+		}
+	}
+
 	return false;
 }
 

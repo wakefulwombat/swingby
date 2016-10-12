@@ -29,6 +29,23 @@ public:
 	static Point getCircleRandomPoint(Point center, double r, Point leftup, Point rightdown);
 };
 
+class Color {
+public:
+	int r, g, b;
+
+	Color() {
+		this->r = 0;
+		this->g = 0;
+		this->b = 0;
+	}
+
+	Color(int r, int g, int b) {
+		this->r = r;
+		this->g = g;
+		this->b = b;
+	}
+};
+
 int Round(double x);
 bool fileExistT(char* filepath);//テキスト
 bool fileExistB(char* filepath);//バイナリ

@@ -4,6 +4,7 @@
 #include "base_objectBase.h"
 #include "debug.h"
 #include <vector>
+#include <string>
 #include <memory>
 
 class Screen{
@@ -41,6 +42,7 @@ public:
 	static void drawSquare(Point center_pos, Size size, Color color);
 	static void drawLine(Point start, Point end, Color color);
 	static void drawPoint(Point center, int r, Color color);
+	static void drawString(Point leftup, Color color, std::string text, int font_size);
 
 	static void init(int window_width, int window_height);
 	static void update();

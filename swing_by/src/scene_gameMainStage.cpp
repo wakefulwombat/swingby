@@ -34,7 +34,6 @@ void SceneGameMainStage::update() {
 		this->scene_pause->update();
 	}
 	else if (this->isGameOverNow) {
-		this->player->addDraw();
 		this->mouse_pointer->update();
 		this->map->update();
 		this->explosion_manager->update();
@@ -61,8 +60,9 @@ void SceneGameMainStage::finalize() {
 }
 
 void SceneGameMainStage::hitCheck() {
-	if (this->map->isHitWithWall(this->player, this->player->getSize()*0.8)) {
+	if (this->map->isHitWithWall(this->player, 20.0)) {
 		this->explosion_manager->setExplosion(this->player->getPosition());
 		this->player->setInvalid();
+		this->isGameOverNow = true;
 	}
 }

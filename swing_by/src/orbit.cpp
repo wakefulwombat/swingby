@@ -7,7 +7,7 @@
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 CrossTarget::CrossTarget(const std::shared_ptr<ObjectBase> &player, const std::shared_ptr<ObjectBase> &mouse_pointer, const std::shared_ptr<IGetMapCrossPosition> &map) {
-	this->z_sort = 90000;
+	this->z_sort = 10000;
 	this->size = Size(64, 64);
 	for (int i = 0; i < 3; ++i)this->target_spin[i] = 0.000000;
 

@@ -7,7 +7,7 @@ Player::Player() {
 	this->count = 0;
 
 	this->control_status = ControlStatus::None;
-	this->z_sort = 5000;
+	this->z_sort = 100;
 	this->size = Size(56, 24);
 	this->position = Point();
 
@@ -24,7 +24,7 @@ void Player::initialize(Point start) {
 	this->ctrl_mgr = ctrl_mgr;
 	this->control_status = ControlStatus::InternalControlled;
 	this->internalController = this->ctrl_mgr->getInternalMoveObjectController_None();
-	this->z_sort = 5000;
+	this->z_sort = 100;
 	this->size = Size(56, 24);
 	this->position = start;
 
@@ -35,6 +35,8 @@ void Player::initialize(Point start) {
 }
 
 void Player::update() {
+	if (!this->validation) return;
+
 	this->internalController->update();
 
 	if (Input::getKeyCodeDownOnce(KeyType::Game_Swing_OK)) {
