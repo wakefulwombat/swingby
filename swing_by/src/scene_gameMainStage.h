@@ -35,6 +35,6 @@ public:
 	void update() override;
 	void finalize() override;
 
-	void enablePauseScene() override { this->isPaused = true; }
-	void enableGameOverScene() override { this->isGameOverNow = true; }
+	void enablePauseScene() override { this->isPaused = true; this->scene_pause->initialize(); }
+	void enableGameOverScene() override { this->isGameOverNow = true; this->scene_gameover->initialize(); }
 };

@@ -14,7 +14,7 @@ SceneGameMainStage::SceneGameMainStage(const std::shared_ptr<ISetNextSceneInGame
 
 	this->isGameOverNow = false;
 	this->isPaused = false;
-	this->scene_pause = std::make_shared<SceneGameMainStagePause>();
+	this->scene_pause = std::make_shared<SceneGameMainStagePause>([this]() {isPaused = false; });
 	this->scene_gameover = std::make_shared<SceneGameMainStageGameOver>();
 }
 
@@ -48,10 +48,9 @@ void SceneGameMainStage::update() {
 		this->explosion_manager->update();
 
 		this->hitCheck();
-	}
-
-	if (Input::getKeyCodeDownOnce(KeyType::Common_Pause)) {
-		this->isPaused = !this->isPaused;
+		if (Input::getKeyCodeDownOnce(KeyType::Common_Pause)) {
+			this->enablePauseScene();
+		}
 	}
 }
 
@@ -63,6 +62,6 @@ void SceneGameMainStage::hitCheck() {
 	if (this->map->isHitWithWall(this->player, 20.0)) {
 		this->explosion_manager->setExplosion(this->player->getPosition());
 		this->player->setInvalid();
-		this->isGameOverNow = true;
+		this->enableGameOverScene();
 	}
 }

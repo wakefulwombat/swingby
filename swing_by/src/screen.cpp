@@ -86,8 +86,10 @@ void Screen::drawPoint(Point center_pos, int r, Color color) {
 	DrawCircle((int)(center_pos.x - Screen::window_center_world_pos.x + Screen::windowSize.width / Screen::zoom / 2), (int)(center_pos.y - Screen::window_center_world_pos.y + Screen::windowSize.height / Screen::zoom / 2), r, GetColor(color.r, color.g, color.b));
 }
 
-void Screen::drawString(Point leftup, Color color, std::string text, int font_size) {
-
+void Screen::drawString(Point center, Color color, std::string text, int font_size) {
+	SetFontSize(font_size);
+	int width = GetDrawStringWidth(text.c_str(), text.size());
+	DrawString((int)center.x - width / 2 - (int)Screen::window_center_world_pos.x + Screen::windowSize.width / 2, (int)center.y - font_size / 2 - (int)Screen::window_center_world_pos.y + Screen::windowSize.height / 2, text.c_str(), GetColor(color.r, color.g, color.b));
 }
 
 

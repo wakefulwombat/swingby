@@ -14,10 +14,11 @@ private:
 	Color background_color;
 	Color mouseover_color;
 	std::function<void(void)> callback_clicked;
-	bool isClicked;
+	bool isClicked, isHovered;
+	int font_size;
 
 public:
-	Button(Point center, Size size, std::string text, std::function<void(void)> callback_clicked, Color text_color = Color(255, 255, 255), Color background_color = Color(0, 0, 0), Color mouseover_color = Color(128, 128, 128));
+	Button(Point center, Size size, std::string text, int font_size, std::function<void(void)> callback_clicked, Color text_color = Color(255, 255, 255), Color background_color = Color(50, 50, 50), Color mouseover_color = Color(128, 128, 128));
 	void initialize() override {}
 	void update() override;
 	void draw() const override;
@@ -31,5 +32,5 @@ class ButtonManager : public ObjectManagerBase<Button> {
 private:
 
 public:
-	void setNewButton(Point center, Size size, std::string text, std::function<void(void)> clicked, Color text_color = Color(255, 255, 255), Color background_color = Color(0, 0, 0), Color mouseover_color = Color(128, 128, 128));
+	void setNewButton(Point center, Size size, std::string text, int font_size, std::function<void(void)> clicked, Color text_color = Color(255, 255, 255), Color background_color = Color(50, 50, 50), Color mouseover_color = Color(128, 128, 128));
 };
