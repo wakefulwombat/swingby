@@ -11,7 +11,7 @@ private:
 	std::function<void(void)> de_pause;
 
 public:
-	SceneGameMainStagePause(std::function<void(void)> de_pause);
+	SceneGameMainStagePause(std::function<void(void)> de_pause, std::function<void(void)> retry, std::function<void(void)> title);
 	void initialize() override;
 	void update() override;
 	void finalize() override;
