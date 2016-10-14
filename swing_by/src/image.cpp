@@ -7,6 +7,7 @@ int Image::mouse_pointer;
 int Image::player[2];
 int Image::cross_target[3];
 int Image::explosion[14];
+int Image::message[3];
 
 void Image::clearAll(){
 	InitGraph();
@@ -47,6 +48,10 @@ void Image::loadGameScene(){
 	Image::cross_target[2] = LoadGraph("asset\\crosstarget\\3.png");
 
 	LoadDivGraph("asset\\explosion.png", 14, 14, 1, 240, 240, Image::explosion);
+
+	Image::message[(int)MessageType::PAUSE] = LoadGraph("asset\\message\\pause.png");
+	Image::message[(int)MessageType::GAMEOVER] = LoadGraph("asset\\message\\gameover.png");
+	Image::message[(int)MessageType::STAGECLEAR] = LoadGraph("asset\\message\\stageclear.png");
 }
 
 void Image::loadOtherScene(){

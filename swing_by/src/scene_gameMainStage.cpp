@@ -14,8 +14,8 @@ SceneGameMainStage::SceneGameMainStage(const std::shared_ptr<ISetNextSceneInGame
 
 	this->isGameOverNow = false;
 	this->isPaused = false;
-	this->scene_pause = std::make_shared<SceneGameMainStagePause>([this]() {isPaused = false; });
-	this->scene_gameover = std::make_shared<SceneGameMainStageGameOver>();
+	this->scene_pause = std::make_shared<SceneGameMainStagePause>([this]() {isPaused = false; }, []() {}, []() {});
+	this->scene_gameover = std::make_shared<SceneGameMainStageGameOver>([]() {}, []() {});
 }
 
 void SceneGameMainStage::initialize() {

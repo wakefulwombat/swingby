@@ -30,6 +30,7 @@
     <ClCompile Include="src\input.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\map.cpp" />
+    <ClCompile Include="src\message.cpp" />
     <ClCompile Include="src\mousePointer.cpp" />
     <ClCompile Include="src\music.cpp" />
     <ClCompile Include="src\orbit.cpp" />
@@ -73,6 +74,7 @@
     <ClInclude Include="src\interface_setNextSceneInGameMain.h" />
     <ClInclude Include="src\controllerFactory.h" />
     <ClInclude Include="src\map.h" />
+    <ClInclude Include="src\message.h" />
     <ClInclude Include="src\mousePointer.h" />
     <ClInclude Include="src\music.h" />
     <ClInclude Include="src\orbit.h" />

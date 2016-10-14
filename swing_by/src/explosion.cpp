@@ -8,7 +8,7 @@ Explosion::Explosion(Point pos) {
 	this->chip_switch_time = 5;
 	this->chipSize = 14;
 	this->expansion = 1.0;
-	this->img_opacity = 0.7;
+	this->img_opacity = 0.9;
 	this->repeat = false;
 	this->show_chip_index = 0;
 	this->size = Size(240, 240);
@@ -21,7 +21,10 @@ void Explosion::update() {
 
 	this->chip_count++;
 	if (this->chip_count%this->chip_switch_time == 0) this->show_chip_index++;
-	if (this->show_chip_index == this->chipSize) this->validation = false;
+	if (this->show_chip_index == this->chipSize) {
+		this->validation = false;
+		return;
+	}
 
 	this->addDraw();
 }

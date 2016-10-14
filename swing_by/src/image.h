@@ -1,5 +1,11 @@
 #pragma once
 
+enum class MessageType {
+	PAUSE,
+	GAMEOVER,
+	STAGECLEAR
+};
+
 class Image{
 private:
 	static void clearAll();
@@ -10,6 +16,7 @@ private:
 	static int player[2];
 	static int cross_target[3];
 	static int explosion[14];
+	static int message[3];
 
 public:
 	static void loadGameScene();
@@ -20,4 +27,5 @@ public:
 	static int getMapChip(int index){ return Image::map_chip[index]; }
 	static int getCrossTarget(int index) { return Image::cross_target[index]; }
 	static int getExplosion(int index) { return Image::explosion[index]; }
+	static int getMessage(MessageType type) { return Image::message[(int)type]; }
 };

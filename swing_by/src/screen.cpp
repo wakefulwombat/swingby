@@ -75,18 +75,22 @@ void Screen::drawOnWindowForMouse(Point leftup_pos, int graphHandle, double opac
 
 
 void Screen::drawSquare(Point center_pos, Size size, Color color) {
+	SetDrawBlendMode(DX_BLENDMODE_ALPHA, 255);
 	DrawBox((int)(center_pos.x - size.width / 2 - Screen::window_center_world_pos.x + Screen::windowSize.width / Screen::zoom / 2), (int)(center_pos.y - size.height / 2 - Screen::window_center_world_pos.y + Screen::windowSize.height / Screen::zoom / 2), (int)(center_pos.x + size.width / 2 - Screen::window_center_world_pos.x + Screen::windowSize.width / Screen::zoom / 2), (int)(center_pos.y + size.height / 2 - Screen::window_center_world_pos.y + Screen::windowSize.height / Screen::zoom / 2), GetColor(color.r, color.g, color.b), true);
 }
 
 void Screen::drawLine(Point start, Point end, Color color) {
+	SetDrawBlendMode(DX_BLENDMODE_ALPHA, 255);
 	DrawLine((int)(start.x - Screen::window_center_world_pos.x + Screen::windowSize.width / Screen::zoom / 2), (int)(start.y - Screen::window_center_world_pos.y + Screen::windowSize.height / Screen::zoom / 2), (int)(end.x - Screen::window_center_world_pos.x + Screen::windowSize.width / Screen::zoom / 2), (int)(end.y - Screen::window_center_world_pos.y + Screen::windowSize.height / Screen::zoom / 2), GetColor(color.r, color.g, color.b));
 }
 
 void Screen::drawPoint(Point center_pos, int r, Color color) {
+	SetDrawBlendMode(DX_BLENDMODE_ALPHA, 255);
 	DrawCircle((int)(center_pos.x - Screen::window_center_world_pos.x + Screen::windowSize.width / Screen::zoom / 2), (int)(center_pos.y - Screen::window_center_world_pos.y + Screen::windowSize.height / Screen::zoom / 2), r, GetColor(color.r, color.g, color.b));
 }
 
 void Screen::drawString(Point center, Color color, std::string text, int font_size) {
+	SetDrawBlendMode(DX_BLENDMODE_ALPHA, 255);
 	SetFontSize(font_size);
 	int width = GetDrawStringWidth(text.c_str(), text.size());
 	DrawString((int)center.x - width / 2 - (int)Screen::window_center_world_pos.x + Screen::windowSize.width / 2, (int)center.y - font_size / 2 - (int)Screen::window_center_world_pos.y + Screen::windowSize.height / 2, text.c_str(), GetColor(color.r, color.g, color.b));

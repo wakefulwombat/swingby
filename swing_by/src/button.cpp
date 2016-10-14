@@ -24,7 +24,11 @@ Button::Button(Point center, Size size, std::string text, int font_size, std::fu
 void Button::update() {
 	if (this->isClicked) {
 		this->count++;
-		if (this->count >= 10) this->clicked();
+		if (this->count >= 10) {
+			this->count = 0;
+			this->callback_clicked();
+			this->isClicked = false;
+		}
 	}
 
 	this->addDraw();
