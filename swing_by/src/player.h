@@ -4,6 +4,7 @@
 #include "interface_getController.h"
 #include "interface_getOrbit.h"
 #include "interface_setMousePointer.h"
+#include "timerRing.h"
 #include "screen.h"
 #include <memory>
 
@@ -13,6 +14,8 @@ private:
 	std::shared_ptr<ObjectBase> cross_target;
 	std::shared_ptr<IGetOrbit> orbit;
 	std::shared_ptr<ISetMousePointer> mouse_pointer;
+
+	std::shared_ptr<TimerRing> vector_trans_timer;
 
 	double overshoot_vel;
 

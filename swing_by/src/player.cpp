@@ -38,6 +38,7 @@ void Player::update() {
 	if (!this->validation) return;
 
 	this->internalController->update();
+	this->vector_trans_timer->update();
 
 	if (Input::getKeyCodeDownOnce(KeyType::Game_Swing_OK)) {
 		if(this->internalController->isEnd()) this->internalController = this->ctrl_mgr->getInternalMoveObjectController_Ellipse(this->shared_from_this(), this->shared_from_this(), this->orbit, this->cross_target->getPosition());
@@ -47,7 +48,7 @@ void Player::update() {
 	}
 
 	if (Input::getKeyCodeDownOnce(KeyType::Game_VectorTrans_CANCEL)) {
-		if (this->internalController->isEnd()) {
+		if (this->internalController->isEnd()&&!this->vector_trans_timer->getValidation()) {
 			this->overshoot_vel = this->trans_vel;
 			this->internalController = this->ctrl_mgr->getInternalMoveObjectController_ChargeStop(this->shared_from_this(), this->shared_from_this(), this->getTransVelVec());
 			this->mouse_pointer->rememberHide();
@@ -55,6 +56,7 @@ void Player::update() {
 	}
 	if (Input::getKeyCodeUpOnce(KeyType::Game_VectorTrans_CANCEL)) {
 		if (this->internalController->isEnd()) {
+			this->vector_trans_timer->restart();
 			this->internalController = this->ctrl_mgr->getInternalMoveObjectController_OverShoot(this->shared_from_this(), this->shared_from_this(), this->overshoot_vel);
 			this->mouse_pointer->rememberShow();
 		}
@@ -84,6 +86,8 @@ void Player::setInterface(const std::shared_ptr<IGetController> &ctrl_mgr, const
 	this->cross_target = cross_target;
 	this->orbit = orbit;
 	this->mouse_pointer = mouse_pointer;
+
+	this->vector_trans_timer = std::make_shared<TimerRing>(this->shared_from_this(), 300);
 
 	this->control_status = ControlStatus::InternalControlled;
 	this->internalController = this->ctrl_mgr->getInternalMoveObjectController_None();

@@ -51,6 +51,7 @@
     <ClCompile Include="src\sound.cpp" />
     <ClCompile Include="src\textBox.cpp" />
     <ClCompile Include="src\timer.cpp" />
+    <ClCompile Include="src\timerRing.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\base_externalObjectControllerBase.h" />
@@ -97,6 +98,7 @@
     <ClInclude Include="src\sound.h" />
     <ClInclude Include="src\textBox.h" />
     <ClInclude Include="src\timer.h" />
+    <ClInclude Include="src\timerRing.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{D7DA6774-1282-4C97-A621-9F116C9A90D9}</ProjectGuid>

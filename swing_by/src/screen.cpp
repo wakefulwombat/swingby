@@ -84,9 +84,9 @@ void Screen::drawLine(Point start, Point end, Color color) {
 	DrawLine((int)(start.x - Screen::window_center_world_pos.x + Screen::windowSize.width / Screen::zoom / 2), (int)(start.y - Screen::window_center_world_pos.y + Screen::windowSize.height / Screen::zoom / 2), (int)(end.x - Screen::window_center_world_pos.x + Screen::windowSize.width / Screen::zoom / 2), (int)(end.y - Screen::window_center_world_pos.y + Screen::windowSize.height / Screen::zoom / 2), GetColor(color.r, color.g, color.b));
 }
 
-void Screen::drawPoint(Point center_pos, int r, Color color) {
+void Screen::drawPoint(Point center_pos, int r, Color color, bool fill) {
 	SetDrawBlendMode(DX_BLENDMODE_ALPHA, 255);
-	DrawCircle((int)(center_pos.x - Screen::window_center_world_pos.x + Screen::windowSize.width / Screen::zoom / 2), (int)(center_pos.y - Screen::window_center_world_pos.y + Screen::windowSize.height / Screen::zoom / 2), r, GetColor(color.r, color.g, color.b));
+	DrawCircle((int)(center_pos.x - Screen::window_center_world_pos.x + Screen::windowSize.width / Screen::zoom / 2), (int)(center_pos.y - Screen::window_center_world_pos.y + Screen::windowSize.height / Screen::zoom / 2), r, GetColor(color.r, color.g, color.b), fill);
 }
 
 void Screen::drawString(Point center, Color color, std::string text, int font_size) {

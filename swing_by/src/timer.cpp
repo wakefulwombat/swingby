@@ -7,7 +7,7 @@ Timer::Timer() {
 	this->position = Point(Screen::getWindowSize().width - 90, 20);
 	this->size = Size(30, 30);
 	this->expansion = 0.5;
-	this->z_sort = 99;
+	this->z_sort = 98;
 }
 
 void Timer::update() {
