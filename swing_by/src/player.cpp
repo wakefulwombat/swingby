@@ -48,16 +48,16 @@ void Player::update() {
 	}
 
 	if (Input::getKeyCodeDownOnce(KeyType::Game_VectorTrans_CANCEL)) {
-		if (this->internalController->isEnd()&&!this->vector_trans_timer->getValidation()) {
+		if (this->internalController->isEnd() && !this->vector_trans_timer->getValidation()) {
 			this->overshoot_vel = this->trans_vel;
 			this->internalController = this->ctrl_mgr->getInternalMoveObjectController_ChargeStop(this->shared_from_this(), this->shared_from_this(), this->getTransVelVec());
 			this->mouse_pointer->rememberHide();
 		}
 	}
 	if (Input::getKeyCodeUpOnce(KeyType::Game_VectorTrans_CANCEL)) {
-		if (this->internalController->isEnd()) {
+		if (this->internalController->isEnd() && !this->vector_trans_timer->getValidation()) {
 			this->vector_trans_timer->restart();
-			this->internalController = this->ctrl_mgr->getInternalMoveObjectController_OverShoot(this->shared_from_this(), this->shared_from_this(), this->overshoot_vel);
+			this->internalController = this->ctrl_mgr->getInternalMoveObjectController_OverShoot(this->shared_from_this(), this->shared_from_this(), this->overshoot_vel, this->orbit);
 			this->mouse_pointer->rememberShow();
 		}
 	}

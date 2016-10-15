@@ -60,15 +60,18 @@ void InternalMoveObjectController_ChargeStop::update() {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-InternalMoveObjectController_OverShoot::InternalMoveObjectController_OverShoot(const std::shared_ptr<ObjectBase> &obj, const std::shared_ptr<MoveObjectProperty> &prop, double vel_target) {
+InternalMoveObjectController_OverShoot::InternalMoveObjectController_OverShoot(const std::shared_ptr<ObjectBase> &obj, const std::shared_ptr<MoveObjectProperty> &prop, double vel_target, const std::shared_ptr<IGetOrbit> &orbit) {
 	this->obj = obj;
 	this->prop = prop;
+	this->orbit = orbit;
 	this->count = 0;
 	this->vel_target = vel_target;
 
 	this->omega = M_PI * 2 / 60;
 	this->vel_now = 0.0;
 	this->zeta = 0.2;
+
+	this->orbit->setInvalid();
 }
 
 void InternalMoveObjectController_OverShoot::update() {
@@ -76,6 +79,7 @@ void InternalMoveObjectController_OverShoot::update() {
 		this->vel_now = this->vel_target*this->c(this->count) + 0.2;
 		this->prop->setTransVelVec(Point(this->vel_now*cos(this->prop->getTransRad()), this->vel_now*sin(this->prop->getTransRad())));
 		this->count++;
+		if (this->count == 60) this->orbit->setValid();
 	}
 	this->obj->setPosition(this->obj->getPosition() + this->prop->getTransVelVec());
 }

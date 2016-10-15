@@ -23,8 +23,9 @@ void MapChip::draw() const {
 
 
 Map::Map(std::string filename) {
-	this->map_size = this->loadMapSize(filename);
-	this->start_pos = this->loadMapStartPoint(filename);
+	this->loadMapSize(filename);
+	this->loadMapStartPoint(filename);
+	this->loadMapGoalArea(filename);
 	this->loadMapChipData(filename);
 }
 
@@ -36,11 +37,9 @@ void Map::update() {
 	}
 }
 
-Size Map::loadMapSize(std::string filename) {
-	Size size;
-
+void Map::loadMapSize(std::string filename) {
 	std::ifstream ifs(filename);
-	if (!ifs) return Size(0, 0);
+	if (!ifs) return;
 
 	std::string str;
 	std::getline(ifs, str);
@@ -49,19 +48,14 @@ Size Map::loadMapSize(std::string filename) {
 	std::istringstream stream(str);
 	getline(stream, tmp, ',');
 	getline(stream, tmp, ',');
-	size.width = std::stoi(tmp);
+	this->map_size.width = std::stoi(tmp);
 	getline(stream, tmp, ',');
-	size.height = std::stoi(tmp);
-
-	return size;
+	this->map_size.height = std::stoi(tmp);
 }
 
-Point Map::loadMapStartPoint(std::string filename) {
-	Point pos;
-
+void Map::loadMapStartPoint(std::string filename) {
 	std::ifstream ifs(filename);
-	if (!ifs) return Point(0, 0);
-
+	if (!ifs) return;
 	std::string str;
 	std::getline(ifs, str);//1行目は読み飛ばす
 	std::getline(ifs, str);
@@ -70,11 +64,30 @@ Point Map::loadMapStartPoint(std::string filename) {
 	std::istringstream stream(str);
 	getline(stream, tmp, ',');
 	getline(stream, tmp, ',');
-	pos.x = std::stod(tmp);
+	this->start_pos.x = std::stod(tmp);
 	getline(stream, tmp, ',');
-	pos.y = std::stoi(tmp);
+	this->start_pos.y = std::stoi(tmp);
+}
 
-	return pos;
+void Map::loadMapGoalArea(std::string filename) {
+	std::ifstream ifs(filename);
+	if (!ifs) return;
+	std::string str;
+	std::getline(ifs, str);
+	std::getline(ifs, str);//2行読み飛ばす
+
+	std::getline(ifs, str);
+	std::string tmp;
+	std::istringstream stream(str);
+	getline(stream, tmp, ',');
+	getline(stream, tmp, ',');
+	this->goal_leftup_pos.x = std::stod(tmp);
+	getline(stream, tmp, ',');
+	this->goal_leftup_pos.y = std::stoi(tmp);
+	getline(stream, tmp, ',');
+	this->goal_rightdown_pos.x = std::stod(tmp);
+	getline(stream, tmp, ',');
+	this->goal_rightdown_pos.y = std::stoi(tmp);
 }
 
 void Map::loadMapChipData(std::string filename) {
@@ -86,7 +99,9 @@ void Map::loadMapChipData(std::string filename) {
 
 	std::string str;
 	std::getline(ifs, str);
-	std::getline(ifs, str);//2行読み飛ばす
+	std::getline(ifs, str);
+	std::getline(ifs, str);//3行読み飛ばす
+
 	for (int y = 0; y < this->map_size.height;++y){
 		tmp.clear();
 		std::getline(ifs, str);
@@ -284,6 +299,8 @@ std::vector<Point> Map::getCrossPointsInMapChip(int chip_x, int chip_y, double a
 }
 
 bool Map::isHitWithWall(const std::shared_ptr<ObjectBase> &obj, double r) {
+	if (obj->getPosition().x < -obj->getSize().width) return true;
+
 	std::vector<Point> candidate;
 	candidate.clear();
 
@@ -367,6 +384,15 @@ bool Map::isHitWithWall(const std::shared_ptr<ObjectBase> &obj, double r) {
 	}
 
 	return false;
+}
+
+bool Map::isInGoalArea(const std::shared_ptr<ObjectBase> &obj) {
+	if (obj->getPosition().x - obj->getSize().width / 2 < this->goal_leftup_pos.x*64.0 - 32.0) return false;
+	if (obj->getPosition().y - obj->getSize().height / 2 < this->goal_leftup_pos.y*64.0 - 32.0) return false;
+	if (obj->getPosition().x + obj->getSize().width / 2 > this->goal_rightdown_pos.x*64.0 + 32.0) return false;
+	if (obj->getPosition().y - obj->getSize().height / 2 > this->goal_rightdown_pos.y*64.0 + 32.0) return false;
+
+	return true;
 }
 
 void Map::addDraw() {

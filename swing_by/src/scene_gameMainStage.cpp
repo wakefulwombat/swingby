@@ -66,5 +66,11 @@ void SceneGameMainStage::hitCheck() {
 		this->explosion_manager->setExplosion(this->player->getPosition());
 		this->player->setInvalid();
 		this->enableGameOverScene();
+		if (!this->mouse_pointer->getValidation()) this->mouse_pointer->rememberShow();
+	}
+	if (this->map->isInGoalArea(this->player)) {
+		this->player->setInvalid();
+		this->timer->setInvalid();
+		if (!this->mouse_pointer->getValidation()) this->mouse_pointer->rememberShow();
 	}
 }

@@ -17,6 +17,6 @@ std::shared_ptr<InternalObjectController> ControllerFactory::getInternalMoveObje
 	return std::make_shared<InternalMoveObjectController_ChargeStop>(obj, prop, start_vel);
 }
 
-std::shared_ptr<InternalObjectController> ControllerFactory::getInternalMoveObjectController_OverShoot(const std::shared_ptr<ObjectBase> &obj, const std::shared_ptr<MoveObjectProperty> &prop, double vel_target) {
-	return std::make_shared<InternalMoveObjectController_OverShoot>(obj, prop, vel_target);
+std::shared_ptr<InternalObjectController> ControllerFactory::getInternalMoveObjectController_OverShoot(const std::shared_ptr<ObjectBase> &obj, const std::shared_ptr<MoveObjectProperty> &prop, double vel_target, const std::shared_ptr<IGetOrbit> &orbit) {
+	return std::make_shared<InternalMoveObjectController_OverShoot>(obj, prop, vel_target, orbit);
 }

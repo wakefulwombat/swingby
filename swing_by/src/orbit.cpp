@@ -170,6 +170,8 @@ OrbitManager::OrbitManager(const std::shared_ptr<ObjectBase> &player, const std:
 	this->mouse_pointer = mouse_pointer;
 	this->crossTarget = std::make_shared<CrossTarget>(player, mouse_pointer, map);
 	this->orbit = std::make_shared<Orbit>(player, pl_vel, this->crossTarget);
+
+	this->validation = true;
 }
 
 void OrbitManager::initialize() {
@@ -177,6 +179,8 @@ void OrbitManager::initialize() {
 }
 
 void OrbitManager::update() {
+	if (!this->validation) return;
+
 	if (this->mouse_pointer->getPosition().x < 0) return;
 	if (this->mouse_pointer->getPosition().y < 0) return;
 	if (this->mouse_pointer->getPosition().x > Screen::getWindowSize().width) return;

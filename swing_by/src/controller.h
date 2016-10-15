@@ -50,6 +50,7 @@ class InternalMoveObjectController_OverShoot : public InternalObjectController {
 private:
 	std::shared_ptr<ObjectBase> obj;
 	std::shared_ptr<MoveObjectProperty> prop;
+	std::shared_ptr<IGetOrbit> orbit;
 	int count;
 	double vel_target, vel_now;
 	double omega, zeta;
@@ -57,7 +58,7 @@ private:
 	double c(int t);
 
 public:
-	InternalMoveObjectController_OverShoot(const std::shared_ptr<ObjectBase> &obj, const std::shared_ptr<MoveObjectProperty> &prop, double vel_target);
+	InternalMoveObjectController_OverShoot(const std::shared_ptr<ObjectBase> &obj, const std::shared_ptr<MoveObjectProperty> &prop, double vel_target, const std::shared_ptr<IGetOrbit> &orbit);
 	void update() override;
 	bool isEnd() override;
 };

@@ -8,9 +8,12 @@ Timer::Timer() {
 	this->size = Size(30, 30);
 	this->expansion = 0.5;
 	this->z_sort = 98;
+	this->validation - true;
 }
 
 void Timer::update() {
+	if (!this->validation) return;
+
 	int delta_ms = GetNowCount() - this->start_time;
 
 	for (int i = 0; i < 5; ++i) {

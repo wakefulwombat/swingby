@@ -24,10 +24,12 @@ class Map : public RequiredFunc, public IGetMapCrossPosition{
 private:
 	Size map_size;
 	Point start_pos;
+	Point goal_leftup_pos, goal_rightdown_pos;
 	std::vector<std::vector<std::shared_ptr<MapChip>>> map_chip;//[y][x]
 
-	Size loadMapSize(std::string filename);
-	Point loadMapStartPoint(std::string filename);
+	void loadMapSize(std::string filename);
+	void loadMapStartPoint(std::string filename);
+	void loadMapGoalArea(std::string filename);
 	void loadMapChipData(std::string filename);
 	
 	std::vector<Point> getCrossPointsInMapChip(int chip_x, int chip_y, double a, double b);
@@ -43,6 +45,7 @@ public:
 	Point getMapCrossPosition(Point line_p1, Point line_p2) override;
 
 	bool isHitWithWall(const std::shared_ptr<ObjectBase> &obj, double r);
+	bool isInGoalArea(const std::shared_ptr<ObjectBase> &obj);
 
 	void addDraw();
 };

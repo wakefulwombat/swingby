@@ -61,6 +61,8 @@ private:
 
 	std::shared_ptr<ObjectBase> mouse_pointer;
 
+	bool validation;
+
 public:
 	OrbitManager(const std::shared_ptr<ObjectBase> &player, const std::shared_ptr<MoveObjectProperty> &pl_vel, const std::shared_ptr<ObjectBase> &mouse_pointer, const std::shared_ptr<IGetMapCrossPosition> &map);
 	void initialize() override;
@@ -71,6 +73,8 @@ public:
 
 	void resetOrbitParams(Point player_pos, Point player_vel, Point target_pos) override;
 	Point getOrbitNextVelocityVector(Point player_now_pos) override;
+	void setInvalid() override { this->validation = false; }
+	void setValid() override { this->validation = true; }
 
 	std::shared_ptr<ObjectBase> getCrossTarget() { return this->crossTarget; }
 

@@ -21,8 +21,6 @@ public:
 	void addDraw() override { Screen::addDrawObjectWindow(this->shared_from_this()); }
 
 	void moveMousePointer(Point start, Point end, double move_pixel) override;
-	void hide() override { this->validation = false; }
-	void show() override { this->validation = true; }
 	void rememberHide() override;
 	void rememberShow() override;
 };
