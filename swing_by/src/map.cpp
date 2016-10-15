@@ -305,7 +305,7 @@ bool Map::isHitWithWall(const std::shared_ptr<ObjectBase> &obj, double r) {
 
 	for (int x = -c; x <= c; ++x) {
 		for (int y = -c; y <= c; ++y) {
-			candidate.push_back(Point(map_x + c, map_y + c));
+			candidate.push_back(Point(map_x + x, map_y + y));
 		}
 	}
 
@@ -319,49 +319,49 @@ bool Map::isHitWithWall(const std::shared_ptr<ObjectBase> &obj, double r) {
 		switch (this->map_chip[(int)p.y][(int)p.x]->getChipKindIndex())
 		{
 		case 0:
-			if (this->map_chip[(int)p.y][(int)p.x]->getPosition().y - 32.0 - obj->getPosition().y < r) return true;
+			if (abs(this->map_chip[(int)p.y][(int)p.x]->getPosition().y - 32.0 - obj->getPosition().y) < r) return true;
 			break;
 		case 1:
-			if (obj->getPosition().x - (this->map_chip[(int)p.y][(int)p.x]->getPosition().x + 32.0) < r) return true;
+			if (abs(obj->getPosition().x - (this->map_chip[(int)p.y][(int)p.x]->getPosition().x + 32.0)) < r) return true;
 			break;
 		case 2:
-			if (obj->getPosition().y - (this->map_chip[(int)p.y][(int)p.x]->getPosition().y + 32.0) < r) return true;
+			if (abs(obj->getPosition().y - (this->map_chip[(int)p.y][(int)p.x]->getPosition().y + 32.0)) < r) return true;
 			break;
 		case 3:
-			if (this->map_chip[(int)p.y][(int)p.x]->getPosition().x - 32.0 - obj->getPosition().x < r) return true;
+			if (abs(this->map_chip[(int)p.y][(int)p.x]->getPosition().x - 32.0 - obj->getPosition().x) < r) return true;
 			break;
 
 		case 4:
 		case 6:
-			if ((obj->getPosition().x + obj->getPosition().y - this->map_chip[(int)p.y][(int)p.x]->getPosition().x + this->map_chip[(int)p.y][(int)p.x]->getPosition().y) / sqrt(2) < r) return true;
+			if (abs(obj->getPosition().x + obj->getPosition().y - this->map_chip[(int)p.y][(int)p.x]->getPosition().x + this->map_chip[(int)p.y][(int)p.x]->getPosition().y) / sqrt(2) < r) return true;
 			break;
 		case 5:
 		case 7:
-			if ((obj->getPosition().y - obj->getPosition().x - this->map_chip[(int)p.y][(int)p.x]->getPosition().y + this->map_chip[(int)p.y][(int)p.x]->getPosition().x) / sqrt(2) < r) return true;
+			if (abs(obj->getPosition().y - obj->getPosition().x - this->map_chip[(int)p.y][(int)p.x]->getPosition().y + this->map_chip[(int)p.y][(int)p.x]->getPosition().x) / sqrt(2) < r) return true;
 			break;
 
 		case 12:
-			if (this->map_chip[(int)p.y][(int)p.x]->getPosition().y - 32.0 - obj->getPosition().y < r) return true;
-			if (this->map_chip[(int)p.y][(int)p.x]->getPosition().x - 32.0 - obj->getPosition().x < r) return true;
+			if ((abs(this->map_chip[(int)p.y][(int)p.x]->getPosition().y - 32.0 - obj->getPosition().y) < r) && (abs(this->map_chip[(int)p.y][(int)p.x]->getPosition().x - obj->getPosition().x) < 16.0)) return true;
+			if ((abs(this->map_chip[(int)p.y][(int)p.x]->getPosition().x - 32.0 - obj->getPosition().x) < r) && (abs(this->map_chip[(int)p.y][(int)p.x]->getPosition().y - obj->getPosition().y) < 16.0)) return true;
 			break;
 		case 13:
-			if (this->map_chip[(int)p.y][(int)p.x]->getPosition().y - 32.0 - obj->getPosition().y < r) return true;
-			if (obj->getPosition().x - (this->map_chip[(int)p.y][(int)p.x]->getPosition().x + 32.0) < r) return true;
+			if ((abs(this->map_chip[(int)p.y][(int)p.x]->getPosition().y - 32.0 - obj->getPosition().y) < r) && (abs(this->map_chip[(int)p.y][(int)p.x]->getPosition().x - obj->getPosition().x) < 16.0)) return true;
+			if ((abs(obj->getPosition().x - (this->map_chip[(int)p.y][(int)p.x]->getPosition().x + 32.0)) < r) && (abs(this->map_chip[(int)p.y][(int)p.x]->getPosition().y - obj->getPosition().y) < 16.0)) return true;
 			break;
 		case 14:
-			if (obj->getPosition().x - (this->map_chip[(int)p.y][(int)p.x]->getPosition().x + 32.0) < r) return true;
-			if (obj->getPosition().y - (this->map_chip[(int)p.y][(int)p.x]->getPosition().y + 32.0) < r) return true;
+			if ((abs(obj->getPosition().x - (this->map_chip[(int)p.y][(int)p.x]->getPosition().x + 32.0)) < r) && (abs(this->map_chip[(int)p.y][(int)p.x]->getPosition().y - obj->getPosition().y) < 16.0)) return true;
+			if ((abs(obj->getPosition().y - (this->map_chip[(int)p.y][(int)p.x]->getPosition().y + 32.0)) < r) && (abs(this->map_chip[(int)p.y][(int)p.x]->getPosition().x - obj->getPosition().x) < 16.0)) return true;
 			break;
 		case 15:
-			if (obj->getPosition().y - (this->map_chip[(int)p.y][(int)p.x]->getPosition().y + 32.0) < r) return true;
-			if (this->map_chip[(int)p.y][(int)p.x]->getPosition().x - 32.0 - obj->getPosition().x < r) return true;
+			if ((abs(obj->getPosition().y - (this->map_chip[(int)p.y][(int)p.x]->getPosition().y + 32.0)) < r) && (abs(this->map_chip[(int)p.y][(int)p.x]->getPosition().x - obj->getPosition().x) < 16.0)) return true;
+			if ((abs(this->map_chip[(int)p.y][(int)p.x]->getPosition().x - 32.0 - obj->getPosition().x) < r) && (abs(this->map_chip[(int)p.y][(int)p.x]->getPosition().y - obj->getPosition().y) < 16.0)) return true;
 			break;
 
 		case 20:
-			if (this->map_chip[(int)p.y][(int)p.x]->getPosition().y - 32.0 - obj->getPosition().y < r) return true;
-			if (obj->getPosition().x - (this->map_chip[(int)p.y][(int)p.x]->getPosition().x + 32.0) < r) return true;
-			if (obj->getPosition().y - (this->map_chip[(int)p.y][(int)p.x]->getPosition().y + 32.0) < r) return true;
-			if (this->map_chip[(int)p.y][(int)p.x]->getPosition().x - 32.0 - obj->getPosition().x < r) return true;
+			if ((abs(this->map_chip[(int)p.y][(int)p.x]->getPosition().y - 32.0 - obj->getPosition().y) < r) && (abs(this->map_chip[(int)p.y][(int)p.x]->getPosition().x - obj->getPosition().x) < 16.0)) return true;
+			if ((abs(obj->getPosition().x - (this->map_chip[(int)p.y][(int)p.x]->getPosition().x + 32.0)) < r) && (abs(this->map_chip[(int)p.y][(int)p.x]->getPosition().y - obj->getPosition().y) < 16.0)) return true;
+			if ((abs(obj->getPosition().y - (this->map_chip[(int)p.y][(int)p.x]->getPosition().y + 32.0)) < r) && (abs(this->map_chip[(int)p.y][(int)p.x]->getPosition().x - obj->getPosition().x) < 16.0)) return true;
+			if ((abs(this->map_chip[(int)p.y][(int)p.x]->getPosition().x - 32.0 - obj->getPosition().x) < r) && (abs(this->map_chip[(int)p.y][(int)p.x]->getPosition().y - obj->getPosition().y) < 16.0)) return true;
 			break;
 		}
 	}

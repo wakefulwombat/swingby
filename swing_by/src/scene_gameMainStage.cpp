@@ -59,7 +59,7 @@ void SceneGameMainStage::finalize() {
 }
 
 void SceneGameMainStage::hitCheck() {
-	if (this->map->isHitWithWall(this->player, 20.0)) {
+	if (this->map->isHitWithWall(this->player, 12.0)) {
 		this->explosion_manager->setExplosion(this->player->getPosition());
 		this->player->setInvalid();
 		this->enableGameOverScene();
