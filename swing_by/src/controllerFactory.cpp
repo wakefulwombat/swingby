@@ -12,3 +12,11 @@ std::shared_ptr<InternalObjectController> ControllerFactory::getInternalMoveObje
 std::shared_ptr<InternalObjectController> ControllerFactory::getInternalMoveObjectController_Ellipse(const std::shared_ptr<ObjectBase> &obj, const std::shared_ptr<MoveObjectProperty> &prop, const std::shared_ptr<IGetOrbit> &orbit, Point target_pos){
 	return std::make_shared<InternalMoveObjectController_Ellipse>(obj, prop, orbit, target_pos);
 }
+
+std::shared_ptr<InternalObjectController> ControllerFactory::getInternalMoveObjectController_ChargeStop(const std::shared_ptr<ObjectBase> &obj, const std::shared_ptr<MoveObjectProperty> &prop, Point start_vel) {
+	return std::make_shared<InternalMoveObjectController_ChargeStop>(obj, prop, start_vel);
+}
+
+std::shared_ptr<InternalObjectController> ControllerFactory::getInternalMoveObjectController_OverShoot(const std::shared_ptr<ObjectBase> &obj, const std::shared_ptr<MoveObjectProperty> &prop, double vel_target) {
+	return std::make_shared<InternalMoveObjectController_OverShoot>(obj, prop, vel_target);
+}

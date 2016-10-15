@@ -34,3 +34,32 @@ public:
 	void update() override;
 	void end() override;
 };
+
+class InternalMoveObjectController_ChargeStop : public InternalObjectController {
+private:
+	std::shared_ptr<ObjectBase> obj;
+	std::shared_ptr<MoveObjectProperty> prop;
+	int count;
+	Point start_vel;
+
+public:
+	InternalMoveObjectController_ChargeStop(const std::shared_ptr<ObjectBase> &obj, const std::shared_ptr<MoveObjectProperty> &prop, Point start_vel);
+	void update() override;
+	void end() override;
+};
+
+class InternalMoveObjectController_OverShoot : public InternalObjectController {
+private:
+	std::shared_ptr<ObjectBase> obj;
+	std::shared_ptr<MoveObjectProperty> prop;
+	int count;
+	double vel_target, vel_now;
+	double omega, zeta;
+
+	double c(int t);
+
+public:
+	InternalMoveObjectController_OverShoot(const std::shared_ptr<ObjectBase> &obj, const std::shared_ptr<MoveObjectProperty> &prop, double vel_target);
+	void update() override;
+	void end() override;
+};

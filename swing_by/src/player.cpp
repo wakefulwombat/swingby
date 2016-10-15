@@ -45,15 +45,12 @@ void Player::update() {
 	if (Input::getKeyCodeUpOnce(KeyType::Game_Swing_OK)) {
 		this->internalController = this->ctrl_mgr->getInternalMoveObjectController_GoStraight(this->shared_from_this(), this->shared_from_this());
 	}
-	if (Input::getKeyCodeDown(KeyType::Game_Swing_OK)) {
-		
-	}
 
 	if (Input::getKeyCodeDownOnce(KeyType::Game_VectorTrans_CANCEL)) {
-		
+		this->internalController = this->ctrl_mgr->getInternalMoveObjectController_ChargeStop(this->shared_from_this(), this->shared_from_this(), this->getTransVelVec());
 	}
 	if (Input::getKeyCodeUpOnce(KeyType::Game_VectorTrans_CANCEL)) {
-		
+		this->internalController = this->ctrl_mgr->getInternalMoveObjectController_OverShoot(this->shared_from_this(), this->shared_from_this(), 3.0);
 	}
 	if (Input::getKeyCodeDown(KeyType::Game_VectorTrans_CANCEL)) {
 
