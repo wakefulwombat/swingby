@@ -17,23 +17,23 @@ void SceneManager::update(){
 
 		switch (this->nextScene){
 		case SceneKind::Ending:
-			this->nowScene = std::make_shared<SceneEnding>(this->shared_from_this());
+			this->nowScene = std::make_shared<SceneEnding>([this](SceneKind kind) {nextScene = kind; });
 			break;
 
 		case SceneKind::GameMain:
-			this->nowScene = std::make_shared<SceneGameMain>(this->shared_from_this());
+			this->nowScene = std::make_shared<SceneGameMain>([this](SceneKind kind) {nextScene = kind; });
 			break;
 
 		case SceneKind::MusicRoom:
-			this->nowScene = std::make_shared<SceneMusicRoom>(this->shared_from_this());
+			this->nowScene = std::make_shared<SceneMusicRoom>([this](SceneKind kind) {nextScene = kind; });
 			break;
 
 		case SceneKind::Opening:
-			this->nowScene = std::make_shared<SceneOpening>(this->shared_from_this());
+			this->nowScene = std::make_shared<SceneOpening>([this](SceneKind kind) {nextScene = kind; });
 			break;
 
 		case SceneKind::Option:
-			this->nowScene = std::make_shared<SceneOption>(this->shared_from_this());
+			this->nowScene = std::make_shared<SceneOption>([this](SceneKind kind) {nextScene = kind; });
 			break;
 		}
 

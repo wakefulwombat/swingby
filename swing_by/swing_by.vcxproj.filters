@@ -143,9 +143,6 @@
     <ClInclude Include="src\sound.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="src\interface_setNextScene.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="src\scene_gameMain.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
@@ -162,9 +159,6 @@
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="src\base_sceneInGameMainBase.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="src\interface_setNextSceneInGameMain.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="src\scene_gameMainEvent.h">

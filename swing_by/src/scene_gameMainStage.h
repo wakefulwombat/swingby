@@ -11,6 +11,7 @@
 #include "timer.h"
 #include "scene_gameMainStagePause.h"
 #include "scene_gameMainStageGameOver.h"
+#include "base_sceneBase.h"
 #include "interface_setSceneGameMainStageStatus.h"
 #include <vector>
 
@@ -32,7 +33,7 @@ private:
 	void hitCheck();
 
 public:
-	SceneGameMainStage(const std::shared_ptr<ISetNextSceneInGameMain> &isetNextScene);
+	SceneGameMainStage(std::function<void(SceneInGameMainKind)> gameMainSceneChanger, std::function<void(SceneKind)> changer);
 	void initialize() override;
 	void update() override;
 	void finalize() override;

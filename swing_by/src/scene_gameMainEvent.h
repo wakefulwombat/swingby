@@ -6,7 +6,7 @@ class SceneGameMainEvent : public SceneInGameMainBase {
 private:
 
 public:
-	SceneGameMainEvent(const std::shared_ptr<ISetNextSceneInGameMain> &isetNextScene);
+	SceneGameMainEvent(std::function<void(SceneInGameMainKind)> sceneChanger);
 	void initialize() override;
 	void update() override;
 	void finalize() override;

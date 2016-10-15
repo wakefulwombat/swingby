@@ -3,17 +3,8 @@
 #include "common.h"
 #include "base_requiredFunc.h"
 #include "base_sceneBase.h"
-#include "interface_setNextScene.h"
 #include <memory>
 
-enum class SceneKind{
-	Opening,
-	Ending,
-	GameMain,
-	MusicRoom,
-	Option,
-	None
-};
 
 class Selection{
 private:
@@ -27,7 +18,7 @@ public:
 };
 
 
-class SceneManager : public RequiredFunc, public ISetNextScene, public std::enable_shared_from_this<SceneManager> {
+class SceneManager : public RequiredFunc, public std::enable_shared_from_this<SceneManager> {
 private:
 	SceneKind nextScene;
 	std::shared_ptr<SceneBase> nowScene;
@@ -37,6 +28,4 @@ public:
 
 	void update() override;
 	void finalize() override;
-
-	void setNextScene(SceneKind nextScene) override { this->nextScene = nextScene; }
 };

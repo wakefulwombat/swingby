@@ -4,8 +4,9 @@
 #include "scene_gameMainStage.h"
 #include "scene_gameMainStageSelect.h"
 
-SceneGameMain::SceneGameMain(const std::shared_ptr<ISetNextScene> &i) : SceneBase(i){
+SceneGameMain::SceneGameMain(std::function<void(SceneKind)> changer) : SceneBase(changer){
 	this->nextSceneInGameMain = SceneInGameMainKind::Stage;
+	this->sceneChanger = changer;
 }
 
 void SceneGameMain::initialize() {
@@ -20,19 +21,19 @@ void SceneGameMain::update() {
 
 		switch (this->nextSceneInGameMain) {
 		case SceneInGameMainKind::Event:
-			this->nowSceneInGameMain = std::make_shared<SceneGameMainEvent>(this->shared_from_this());
+			this->nowSceneInGameMain = std::make_shared<SceneGameMainEvent>([this](SceneInGameMainKind scene) {nextSceneInGameMain = scene; });
 			break;
 
 		case SceneInGameMainKind::Result:
-			this->nowSceneInGameMain = std::make_shared<SceneGameMainResult>(this->shared_from_this());
+			this->nowSceneInGameMain = std::make_shared<SceneGameMainResult>([this](SceneInGameMainKind scene) {nextSceneInGameMain = scene; });
 			break;
 
 		case SceneInGameMainKind::Stage:
-			this->nowSceneInGameMain = std::make_shared<SceneGameMainStage>(this->shared_from_this());
+			this->nowSceneInGameMain = std::make_shared<SceneGameMainStage>([this](SceneInGameMainKind scene) {nextSceneInGameMain = scene; }, this->sceneChanger);
 			break;
 
 		case SceneInGameMainKind::StageSelect:
-			this->nowSceneInGameMain = std::make_shared<SceneGameMainStageSelect>(this->shared_from_this());
+			this->nowSceneInGameMain = std::make_shared<SceneGameMainStageSelect>([this](SceneInGameMainKind scene) {nextSceneInGameMain = scene; });
 			break;
 		}
 

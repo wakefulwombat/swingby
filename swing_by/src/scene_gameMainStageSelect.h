@@ -6,7 +6,7 @@ class SceneGameMainStageSelect : public SceneInGameMainBase {
 private:
 
 public:
-	SceneGameMainStageSelect(const std::shared_ptr<ISetNextSceneInGameMain> &isetNextScene);
+	SceneGameMainStageSelect(std::function<void(SceneInGameMainKind)> sceneChanger);
 	void initialize() override;
 	void update() override;
 	void finalize() override;

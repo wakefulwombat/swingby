@@ -1,6 +1,6 @@
 #include "scene_opening.h"
 
-SceneOpening::SceneOpening(const std::shared_ptr<ISetNextScene> &i) : SceneBase(i){
+SceneOpening::SceneOpening(std::function<void(SceneKind)> changer) : SceneBase(changer){
 	
 }
 

@@ -1,14 +1,23 @@
 #pragma once
 
 #include "base_requiredFunc.h"
-#include "interface_setNextScene.h"
 #include <memory>
+#include <functional>
+
+enum class SceneKind {
+	Opening,
+	Ending,
+	GameMain,
+	MusicRoom,
+	Option,
+	None
+};
 
 class SceneBase : public RequiredFunc{
 protected:
-	std::shared_ptr<ISetNextScene> sceneChanger;
+	std::function<void(SceneKind)> sceneChanger;
 
 public:
-	SceneBase(const std::shared_ptr<ISetNextScene> &changer){ this->sceneChanger = changer; }
+	SceneBase(std::function<void(SceneKind)> changer){ this->sceneChanger = changer; }
 	virtual ~SceneBase(){}
 };

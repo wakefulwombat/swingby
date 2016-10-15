@@ -1,6 +1,6 @@
 #include "scene_ending.h"
 
-SceneEnding::SceneEnding(const std::shared_ptr<ISetNextScene> &i) : SceneBase(i){
+SceneEnding::SceneEnding(std::function<void(SceneKind)> changer) : SceneBase(changer){
 	
 }
 

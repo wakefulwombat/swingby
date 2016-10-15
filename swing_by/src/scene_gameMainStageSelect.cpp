@@ -1,6 +1,6 @@
 #include "scene_gameMainStageSelect.h"
 
-SceneGameMainStageSelect::SceneGameMainStageSelect(const std::shared_ptr<ISetNextSceneInGameMain> &i) : SceneInGameMainBase(i) {
+SceneGameMainStageSelect::SceneGameMainStageSelect(std::function<void(SceneInGameMainKind)> sceneChanger) : SceneInGameMainBase(sceneChanger) {
 
 }
 

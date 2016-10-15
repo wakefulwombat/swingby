@@ -1,6 +1,6 @@
 #include "scene_musicRoom.h"
 
-SceneMusicRoom::SceneMusicRoom(const std::shared_ptr<ISetNextScene> &i) : SceneBase(i){
+SceneMusicRoom::SceneMusicRoom(std::function<void(SceneKind)> changer) : SceneBase(changer){
 	
 }
 

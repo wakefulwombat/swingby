@@ -2,7 +2,7 @@
 #include "screen.h"
 #include "input.h"
 
-SceneGameMainStage::SceneGameMainStage(const std::shared_ptr<ISetNextSceneInGameMain> &i) : SceneInGameMainBase(i) {
+SceneGameMainStage::SceneGameMainStage(std::function<void(SceneInGameMainKind)> gameMainSceneChanger, std::function<void(SceneKind)> changer) : SceneInGameMainBase(gameMainSceneChanger) {
 	this->player = std::make_shared<Player>();
 	this->control_factory = std::make_shared<ControllerFactory>();
 	this->mouse_pointer = std::make_shared<MousePointer>();
@@ -15,8 +15,8 @@ SceneGameMainStage::SceneGameMainStage(const std::shared_ptr<ISetNextSceneInGame
 
 	this->isGameOverNow = false;
 	this->isPaused = false;
-	this->scene_pause = std::make_shared<SceneGameMainStagePause>([this]() {isPaused = false; }, []() {}, []() {});
-	this->scene_gameover = std::make_shared<SceneGameMainStageGameOver>([]() {}, []() {});
+	this->scene_pause = std::make_shared<SceneGameMainStagePause>([this]() {isPaused = false; }, [gameMainSceneChanger]() {gameMainSceneChanger(SceneInGameMainKind::Stage); }, [changer]() {changer(SceneKind::Opening); });
+	this->scene_gameover = std::make_shared<SceneGameMainStageGameOver>([gameMainSceneChanger]() {gameMainSceneChanger(SceneInGameMainKind::Stage); }, [changer]() {changer(SceneKind::Opening); });
 }
 
 void SceneGameMainStage::initialize() {
