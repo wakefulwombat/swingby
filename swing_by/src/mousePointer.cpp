@@ -43,3 +43,13 @@ void MousePointer::moveMousePointer(Point start, Point end, double move_pixel) {
 	this->rock_moveAngle = atan2(this->rock_moveEnd.y - this->rock_moveStart.y, this->rock_moveEnd.x - this->rock_moveStart.x);
 	this->count = 0;
 }
+
+void MousePointer::rememberHide() {
+	this->remember_pos = Input::getNowMousePoint();
+	this->validation = false;
+}
+
+void MousePointer::rememberShow() {
+	Input::setNowMousePoint(this->remember_pos);
+	this->validation = true;
+}

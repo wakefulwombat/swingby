@@ -8,6 +8,7 @@
 #include "map.h"
 #include "orbit.h"
 #include "explosion.h"
+#include "timer.h"
 #include "scene_gameMainStagePause.h"
 #include "scene_gameMainStageGameOver.h"
 #include "interface_setSceneGameMainStageStatus.h"
@@ -21,6 +22,7 @@ private:
 	std::shared_ptr<Map> map;
 	std::shared_ptr<OrbitManager> orbit_manager;
 	std::shared_ptr<ExplosionManager> explosion_manager;
+	std::shared_ptr<Timer> timer;
 
 	std::shared_ptr<SceneGameMainStageGameOver> scene_gameover;
 	std::shared_ptr<SceneGameMainStagePause> scene_pause;

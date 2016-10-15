@@ -1,11 +1,10 @@
 #include "controller.h"
+#include "input.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 InternalMoveObjectController_None::InternalMoveObjectController_None() {}
 
 void InternalMoveObjectController_None::update() {}
-
-void InternalMoveObjectController_None::end() {}
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -16,10 +15,6 @@ InternalMoveObjectController_GoStraight::InternalMoveObjectController_GoStraight
 
 void InternalMoveObjectController_GoStraight::update() {
 	this->obj->setPosition(this->obj->getPosition() + this->prop->getTransVelVec());
-}
-
-void InternalMoveObjectController_GoStraight::end() {
-	this->obj->setControlRights(ControlStatus::Movable);
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -38,10 +33,6 @@ void InternalMoveObjectController_Ellipse::update() {
 	this->obj->setPosition(this->obj->getPosition() + vel);
 	this->prop->setTransVelVec(vel);
 }
-
-void InternalMoveObjectController_Ellipse::end() {
-	this->obj->setControlRights(ControlStatus::Movable);
-}
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -50,6 +41,8 @@ InternalMoveObjectController_ChargeStop::InternalMoveObjectController_ChargeStop
 	this->prop = prop;
 	this->count = 0;
 	this->start_vel = start_vel;
+
+	this->mouse_pos = Input::getNowMousePoint();
 }
 
 void InternalMoveObjectController_ChargeStop::update() {
@@ -60,10 +53,9 @@ void InternalMoveObjectController_ChargeStop::update() {
 	}
 	this->prop->setTransVelVec(vel);
 	this->obj->setPosition(this->obj->getPosition() + this->prop->getTransVelVec());
-}
 
-void InternalMoveObjectController_ChargeStop::end() {
-	this->obj->setControlRights(ControlStatus::Movable);
+	this->obj->setImageRotationRad(atan2(-Input::getNowMousePoint().y + this->mouse_pos.y, -Input::getNowMousePoint().x + this->mouse_pos.x));
+	if (Input::getKeyCodeUpOnce(KeyType::Game_VectorTrans_CANCEL)) this->prop->setTransRad(this->obj->getImageRotationRad());
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -88,8 +80,9 @@ void InternalMoveObjectController_OverShoot::update() {
 	this->obj->setPosition(this->obj->getPosition() + this->prop->getTransVelVec());
 }
 
-void InternalMoveObjectController_OverShoot::end() {
-	this->obj->setControlRights(ControlStatus::Movable);
+bool InternalMoveObjectController_OverShoot::isEnd() {
+	if (this->count == 60) return true;
+	return false;
 }
 
 double InternalMoveObjectController_OverShoot::c(int t) {

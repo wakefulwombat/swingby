@@ -10,7 +10,6 @@ class InternalMoveObjectController_None : public InternalObjectController {
 public:
 	InternalMoveObjectController_None();
 	void update() override;
-	void end() override;
 };
 
 class InternalMoveObjectController_GoStraight : public InternalObjectController {
@@ -20,7 +19,6 @@ private:
 public:
 	InternalMoveObjectController_GoStraight(const std::shared_ptr<ObjectBase> &obj, const std::shared_ptr<MoveObjectProperty> &prop);
 	void update() override;
-	void end() override;
 };
 
 class InternalMoveObjectController_Ellipse : public InternalObjectController {
@@ -32,7 +30,6 @@ private:
 public:
 	InternalMoveObjectController_Ellipse(const std::shared_ptr<ObjectBase> &obj, const std::shared_ptr<MoveObjectProperty> &prop, const std::shared_ptr<IGetOrbit> &orbit, Point target_pos);
 	void update() override;
-	void end() override;
 };
 
 class InternalMoveObjectController_ChargeStop : public InternalObjectController {
@@ -42,10 +39,11 @@ private:
 	int count;
 	Point start_vel;
 
+	Point mouse_pos;
+
 public:
 	InternalMoveObjectController_ChargeStop(const std::shared_ptr<ObjectBase> &obj, const std::shared_ptr<MoveObjectProperty> &prop, Point start_vel);
 	void update() override;
-	void end() override;
 };
 
 class InternalMoveObjectController_OverShoot : public InternalObjectController {
@@ -61,5 +59,5 @@ private:
 public:
 	InternalMoveObjectController_OverShoot(const std::shared_ptr<ObjectBase> &obj, const std::shared_ptr<MoveObjectProperty> &prop, double vel_target);
 	void update() override;
-	void end() override;
+	bool isEnd() override;
 };

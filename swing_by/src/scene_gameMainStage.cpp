@@ -9,8 +9,9 @@ SceneGameMainStage::SceneGameMainStage(const std::shared_ptr<ISetNextSceneInGame
 	this->map = std::make_shared<Map>("asset\\map\\map_001.csv");
 	this->explosion_manager = std::make_shared<ExplosionManager>();
 	this->orbit_manager = std::make_shared<OrbitManager>(this->player, this->player, this->mouse_pointer, this->map);
+	this->timer = std::make_shared<Timer>();
 
-	this->player->setInterface(this->control_factory, this->orbit_manager->getCrossTarget(), this->orbit_manager);
+	this->player->setInterface(this->control_factory, this->orbit_manager->getCrossTarget(), this->orbit_manager, this->mouse_pointer->shared_from_this());
 
 	this->isGameOverNow = false;
 	this->isPaused = false;
@@ -30,6 +31,7 @@ void SceneGameMainStage::update() {
 		this->map->addDraw();
 		this->orbit_manager->addDraw();
 		this->explosion_manager->addDraw();
+		this->timer->addDraw();
 
 		this->scene_pause->update();
 	}
@@ -46,6 +48,7 @@ void SceneGameMainStage::update() {
 		this->map->update();
 		this->orbit_manager->update();
 		this->explosion_manager->update();
+		this->timer->update();
 
 		this->hitCheck();
 		if (Input::getKeyCodeDownOnce(KeyType::Common_Pause)) {

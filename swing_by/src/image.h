@@ -17,6 +17,8 @@ private:
 	static int cross_target[3];
 	static int explosion[14];
 	static int message[3];
+	static int number[10];
+	static int dot;
 
 public:
 	static void loadGameScene();
@@ -28,4 +30,6 @@ public:
 	static int getCrossTarget(int index) { return Image::cross_target[index]; }
 	static int getExplosion(int index) { return Image::explosion[index]; }
 	static int getMessage(MessageType type) { return Image::message[(int)type]; }
+	static int getNumber(int number) { return Image::number[number]; }
+	static int getDot() { return Image::dot; }
 };

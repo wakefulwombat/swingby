@@ -8,6 +8,8 @@ int Image::player[2];
 int Image::cross_target[3];
 int Image::explosion[14];
 int Image::message[3];
+int Image::number[10];
+int Image::dot;
 
 void Image::clearAll(){
 	InitGraph();
@@ -52,6 +54,19 @@ void Image::loadGameScene(){
 	Image::message[(int)MessageType::PAUSE] = LoadGraph("asset\\message\\pause.png");
 	Image::message[(int)MessageType::GAMEOVER] = LoadGraph("asset\\message\\gameover.png");
 	Image::message[(int)MessageType::STAGECLEAR] = LoadGraph("asset\\message\\stageclear.png");
+
+	Image::number[0] = LoadGraph("asset\\number\\w0.png");
+	Image::number[1] = LoadGraph("asset\\number\\w1.png");
+	Image::number[2] = LoadGraph("asset\\number\\w2.png");
+	Image::number[3] = LoadGraph("asset\\number\\w3.png");
+	Image::number[4] = LoadGraph("asset\\number\\w4.png");
+	Image::number[5] = LoadGraph("asset\\number\\w5.png");
+	Image::number[6] = LoadGraph("asset\\number\\w6.png");
+	Image::number[7] = LoadGraph("asset\\number\\w7.png");
+	Image::number[8] = LoadGraph("asset\\number\\w8.png");
+	Image::number[9] = LoadGraph("asset\\number\\w9.png");
+
+	Image::dot = LoadGraph("asset\\number\\dot.png");
 }
 
 void Image::loadOtherScene(){

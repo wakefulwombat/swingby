@@ -40,17 +40,24 @@ void Player::update() {
 	this->internalController->update();
 
 	if (Input::getKeyCodeDownOnce(KeyType::Game_Swing_OK)) {
-		this->internalController = this->ctrl_mgr->getInternalMoveObjectController_Ellipse(this->shared_from_this(), this->shared_from_this(), this->orbit, this->cross_target->getPosition());
+		if(this->internalController->isEnd()) this->internalController = this->ctrl_mgr->getInternalMoveObjectController_Ellipse(this->shared_from_this(), this->shared_from_this(), this->orbit, this->cross_target->getPosition());
 	}
 	if (Input::getKeyCodeUpOnce(KeyType::Game_Swing_OK)) {
-		this->internalController = this->ctrl_mgr->getInternalMoveObjectController_GoStraight(this->shared_from_this(), this->shared_from_this());
+		if (this->internalController->isEnd()) this->internalController = this->ctrl_mgr->getInternalMoveObjectController_GoStraight(this->shared_from_this(), this->shared_from_this());
 	}
 
 	if (Input::getKeyCodeDownOnce(KeyType::Game_VectorTrans_CANCEL)) {
-		this->internalController = this->ctrl_mgr->getInternalMoveObjectController_ChargeStop(this->shared_from_this(), this->shared_from_this(), this->getTransVelVec());
+		if (this->internalController->isEnd()) {
+			this->overshoot_vel = this->trans_vel;
+			this->internalController = this->ctrl_mgr->getInternalMoveObjectController_ChargeStop(this->shared_from_this(), this->shared_from_this(), this->getTransVelVec());
+			this->mouse_pointer->rememberHide();
+		}
 	}
 	if (Input::getKeyCodeUpOnce(KeyType::Game_VectorTrans_CANCEL)) {
-		this->internalController = this->ctrl_mgr->getInternalMoveObjectController_OverShoot(this->shared_from_this(), this->shared_from_this(), 3.0);
+		if (this->internalController->isEnd()) {
+			this->internalController = this->ctrl_mgr->getInternalMoveObjectController_OverShoot(this->shared_from_this(), this->shared_from_this(), this->overshoot_vel);
+			this->mouse_pointer->rememberShow();
+		}
 	}
 	if (Input::getKeyCodeDown(KeyType::Game_VectorTrans_CANCEL)) {
 
@@ -72,10 +79,11 @@ void Player::finalize() {
 
 }
 
-void Player::setInterface(const std::shared_ptr<IGetController> &ctrl_mgr, const std::shared_ptr<ObjectBase> &cross_target, const std::shared_ptr<IGetOrbit> &orbit) {
+void Player::setInterface(const std::shared_ptr<IGetController> &ctrl_mgr, const std::shared_ptr<ObjectBase> &cross_target, const std::shared_ptr<IGetOrbit> &orbit, const std::shared_ptr<ISetMousePointer> &mouse_pointer) {
 	this->ctrl_mgr = ctrl_mgr;
 	this->cross_target = cross_target;
 	this->orbit = orbit;
+	this->mouse_pointer = mouse_pointer;
 
 	this->control_status = ControlStatus::InternalControlled;
 	this->internalController = this->ctrl_mgr->getInternalMoveObjectController_None();
