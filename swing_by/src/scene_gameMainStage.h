@@ -11,6 +11,7 @@
 #include "timer.h"
 #include "scene_gameMainStagePause.h"
 #include "scene_gameMainStageGameOver.h"
+#include "scene_gameMainStageClear.h"
 #include "base_sceneBase.h"
 #include "interface_setSceneGameMainStageStatus.h"
 #include <vector>
@@ -27,8 +28,9 @@ private:
 
 	std::shared_ptr<SceneGameMainStageGameOver> scene_gameover;
 	std::shared_ptr<SceneGameMainStagePause> scene_pause;
+	std::shared_ptr<SceneGameMainStageClear> scene_clear;
 
-	bool isPaused, isGameOverNow;
+	bool isPaused, isGameOverNow, isStageCleared;
 
 	void hitCheck();
 

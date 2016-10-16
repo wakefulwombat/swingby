@@ -15,8 +15,10 @@ SceneGameMainStage::SceneGameMainStage(std::function<void(SceneInGameMainKind)> 
 
 	this->isGameOverNow = false;
 	this->isPaused = false;
+	this->isStageCleared = false;
 	this->scene_pause = std::make_shared<SceneGameMainStagePause>([this]() {isPaused = false; }, [gameMainSceneChanger]() {gameMainSceneChanger(SceneInGameMainKind::Stage); }, [changer]() {changer(SceneKind::Opening); });
 	this->scene_gameover = std::make_shared<SceneGameMainStageGameOver>([gameMainSceneChanger]() {gameMainSceneChanger(SceneInGameMainKind::Stage); }, [changer]() {changer(SceneKind::Opening); });
+	this->scene_clear = std::make_shared<SceneGameMainStageClear>([gameMainSceneChanger]() {gameMainSceneChanger(SceneInGameMainKind::Result); }, [this](Point pos) {explosion_manager->setExplosion(pos); });
 }
 
 void SceneGameMainStage::initialize() {
@@ -41,6 +43,13 @@ void SceneGameMainStage::update() {
 		this->explosion_manager->update();
 		
 		this->scene_gameover->update();
+	}
+	else if (this->isStageCleared) {
+		this->mouse_pointer->update();
+		this->map->update();
+		this->explosion_manager->update();
+
+		this->scene_clear->update();
 	}
 	else {
 		this->player->update();
@@ -70,7 +79,7 @@ void SceneGameMainStage::hitCheck() {
 	}
 	if (this->map->isInGoalArea(this->player)) {
 		this->player->setInvalid();
-		this->timer->setInvalid();
+		this->isStageCleared = true;
 		if (!this->mouse_pointer->getValidation()) this->mouse_pointer->rememberShow();
 	}
 }

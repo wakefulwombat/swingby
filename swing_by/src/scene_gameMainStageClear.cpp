@@ -2,12 +2,12 @@
 #include "screen.h"
 #include "input.h"
 
-SceneGameMainStageClear::SceneGameMainStageClear(std::function<void(void)> result) {
+SceneGameMainStageClear::SceneGameMainStageClear(std::function<void(void)> result, std::function<void(Point)> setExplosion) {
 	this->result = result;
+	this->setExplosion = setExplosion;
 
-	this->explosion = std::make_shared<ExplosionManager>();
 	this->clear_mes = std::make_shared<Message>(Point(Screen::getWindowSize().width / 2, Screen::getWindowSize().height / 3), MessageType::STAGECLEAR);
-	int count = 0;
+	this->count = 0;
 }
 
 void SceneGameMainStageClear::update() {
@@ -21,9 +21,8 @@ void SceneGameMainStageClear::update() {
 	}
 
 	if (this->count % 3 == 0) {
-		this->explosion->setExplosion(Point::getRandomPoint(Screen::getPositionOfWorldCoordinate(Point(0, 0)), Screen::getPositionOfWorldCoordinate(Point(Screen::getWindowSize().width, Screen::getWindowSize().height))));
+		this->setExplosion(Point::getRandomPoint(Screen::getPositionOfWorldCoordinate(Point(0, 0)), Screen::getPositionOfWorldCoordinate(Point(Screen::getWindowSize().width, Screen::getWindowSize().height))));
 	}
 
-	this->explosion->addDraw();
 	this->clear_mes->addDraw();
 }
