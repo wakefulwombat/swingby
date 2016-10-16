@@ -30,11 +30,7 @@ Map::Map(std::string filename) {
 }
 
 void Map::update() {
-	for (auto row = this->map_chip.begin(); row != this->map_chip.end();++row) {
-		for (auto chip = (*row).begin(); chip != (*row).end(); ++chip) {
-			(*chip)->update();
-		}
-	}
+	this->addDraw();
 }
 
 void Map::loadMapSize(std::string filename) {

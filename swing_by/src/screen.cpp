@@ -74,9 +74,9 @@ void Screen::drawOnWindowForMouse(Point leftup_pos, int graphHandle, double opac
 }
 
 
-void Screen::drawSquare(Point center_pos, Size size, Color color) {
+void Screen::drawSquare(Point center_pos, Size size, Color color, bool fill) {
 	SetDrawBlendMode(DX_BLENDMODE_ALPHA, 255);
-	DrawBox((int)(center_pos.x - size.width / 2 - Screen::window_center_world_pos.x + Screen::windowSize.width / Screen::zoom / 2), (int)(center_pos.y - size.height / 2 - Screen::window_center_world_pos.y + Screen::windowSize.height / Screen::zoom / 2), (int)(center_pos.x + size.width / 2 - Screen::window_center_world_pos.x + Screen::windowSize.width / Screen::zoom / 2), (int)(center_pos.y + size.height / 2 - Screen::window_center_world_pos.y + Screen::windowSize.height / Screen::zoom / 2), GetColor(color.r, color.g, color.b), true);
+	DrawBox((int)(center_pos.x - size.width / 2 - Screen::window_center_world_pos.x + Screen::windowSize.width / Screen::zoom / 2), (int)(center_pos.y - size.height / 2 - Screen::window_center_world_pos.y + Screen::windowSize.height / Screen::zoom / 2), (int)(center_pos.x + size.width / 2 - Screen::window_center_world_pos.x + Screen::windowSize.width / Screen::zoom / 2), (int)(center_pos.y + size.height / 2 - Screen::window_center_world_pos.y + Screen::windowSize.height / Screen::zoom / 2), GetColor(color.r, color.g, color.b), fill);
 }
 
 void Screen::drawLine(Point start, Point end, Color color) {

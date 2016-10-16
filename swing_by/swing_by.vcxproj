@@ -38,6 +38,7 @@
     <ClCompile Include="src\scene_ending.cpp" />
     <ClCompile Include="src\scene_gameMain.cpp" />
     <ClCompile Include="src\scene_gameMainEvent.cpp" />
+    <ClCompile Include="src\scene_gameMainStageClear.cpp" />
     <ClCompile Include="src\scene_gameMainStageGameOver.cpp" />
     <ClCompile Include="src\scene_gameMainStagePause.cpp" />
     <ClCompile Include="src\scene_gameMainResult.cpp" />
@@ -83,6 +84,7 @@
     <ClInclude Include="src\scene_ending.h" />
     <ClInclude Include="src\scene_gameMain.h" />
     <ClInclude Include="src\scene_gameMainEvent.h" />
+    <ClInclude Include="src\scene_gameMainStageClear.h" />
     <ClInclude Include="src\scene_gameMainStageGameOver.h" />
     <ClInclude Include="src\scene_gameMainStagePause.h" />
     <ClInclude Include="src\scene_gameMainResult.h" />

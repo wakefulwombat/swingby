@@ -8,7 +8,7 @@ Timer::Timer() {
 	this->size = Size(30, 30);
 	this->expansion = 0.5;
 	this->z_sort = 98;
-	this->validation - true;
+	this->validation = true;
 }
 
 void Timer::update() {

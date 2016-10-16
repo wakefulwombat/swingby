@@ -39,7 +39,7 @@ public:
 	static void drawOnWindow(Point center_pos, Size size, int graphHandle, double expansion, double rotation, double opacity);
 	static void drawOnWindowForMouse(Point leftup_pos, int graphHandle, double opacity);
 	
-	static void drawSquare(Point center_pos, Size size, Color color);
+	static void drawSquare(Point center_pos, Size size, Color color, bool fill = true);
 	static void drawLine(Point start, Point end, Color color);
 	static void drawPoint(Point center, int r, Color color, bool fill = true);
 	static void drawString(Point center, Color color, std::string text, int font_size);
