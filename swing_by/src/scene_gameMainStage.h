@@ -35,7 +35,7 @@ private:
 	void hitCheck();
 
 public:
-	SceneGameMainStage(std::function<void(SceneInGameMainKind)> gameMainSceneChanger, std::function<void(SceneKind)> changer);
+	SceneGameMainStage(std::function<void(SceneInGameMainKind)> gameMainSceneChanger, std::function<void(SceneKind)> changer, int stage);
 	void initialize() override;
 	void update() override;
 	void finalize() override;

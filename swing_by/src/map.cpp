@@ -22,7 +22,8 @@ void MapChip::draw() const {
 }
 
 
-Map::Map(std::string filename) {
+Map::Map(int stage) {
+	std::string filename = this->transformStageToFilename(stage);
 	this->loadMapSize(filename);
 	this->loadMapStartPoint(filename);
 	this->loadMapGoalArea(filename);
@@ -109,6 +110,17 @@ void Map::loadMapChipData(std::string filename) {
 		}
 		this->map_chip.push_back(std::move(tmp));
 	}
+}
+
+std::string Map::transformStageToFilename(int stage) {
+	std::string s;
+	switch (stage) {
+	case 0:
+		s = "asset\\map\\map_001.csv";
+		break;
+	}
+
+	return s;
 }
 
 bool Map::isMapChipVisible(int x_index, int y_index) {

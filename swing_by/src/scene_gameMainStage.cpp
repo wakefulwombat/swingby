@@ -2,11 +2,11 @@
 #include "screen.h"
 #include "input.h"
 
-SceneGameMainStage::SceneGameMainStage(std::function<void(SceneInGameMainKind)> gameMainSceneChanger, std::function<void(SceneKind)> changer) : SceneInGameMainBase(gameMainSceneChanger) {
+SceneGameMainStage::SceneGameMainStage(std::function<void(SceneInGameMainKind)> gameMainSceneChanger, std::function<void(SceneKind)> changer, int stage) : SceneInGameMainBase(gameMainSceneChanger) {
 	this->player = std::make_shared<Player>();
 	this->control_factory = std::make_shared<ControllerFactory>();
 	this->mouse_pointer = std::make_shared<MousePointer>();
-	this->map = std::make_shared<Map>("asset\\map\\map_001.csv");
+	this->map = std::make_shared<Map>(stage);
 	this->explosion_manager = std::make_shared<ExplosionManager>();
 	this->orbit_manager = std::make_shared<OrbitManager>(this->player, this->player, this->mouse_pointer, this->map);
 	this->timer = std::make_shared<Timer>();

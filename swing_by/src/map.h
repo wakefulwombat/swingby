@@ -32,10 +32,12 @@ private:
 	void loadMapGoalArea(std::string filename);
 	void loadMapChipData(std::string filename);
 	
+	std::string transformStageToFilename(int stage);
+
 	std::vector<Point> getCrossPointsInMapChip(int chip_x, int chip_y, double a, double b);
 
 public:
-	Map(std::string filename);
+	Map(int stage);
 	void update() override;
 
 	Point getStartPosition() { return this->start_pos * 64 + Point(32, 32); }

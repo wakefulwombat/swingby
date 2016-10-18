@@ -48,6 +48,7 @@
     <ClCompile Include="src\scene_musicRoom.cpp" />
     <ClCompile Include="src\scene_opening.cpp" />
     <ClCompile Include="src\scene_option.cpp" />
+    <ClCompile Include="src\score.cpp" />
     <ClCompile Include="src\screen.cpp" />
     <ClCompile Include="src\sound.cpp" />
     <ClCompile Include="src\textBox.cpp" />
@@ -75,6 +76,7 @@
     <ClInclude Include="src\interface_setMousePointer.h" />
     <ClInclude Include="src\interface_setSceneGameMainStageStatus.h" />
     <ClInclude Include="src\controllerFactory.h" />
+    <ClInclude Include="src\interface_setScore.h" />
     <ClInclude Include="src\map.h" />
     <ClInclude Include="src\message.h" />
     <ClInclude Include="src\mousePointer.h" />
@@ -94,6 +96,7 @@
     <ClInclude Include="src\scene_musicRoom.h" />
     <ClInclude Include="src\scene_opening.h" />
     <ClInclude Include="src\scene_option.h" />
+    <ClInclude Include="src\score.h" />
     <ClInclude Include="src\screen.h" />
     <ClInclude Include="src\sound.h" />
     <ClInclude Include="src\textBox.h" />

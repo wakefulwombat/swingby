@@ -12,6 +12,8 @@ private:
 
 	std::function<void(SceneKind)> sceneChanger;
 
+	int selectedStage;
+
 public:
 	SceneGameMain(std::function<void(SceneKind)> changer);
 	void initialize() override;
