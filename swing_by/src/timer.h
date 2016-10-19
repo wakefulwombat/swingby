@@ -14,4 +14,6 @@ public:
 	void update() override;
 	void draw() const override;
 	void addDraw() override { Screen::addDrawObjectWindow(this->shared_from_this()); }
+
+	double getTime();
 };

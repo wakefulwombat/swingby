@@ -4,6 +4,7 @@
 #include "interface_getController.h"
 #include "interface_getOrbit.h"
 #include "interface_setMousePointer.h"
+#include "interface_setScore.h"
 #include "timerRing.h"
 #include "screen.h"
 #include <memory>
@@ -14,6 +15,7 @@ private:
 	std::shared_ptr<ObjectBase> cross_target;
 	std::shared_ptr<IGetOrbit> orbit;
 	std::shared_ptr<ISetMousePointer> mouse_pointer;
+	std::shared_ptr<ISetScore> score;
 
 	std::shared_ptr<TimerRing> vector_trans_timer;
 
@@ -28,5 +30,5 @@ public:
 	void finalize() override;
 
 	void initialize(Point start);
-	void setInterface(const std::shared_ptr<IGetController> &ctrl_mgr, const std::shared_ptr<ObjectBase> &cross_target, const std::shared_ptr<IGetOrbit> &orbit, const std::shared_ptr<ISetMousePointer> &mouse_pointer);
+	void setInterface(const std::shared_ptr<IGetController> &ctrl_mgr, const std::shared_ptr<ObjectBase> &cross_target, const std::shared_ptr<IGetOrbit> &orbit, const std::shared_ptr<ISetMousePointer> &mouse_pointer, const std::shared_ptr<ISetScore> &score);
 };

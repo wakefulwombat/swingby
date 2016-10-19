@@ -32,3 +32,11 @@ void Timer::draw() const {
 	Screen::drawOnWindow(Point(this->position.x + 60.0, this->position.y), this->size, Image::getNumber(this->time[3]), this->expansion, 0.0, 1.0);
 	Screen::drawOnWindow(Point(this->position.x + 75.0, this->position.y), this->size, Image::getNumber(this->time[4]), this->expansion, 0.0, 1.0);
 }
+
+double Timer::getTime() {
+	double t = 0.00;
+	for (int i = 0; i < 5; ++i) {
+		t += this->time[i] * pow(10, 3 - i);
+	}
+	return t;
+}

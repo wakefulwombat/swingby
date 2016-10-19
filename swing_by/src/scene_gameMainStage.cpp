@@ -10,8 +10,9 @@ SceneGameMainStage::SceneGameMainStage(std::function<void(SceneInGameMainKind)> 
 	this->explosion_manager = std::make_shared<ExplosionManager>();
 	this->orbit_manager = std::make_shared<OrbitManager>(this->player, this->player, this->mouse_pointer, this->map);
 	this->timer = std::make_shared<Timer>();
+	this->score = std::make_shared<ScoreManager>(stage);
 
-	this->player->setInterface(this->control_factory, this->orbit_manager->getCrossTarget(), this->orbit_manager, this->mouse_pointer->shared_from_this());
+	this->player->setInterface(this->control_factory, this->orbit_manager->getCrossTarget(), this->orbit_manager, this->mouse_pointer->shared_from_this(), this->score->shared_from_this());
 
 	this->isGameOverNow = false;
 	this->isPaused = false;
@@ -79,6 +80,8 @@ void SceneGameMainStage::hitCheck() {
 	}
 	if (this->map->isInGoalArea(this->player)) {
 		this->player->setInvalid();
+		this->score->setGoalSpeed(this->player->getValidation());
+		this->score->setGoalTime(this->timer->getTime());
 		this->isStageCleared = true;
 		if (!this->mouse_pointer->getValidation()) this->mouse_pointer->rememberShow();
 	}
