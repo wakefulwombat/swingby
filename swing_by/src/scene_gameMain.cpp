@@ -26,11 +26,11 @@ void SceneGameMain::update() {
 			break;
 
 		case SceneInGameMainKind::Result:
-			this->nowSceneInGameMain = std::make_shared<SceneGameMainResult>([this](SceneInGameMainKind scene) {nextSceneInGameMain = scene; });
+			this->nowSceneInGameMain = std::make_shared<SceneGameMainResult>([this](SceneInGameMainKind scene) {nextSceneInGameMain = scene; }, this->scoreResult);
 			break;
 
 		case SceneInGameMainKind::Stage:
-			this->nowSceneInGameMain = std::make_shared<SceneGameMainStage>([this](SceneInGameMainKind scene) {nextSceneInGameMain = scene; }, this->sceneChanger, this->selectedStage);
+			this->nowSceneInGameMain = std::make_shared<SceneGameMainStage>([this](SceneInGameMainKind scene) {nextSceneInGameMain = scene; }, this->sceneChanger, this->selectedStage, [this](ScoreResult r) {scoreResult = r; });
 			break;
 
 		case SceneInGameMainKind::StageSelect:

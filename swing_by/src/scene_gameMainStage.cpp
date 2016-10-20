@@ -2,7 +2,7 @@
 #include "screen.h"
 #include "input.h"
 
-SceneGameMainStage::SceneGameMainStage(std::function<void(SceneInGameMainKind)> gameMainSceneChanger, std::function<void(SceneKind)> changer, int stage) : SceneInGameMainBase(gameMainSceneChanger) {
+SceneGameMainStage::SceneGameMainStage(std::function<void(SceneInGameMainKind)> gameMainSceneChanger, std::function<void(SceneKind)> changer, int stage, std::function<void(ScoreResult)> scoreResult) : SceneInGameMainBase(gameMainSceneChanger) {
 	this->player = std::make_shared<Player>();
 	this->control_factory = std::make_shared<ControllerFactory>();
 	this->mouse_pointer = std::make_shared<MousePointer>();
@@ -19,7 +19,7 @@ SceneGameMainStage::SceneGameMainStage(std::function<void(SceneInGameMainKind)> 
 	this->isStageCleared = false;
 	this->scene_pause = std::make_shared<SceneGameMainStagePause>([this]() {isPaused = false; }, [gameMainSceneChanger]() {gameMainSceneChanger(SceneInGameMainKind::Stage); }, [changer]() {changer(SceneKind::Opening); });
 	this->scene_gameover = std::make_shared<SceneGameMainStageGameOver>([gameMainSceneChanger]() {gameMainSceneChanger(SceneInGameMainKind::Stage); }, [changer]() {changer(SceneKind::Opening); });
-	this->scene_clear = std::make_shared<SceneGameMainStageClear>([gameMainSceneChanger]() {gameMainSceneChanger(SceneInGameMainKind::Result); }, [this](Point pos) {explosion_manager->setExplosion(pos); });
+	this->scene_clear = std::make_shared<SceneGameMainStageClear>([gameMainSceneChanger, scoreResult, this]() {gameMainSceneChanger(SceneInGameMainKind::Result); scoreResult(score->getScoreResult()); }, [this](Point pos) {explosion_manager->setExplosion(pos); });
 }
 
 void SceneGameMainStage::initialize() {
