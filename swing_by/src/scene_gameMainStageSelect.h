@@ -3,6 +3,7 @@
 #include "base_sceneInGameMainBase.h"
 #include "button.h"
 #include "mousePointer.h"
+#include "score.h"
 #include <vector>
 #include <memory>
 
@@ -12,6 +13,8 @@ private:
 	std::vector<std::shared_ptr<ButtonMove>> buttons;
 	std::shared_ptr<Button> button_go;
 	std::shared_ptr<MousePointer> mouse_pointer;
+
+	std::vector<std::shared_ptr<ScoreRank>> highscore;
 
 public:
 	SceneGameMainStageSelect(std::function<void(SceneInGameMainKind)> sceneChanger, std::function<void(int)> setSelectStage);

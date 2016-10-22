@@ -73,7 +73,7 @@ void Player::update() {
 
 	this->score->setNowSpeed(this->trans_vel);
 
-	Screen::setTargetWorldPosition(this->position, 30);
+	Screen::setTargetWorldPosition(this->position, 15);
 }
 
 void Player::draw() const {

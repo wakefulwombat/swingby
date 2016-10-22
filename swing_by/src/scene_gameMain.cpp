@@ -7,7 +7,7 @@
 SceneGameMain::SceneGameMain(std::function<void(SceneKind)> changer) : SceneBase(changer){
 	this->nextSceneInGameMain = SceneInGameMainKind::Stage;
 	this->sceneChanger = changer;
-	this->selectedStage = 0;
+	this->selectedStage = 1;
 }
 
 void SceneGameMain::initialize() {

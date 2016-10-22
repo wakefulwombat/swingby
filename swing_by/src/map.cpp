@@ -118,6 +118,10 @@ std::string Map::transformStageToFilename(int stage) {
 	case 0:
 		s = "asset\\map\\map_001.csv";
 		break;
+
+	case 1:
+		s = "asset\\map\\map_002.csv";
+		break;
 	}
 
 	return s;
@@ -237,22 +241,25 @@ std::vector<Point> Map::getCrossPointsInMapChip(int chip_x, int chip_y, double a
 		if ((pos.y >= this->map_chip[chip_y][chip_x]->getPosition().y - 33.0) && (pos.y <= this->map_chip[chip_y][chip_x]->getPosition().y + 33.0)) list.push_back(pos);
 		break;
 
+
 	case 4:
 	case 6:
-		pos.x = (b + this->map_chip[chip_y][chip_x]->getPosition().x - this->map_chip[chip_y][chip_x]->getPosition().y) / (1.0 - a);
+		pos.x = (this->map_chip[chip_y][chip_x]->getPosition().x + this->map_chip[chip_y][chip_x]->getPosition().y - b) / (1.0 + a);
 		if ((pos.x < this->map_chip[chip_y][chip_x]->getPosition().x - 32.0) || (pos.x > this->map_chip[chip_y][chip_x]->getPosition().x + 32.0)) break;
-		pos.y = pos.x - this->map_chip[chip_y][chip_x]->getPosition().x + this->map_chip[chip_y][chip_x]->getPosition().y;
+		pos.y = a*pos.x + b;
 		if ((pos.y < this->map_chip[chip_y][chip_x]->getPosition().y - 32.0) || (pos.y > this->map_chip[chip_y][chip_x]->getPosition().y + 32.0)) break;
 		list.push_back(pos);
 		break;
+
 	case 5:
 	case 7:
-		pos.x = (b + this->map_chip[chip_y][chip_x]->getPosition().x - this->map_chip[chip_y][chip_x]->getPosition().y) / (-1.0 - a);
+		pos.x = (this->map_chip[chip_y][chip_x]->getPosition().x - this->map_chip[chip_y][chip_x]->getPosition().y + b) / (1.0 - a);
 		if ((pos.x < this->map_chip[chip_y][chip_x]->getPosition().x - 32.0) || (pos.x > this->map_chip[chip_y][chip_x]->getPosition().x + 32.0)) break;
-		pos.y = -pos.x - this->map_chip[chip_y][chip_x]->getPosition().x + this->map_chip[chip_y][chip_x]->getPosition().y;
+		pos.y = a*pos.x + b;
 		if ((pos.y < this->map_chip[chip_y][chip_x]->getPosition().y - 32.0) || (pos.y > this->map_chip[chip_y][chip_x]->getPosition().y + 32.0)) break;
 		list.push_back(pos);
 		break;
+	
 
 	case 12:
 		pos.y = this->map_chip[chip_y][chip_x]->getPosition().y - 32.0;
@@ -358,7 +365,7 @@ bool Map::isHitWithWall(const std::shared_ptr<ObjectBase> &obj, double r) {
 
 		case 4:
 		case 6:
-			if (abs(obj->getPosition().x + obj->getPosition().y - this->map_chip[(int)p.y][(int)p.x]->getPosition().x + this->map_chip[(int)p.y][(int)p.x]->getPosition().y) / sqrt(2) < r) return true;
+			if (abs(obj->getPosition().x + obj->getPosition().y - this->map_chip[(int)p.y][(int)p.x]->getPosition().x - this->map_chip[(int)p.y][(int)p.x]->getPosition().y) / sqrt(2) < r) return true;
 			break;
 		case 5:
 		case 7:
