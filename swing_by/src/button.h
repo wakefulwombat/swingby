@@ -26,6 +26,7 @@ public:
 	void finalize() override {}
 
 	void clicked() { this->isClicked = true; this->count = 0; }
+	void setValid() { this->validation = true; }
 };
 
 class ButtonManager : public ObjectManagerBase<Button> {

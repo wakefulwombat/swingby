@@ -22,6 +22,8 @@ Button::Button(Point center, Size size, std::string text, int font_size, std::fu
 
 
 void Button::update() {
+	if (!this->validation) return;
+
 	if (this->isClicked) {
 		this->count++;
 		if (this->count >= 10) {

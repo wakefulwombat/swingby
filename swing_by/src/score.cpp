@@ -79,5 +79,15 @@ ScoreResult ScoreManager::getScoreResult() {
 	else if (this->now.swing_tech >= this->B.swing_tech) sr.swing_tech = ScoreRank::B;
 	else sr.swing_tech = ScoreRank::C;
 
+	double sum = 0.000000;
+	sum += (double)sr.goal_speed / 4;
+	sum += (double)sr.goal_time / 4;
+	sum += (double)sr.max_speed / 4;
+	sum += (double)sr.swing_tech / 4;
+	if (sum < 0.5) sr.total = ScoreRank::S;
+	else if (sum < 1.5) sr.total = ScoreRank::A;
+	else if (sum < 2.5) sr.total = ScoreRank::B;
+	else sr.total = ScoreRank::C;
+
 	return sr;
 }

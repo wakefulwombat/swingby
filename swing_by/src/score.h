@@ -1,18 +1,13 @@
 #pragma once
 
 #include "interface_setScore.h"
+#include "image.h"
 #include <memory>
 
-enum class ScoreRank {
-	S,
-	A,
-	B,
-	C
-};
 
 struct ScoreResult {
 public:
-	ScoreRank goal_time, max_speed, goal_speed, swing_tech;
+	ScoreRank goal_time, max_speed, goal_speed, swing_tech, total;
 };
 
 struct ScoreValue {

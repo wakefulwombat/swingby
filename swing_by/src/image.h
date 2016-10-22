@@ -3,7 +3,15 @@
 enum class MessageType {
 	PAUSE,
 	GAMEOVER,
-	STAGECLEAR
+	STAGECLEAR,
+	RESULT
+};
+
+enum class ScoreRank {
+	S,
+	A,
+	B,
+	C
 };
 
 class Image{
@@ -16,9 +24,10 @@ private:
 	static int player[2];
 	static int cross_target[3];
 	static int explosion[14];
-	static int message[3];
+	static int message[4];
 	static int number[10];
 	static int dot;
+	static int rank[4];
 
 public:
 	static void loadGameScene();
@@ -32,4 +41,5 @@ public:
 	static int getMessage(MessageType type) { return Image::message[(int)type]; }
 	static int getNumber(int number) { return Image::number[number]; }
 	static int getDot() { return Image::dot; }
+	static int getRank(ScoreRank rank) { return Image::rank[(int)rank]; }
 };
