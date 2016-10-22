@@ -68,6 +68,65 @@ void Button::addDraw() {
 }
 /////////////////////////////////////////////////////////////////////////////////////////////
 
+ButtonMove::ButtonMove(Point center, Size size, std::string text, int font_size, std::function<void(void)> callback_clicked, Color text_color, Color background_color_off, Color background_color_on, Color mouseover_color) : Button(center, size, text, font_size, callback_clicked, text_color, background_color_off, mouseover_color) {
+	this->background_color_on = background_color_on;
+
+	this->validation = true;
+	this->z_sort = 90000;
+	this->isOn = false;
+
+	this->isClicked = false;
+	this->isHovered = false;
+}
+
+void ButtonMove::update() {
+	if (!this->validation) return;
+
+	if (this->isClicked) {
+		this->callback_clicked();
+		this->isClicked = false;
+		this->isOn = true;
+	}
+
+	this->addDraw();
+	this->isHovered = false;
+
+	Point mouse = Screen::getPositionOfWorldCoordinate(Input::getNowMousePoint());
+	if (mouse.x < this->position.x - this->size.width / 2) return;
+	if (mouse.y < this->position.y - this->size.height / 2) return;
+	if (mouse.x > this->position.x + this->size.width / 2) return;
+	if (mouse.y > this->position.y + this->size.height / 2) return;
+
+	this->isHovered = true;
+
+	if (Input::getKeyCodeDownOnce(KeyType::Game_Swing_OK)) {
+		this->isClicked = true;
+	}
+}
+
+void ButtonMove::addDraw() {
+	Screen::addDrawObjectMutable(this->shared_from_this()); 
+}
+
+void ButtonMove::draw() const {
+	Color col;
+
+	if (this->isOn) {
+		col = this->background_color_on;
+	}
+	else {
+		if (this->isHovered) {
+			col = this->mouseover_color;
+		}
+		else {
+			col = this->background_color;
+		}
+	}
+	Screen::drawSquare(this->position, this->size, col);
+
+	col = this->text_color;
+	Screen::drawString(this->position, col, this->text, this->font_size);
+}
 
 /////////////////////////////////////////////////////////////////////////////////////////////
 void ButtonManager::setNewButton(Point center, Size size, std::string text, int font_size, std::function<void(void)> clicked, Color text_color, Color background_color, Color mouseover_color) {

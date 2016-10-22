@@ -76,9 +76,6 @@ void Input::keyUpdate() {
 	}
 
 	Input::mouse_wheel_rotation = GetMouseWheelRotVol();
-	if (Input::mouse_wheel_rotation > 0) {
-		Screen::setZoomIn(2.0, 60);
-	}
 }
 
 bool Input::getKeyCodeDown(KeyType key){

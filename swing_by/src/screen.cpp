@@ -29,6 +29,13 @@ void Screen::setTargetWorldPosition(Point target, int count_max){
 	Screen::tergetPosition_start = Screen::window_center_world_pos + Screen::target_pos_delta;
 }
 
+void Screen::addTargetWorldPositionDelta(Point delta, int count_max) {
+	Screen::move_count = 0;
+	Screen::move_count_max = count_max;
+	Screen::tergetPosition_goal = Screen::window_center_world_pos + Screen::target_pos_delta + delta;
+	Screen::tergetPosition_start = Screen::window_center_world_pos + Screen::target_pos_delta;
+}
+
 void Screen::setZoomIn(double zoom_max, int zoomin_count_max){
 	Screen::zoom_count = 0;
 	Screen::zoom_count_max = zoomin_count_max;

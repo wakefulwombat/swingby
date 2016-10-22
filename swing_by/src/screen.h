@@ -28,6 +28,7 @@ private:
 public:
 	static void initTargetPositionDeltaCenter(Point delta);
 	static void setTargetWorldPosition(Point target, int time);
+	static void addTargetWorldPositionDelta(Point delta, int time);
 	static void setStageSize(Size size);
 
 	static void setZoomIn(double zoom_max, int zoomin_count_max);
