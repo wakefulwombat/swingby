@@ -36,7 +36,7 @@ void Timer::draw() const {
 double Timer::getTime() {
 	double t = 0.00;
 	for (int i = 0; i < 5; ++i) {
-		t += this->time[i] * pow(10, 3 - i);
+		t += this->time[i] * pow(10, 2 - i);
 	}
 	return t;
 }

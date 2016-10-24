@@ -9,7 +9,7 @@ SceneGameMainStageSelect::SceneGameMainStageSelect(std::function<void(SceneInGam
 	for (int i = 0; i < 20; ++i) {
 		int x = i % 4;
 		int y = (i - x) / 4;
-		this->buttons.push_back(std::make_shared<ButtonMove>(Point(90 + x * 150, 300 + y * 110), Size(140, 100), "", 20, [setSelectStage, i, this]() {offButtonInsteadOfIndex(i);  setSelectStage(i); }));
+		this->buttons.push_back(std::make_shared<ButtonMove>(Point(90 + x * 150, 300 + y * 110), Size(140, 100), "STAGE " + std::to_string(i + 1), 20, [setSelectStage, i, this]() {offButtonInsteadOfIndex(i);  setSelectStage(i); }));
 	}
 	this->buttons[0]->clicked();
 	this->button_go = std::make_shared<Button>(Point(800, 450), Size(180, 80), "スタート", 20, [sceneChanger]() {sceneChanger(SceneInGameMainKind::Stage); });

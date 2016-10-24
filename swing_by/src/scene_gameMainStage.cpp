@@ -80,7 +80,7 @@ void SceneGameMainStage::hitCheck() {
 	}
 	if (this->map->isInGoalArea(this->player)) {
 		this->player->setInvalid();
-		this->score->setGoalSpeed(this->player->getValidation());
+		this->score->setGoalSpeed(this->player->getTransVelNorm());
 		this->score->setGoalTime(this->timer->getTime());
 		this->isStageCleared = true;
 		if (!this->mouse_pointer->getValidation()) this->mouse_pointer->rememberShow();
