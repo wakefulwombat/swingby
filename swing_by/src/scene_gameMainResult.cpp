@@ -27,6 +27,11 @@ SceneGameMainResult::SceneGameMainResult(std::function<void(SceneInGameMainKind)
 	this->button.push_back(std::make_shared<Button>(Point(500, 420), Size(200, 70), "ステージセレクト", 22, [gameMainSceneChanger]() {gameMainSceneChanger(SceneInGameMainKind::StageSelect); }));
 	this->button.push_back(std::make_shared<Button>(Point(750, 420), Size(200, 70), "タイトル", 22, [changer]() {changer(SceneKind::Opening); }));
 	for (auto it = this->button.begin(); it != this->button.end(); ++it) (*it)->setInvalid();
+	this->button.push_back(std::make_shared<ButtonMove>(Point(250, 190), Size(200, 70), "タイム", 22, []() {}));
+	this->button.push_back(std::make_shared<ButtonMove>(Point(600, 190), Size(200, 70), "スピード", 22, []() {}));
+	this->button.push_back(std::make_shared<ButtonMove>(Point(250, 310), Size(200, 70), "マックス", 22, []() {}));
+	this->button.push_back(std::make_shared<ButtonMove>(Point(600, 310), Size(200, 70), "スイング", 22, []() {}));
+	
 
 	Screen::initTargetPositionDeltaCenter(Point());
 	Screen::setTargetWorldPosition(Point(Screen::getWindowSize().width / 2, Screen::getWindowSize().height * 3 / 2), 1);
