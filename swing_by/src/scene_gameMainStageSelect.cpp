@@ -2,8 +2,9 @@
 #include "screen.h"
 #include "input.h"
 
-SceneGameMainStageSelect::SceneGameMainStageSelect(std::function<void(SceneInGameMainKind)> sceneChanger, std::function<void(int)> setSelectStage) : SceneInGameMainBase(sceneChanger) {
+SceneGameMainStageSelect::SceneGameMainStageSelect(std::function<void(SceneInGameMainKind)> sceneChanger, std::function<void(SceneKind)> backToTitle, std::function<void(int)> setSelectStage) : SceneInGameMainBase(sceneChanger) {
 	this->setSelectStage = setSelectStage;
+	this->backToTitle = backToTitle;
 
 	for (int i = 0; i < 20; ++i) {
 		int x = i % 4;
@@ -31,6 +32,7 @@ void SceneGameMainStageSelect::update() {
 	this->button_go->update();
 
 	if (Input::getMouseWheelRotation() != 0)Screen::addTargetWorldPositionDelta(Point(0, -100)*Input::getMouseWheelRotation(), 10);
+	if (Input::getKeyCodeDownOnce(KeyType::Game_VectorTrans_CANCEL)) this->backToTitle(SceneKind::Opening);
 }
 
 void SceneGameMainStageSelect::finalize() {

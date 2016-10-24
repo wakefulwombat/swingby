@@ -133,7 +133,7 @@ Point Orbit::getNextVelocityVector(Point now) {
 	Point now_ = this->spin(now, this->ell_f_pos, -this->ell_rotate_rad);
 
 	if(!this->run_circle) {
-		if (this->go_accele) this->move_vel *= 1.01;
+		if (this->go_accele) this->move_vel *= 1.005;
 		else this->move_vel /= 1.005;
 		if (this->move_vel < 1.0) this->move_vel = 1.0;
 

@@ -6,7 +6,8 @@
 #include "scene_option.h"
 
 SceneManager::SceneManager(){
-	this->nextScene = SceneKind::GameMain;
+	this->nextScene = SceneKind::Opening;
+	this->quit = false;
 }
 
 void SceneManager::update(){
@@ -29,7 +30,7 @@ void SceneManager::update(){
 			break;
 
 		case SceneKind::Opening:
-			this->nowScene = std::make_shared<SceneOpening>([this](SceneKind kind) {nextScene = kind; });
+			this->nowScene = std::make_shared<SceneOpening>([this](SceneKind kind) {nextScene = kind; }, [this]() {quit = true; });
 			break;
 
 		case SceneKind::Option:

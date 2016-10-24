@@ -4,7 +4,8 @@ enum class MessageType {
 	PAUSE,
 	GAMEOVER,
 	STAGECLEAR,
-	RESULT
+	RESULT,
+	TITLE
 };
 
 enum class ScoreRank {
@@ -24,7 +25,7 @@ private:
 	static int player[2];
 	static int cross_target[3];
 	static int explosion[14];
-	static int message[4];
+	static int message[5];
 	static int number[10];
 	static int dot;
 	static int rank[4];

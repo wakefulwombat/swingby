@@ -26,6 +26,9 @@ Message::Message(Point pos, MessageType type) {
 		this->size = Size(480, 119);
 		this->expansion = 0.5;
 		break;
+
+	case MessageType::TITLE:
+		this->size = Size(693, 208);
 	}
 }
 

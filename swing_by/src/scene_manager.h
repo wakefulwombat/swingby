@@ -22,10 +22,13 @@ class SceneManager : public RequiredFunc, public std::enable_shared_from_this<Sc
 private:
 	SceneKind nextScene;
 	std::shared_ptr<SceneBase> nowScene;
+	bool quit;
 
 public:
 	SceneManager();
 
 	void update() override;
 	void finalize() override;
+
+	bool isQuit() { return this->quit; }
 };

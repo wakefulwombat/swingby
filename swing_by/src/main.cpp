@@ -45,6 +45,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		ScreenFlip();
 
 		if (ProcessMessage() == -1) break;
+		if (mgr->isQuit()) break;
 	}
 	mgr->finalize();
 

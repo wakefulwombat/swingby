@@ -73,6 +73,7 @@ void Player::update() {
 
 	this->score->setNowSpeed(this->trans_vel);
 
+	Screen::initTargetPositionDeltaCenter(Point(-200.0*cos(this->img_rotation), -200.0*sin(this->img_rotation)));
 	Screen::setTargetWorldPosition(this->position, 15);
 }
 

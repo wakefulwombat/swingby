@@ -7,7 +7,7 @@ int Image::mouse_pointer;
 int Image::player[2];
 int Image::cross_target[3];
 int Image::explosion[14];
-int Image::message[4];
+int Image::message[5];
 int Image::number[10];
 int Image::dot;
 int Image::rank[4];
@@ -56,6 +56,7 @@ void Image::loadGameScene(){
 	Image::message[(int)MessageType::GAMEOVER] = LoadGraph("asset\\message\\gameover.png");
 	Image::message[(int)MessageType::STAGECLEAR] = LoadGraph("asset\\message\\stageclear.png");
 	Image::message[(int)MessageType::RESULT] = LoadGraph("asset\\message\\result.png");
+	Image::message[(int)MessageType::TITLE] = LoadGraph("asset\\message\\title.png");
 
 	Image::number[0] = LoadGraph("asset\\number\\w0.png");
 	Image::number[1] = LoadGraph("asset\\number\\w1.png");
