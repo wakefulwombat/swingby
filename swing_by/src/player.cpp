@@ -41,11 +41,15 @@ void Player::update() {
 	this->vector_trans_timer->update();
 
 	if (Input::getKeyCodeDownOnce(KeyType::Game_Swing_OK)) {
-		if(this->internalController->isEnd()) this->internalController = this->ctrl_mgr->getInternalMoveObjectController_Ellipse(this->shared_from_this(), this->shared_from_this(), this->orbit, this->cross_target->getPosition());
-		this->score->addSwingCount();
+		if (this->internalController->isEnd()) {
+			this->internalController = this->ctrl_mgr->getInternalMoveObjectController_Ellipse(this->shared_from_this(), this->shared_from_this(), this->orbit, this->cross_target->getPosition());
+			this->score->addSwingCount();
+			this->cross_target->fix();
+		}
 	}
 	if (Input::getKeyCodeUpOnce(KeyType::Game_Swing_OK)) {
 		if (this->internalController->isEnd()) this->internalController = this->ctrl_mgr->getInternalMoveObjectController_GoStraight(this->shared_from_this(), this->shared_from_this());
+		this->cross_target->unfix();
 	}
 
 	if (Input::getKeyCodeDownOnce(KeyType::Game_VectorTrans_CANCEL)) {
@@ -85,7 +89,7 @@ void Player::finalize() {
 
 }
 
-void Player::setInterface(const std::shared_ptr<IGetController> &ctrl_mgr, const std::shared_ptr<ObjectBase> &cross_target, const std::shared_ptr<IGetOrbit> &orbit, const std::shared_ptr<ISetMousePointer> &mouse_pointer, const std::shared_ptr<ISetScore> &score) {
+void Player::setInterface(const std::shared_ptr<IGetController> &ctrl_mgr, const std::shared_ptr<CrossTarget> &cross_target, const std::shared_ptr<IGetOrbit> &orbit, const std::shared_ptr<ISetMousePointer> &mouse_pointer, const std::shared_ptr<ISetScore> &score) {
 	this->ctrl_mgr = ctrl_mgr;
 	this->cross_target = cross_target;
 	this->orbit = orbit;

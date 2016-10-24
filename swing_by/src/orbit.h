@@ -16,6 +16,8 @@ private:
 	std::shared_ptr<ObjectBase> mouse_pointer;
 	std::shared_ptr<IGetMapCrossPosition> map;
 
+	bool isFixed;
+
 public:
 	CrossTarget(const std::shared_ptr<ObjectBase> &player, const std::shared_ptr<ObjectBase> &mouse_pointer, const std::shared_ptr<IGetMapCrossPosition> &map);
 	void initialize() override;
@@ -23,6 +25,9 @@ public:
 	void draw() const override;
 	void addDraw() override { Screen::addDrawObjectMutable(this->shared_from_this()); }
 	void finalize() override;
+
+	void fix() { this->isFixed = true; }
+	void unfix() { this->isFixed = false; }
 };
 
 class Orbit : public ObjectBase {
@@ -76,6 +81,6 @@ public:
 	void setInvalid() override { this->validation = false; }
 	void setValid() override { this->validation = true; }
 
-	std::shared_ptr<ObjectBase> getCrossTarget() { return this->crossTarget; }
+	std::shared_ptr<CrossTarget> getCrossTarget() { return this->crossTarget; }
 
 };

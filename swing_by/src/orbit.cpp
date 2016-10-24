@@ -10,6 +10,7 @@ CrossTarget::CrossTarget(const std::shared_ptr<ObjectBase> &player, const std::s
 	this->z_sort = 10000;
 	this->size = Size(64, 64);
 	for (int i = 0; i < 3; ++i)this->target_spin[i] = 0.000000;
+	this->isFixed = false;
 
 	this->player = player;
 	this->mouse_pointer = mouse_pointer;
@@ -21,7 +22,9 @@ void CrossTarget::initialize() {
 }
 
 void CrossTarget::update() {
-	this->position = this->map->getMapCrossPosition(this->player->getPosition(), Screen::getPositionOfWorldCoordinate(this->mouse_pointer->getPosition()));
+	if (!this->validation) return;
+
+	if(!this->isFixed) this->position = this->map->getMapCrossPosition(this->player->getPosition(), Screen::getPositionOfWorldCoordinate(this->mouse_pointer->getPosition()));
 
 	this->target_spin[0] += M_PI / 30;
 	this->target_spin[1] -= M_PI / 40;
