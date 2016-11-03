@@ -18,6 +18,7 @@ private:
 	std::vector<std::shared_ptr<Button>> button;
 
 	int count;
+	int stageMax;
 
 public:
 	SceneGameMainResult(std::function<void(SceneInGameMainKind)> gameMainSceneChanger, std::function<void(SceneKind)> changer, ScoreResult result);

@@ -1,8 +1,11 @@
 #include "scene_gameMainResult.h"
 #include "screen.h"
+#include <fstream>
+#include <sstream>
 
 SceneGameMainResult::SceneGameMainResult(std::function<void(SceneInGameMainKind)> gameMainSceneChanger, std::function<void(SceneKind)> changer, ScoreResult result) : SceneInGameMainBase(gameMainSceneChanger) {
 	this->count = 0;
+	this->stageMax = stageMax;
 
 	this->mouse_pointer = std::make_shared<MousePointer>();
 	this->mes = std::make_shared<Message>(Point(150, 50), MessageType::RESULT);

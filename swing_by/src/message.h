@@ -32,4 +32,5 @@ public:
 	void addDraw() override;
 
 	void startShowing(double start_exp, double final_exp, int time);
+	void changeType(ScoreRank type) { this->type = type; }
 };
