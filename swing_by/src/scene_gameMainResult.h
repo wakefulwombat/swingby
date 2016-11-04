@@ -18,10 +18,10 @@ private:
 	std::vector<std::shared_ptr<Button>> button;
 
 	int count;
-	int stageMax;
+	void writeHighScore(int stage, ScoreResult result);
 
 public:
-	SceneGameMainResult(std::function<void(SceneInGameMainKind)> gameMainSceneChanger, std::function<void(SceneKind)> changer, ScoreResult result);
+	SceneGameMainResult(std::function<void(SceneInGameMainKind)> gameMainSceneChanger, std::function<void(SceneKind)> changer, int stage, ScoreResult result);
 	void initialize() override;
 	void update() override;
 	void finalize() override;

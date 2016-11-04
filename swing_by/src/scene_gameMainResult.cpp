@@ -2,11 +2,12 @@
 #include "screen.h"
 #include <fstream>
 #include <sstream>
+#include <vector>
 
-SceneGameMainResult::SceneGameMainResult(std::function<void(SceneInGameMainKind)> gameMainSceneChanger, std::function<void(SceneKind)> changer, ScoreResult result) : SceneInGameMainBase(gameMainSceneChanger) {
+SceneGameMainResult::SceneGameMainResult(std::function<void(SceneInGameMainKind)> gameMainSceneChanger, std::function<void(SceneKind)> changer, int stage, ScoreResult result) : SceneInGameMainBase(gameMainSceneChanger) {
 	this->count = 0;
-	this->stageMax = stageMax;
 
+	this->writeHighScore(stage, result);
 	this->mouse_pointer = std::make_shared<MousePointer>();
 	this->mes = std::make_shared<Message>(Point(150, 50), MessageType::RESULT);
 	this->mes->setInvalid();
@@ -65,4 +66,29 @@ void SceneGameMainResult::update() {
 
 void SceneGameMainResult::finalize() {
 
+}
+
+void SceneGameMainResult::writeHighScore(int stage, ScoreResult result) {
+	std::ifstream ifs("asset\\highscore.dat");
+	if (!ifs) return;
+
+	std::string str;
+	std::vector<int> highscore_list;
+
+	for (int i = 0; i < 20; ++i) {
+		std::getline(ifs, str);
+		std::string score;
+		std::istringstream stream(str);
+
+		getline(stream, score, ',');
+		highscore_list.push_back(std::stoi(score));
+	}
+
+	if (highscore_list[stage] > (int)result.total) highscore_list[stage] = (int)result.total;
+	else if(highscore_list[stage]==-1) highscore_list[stage] = (int)result.total;
+
+	std::ofstream ofs("asset\\highscore.dat");
+	for (int i = 0; i < 20; ++i) {
+		ofs << highscore_list[i] << std::endl;
+	}
 }

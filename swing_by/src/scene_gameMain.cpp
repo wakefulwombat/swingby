@@ -7,7 +7,7 @@
 SceneGameMain::SceneGameMain(std::function<void(SceneKind)> changer) : SceneBase(changer){
 	this->nextSceneInGameMain = SceneInGameMainKind::StageSelect;
 	this->sceneChanger = changer;
-	this->selectedStage = 1;
+	this->selectedStage = 0;
 }
 
 void SceneGameMain::initialize() {
@@ -26,7 +26,7 @@ void SceneGameMain::update() {
 			break;
 
 		case SceneInGameMainKind::Result:
-			this->nowSceneInGameMain = std::make_shared<SceneGameMainResult>([this](SceneInGameMainKind scene) {nextSceneInGameMain = scene; }, this->sceneChanger, this->scoreResult);
+			this->nowSceneInGameMain = std::make_shared<SceneGameMainResult>([this](SceneInGameMainKind scene) {nextSceneInGameMain = scene; }, this->sceneChanger, this->selectedStage, this->scoreResult);
 			break;
 
 		case SceneInGameMainKind::Stage:
