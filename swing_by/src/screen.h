@@ -45,6 +45,11 @@ public:
 	static void drawPoint(Point center, int r, Color color, bool fill = true);
 	static void drawString(Point center, Color color, std::string text, int font_size);
 
+	//static void drawSquareFixSize(Point center_pos, Size size, Color color, bool fill = true);
+	//static void drawStringFixSize(Point center, Color color, std::string text, int font_size);
+	static void drawSquareOnWindow(Point center_pos, Size size, Color color, bool fill = true);
+	static void drawStringOnWindow(Point center, Color color, std::string text, int font_size);
+
 	static void init(int window_width, int window_height);
 	static void update();
 
@@ -55,6 +60,8 @@ public:
 	static Size getWindowSize(){ return Screen::windowSize; }
 	static Point getPositionOfWindowCoordinate(Point world_pos) { return world_pos - Screen::window_center_world_pos + Screen::windowSize / 2; }
 	static Point getPositionOfWorldCoordinate(Point window_pos) { return window_pos + Screen::window_center_world_pos - Screen::windowSize / 2; }
+	static Point toWindowPosPxFromWorldPos(Point world_pos) { return ((world_pos - Screen::window_center_world_pos)*Screen::zoom + Screen::windowSize / 2); }
+	static Point toWorldPosFromWindowPosPx(Point window_pos) { return (Screen::window_center_world_pos + (window_pos - Screen::windowSize / 2) / Screen::zoom); }
 
 	static bool isVisible(const std::shared_ptr<ObjectBase> &obj);
 	static bool isVisiblePoint(Point pos);

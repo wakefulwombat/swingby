@@ -24,7 +24,7 @@ void CrossTarget::initialize() {
 void CrossTarget::update() {
 	if (!this->validation) return;
 
-	if(!this->isFixed) this->position = this->map->getMapCrossPosition(this->player->getPosition(), Screen::getPositionOfWorldCoordinate(this->mouse_pointer->getPosition()));
+	if(!this->isFixed) this->position = this->map->getMapCrossPosition(this->player->getPosition(), Screen::toWorldPosFromWindowPosPx(this->mouse_pointer->getPosition()));
 
 	this->target_spin[0] += M_PI / 30;
 	this->target_spin[1] -= M_PI / 40;

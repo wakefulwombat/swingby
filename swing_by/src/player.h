@@ -21,10 +21,11 @@ private:
 	std::shared_ptr<TimerRing> vector_trans_timer;
 
 	double overshoot_vel;
+	int wheel_rotation;
 
 public:
 	Player();
-	void initialize() override {}
+	void initialize() override { this->wheel_rotation = 0; }
 	void update() override;
 	void draw() const override;
 	void addDraw() override { Screen::addDrawObjectMutable(this->shared_from_this()); }

@@ -57,10 +57,12 @@ void Button::draw() const {
 	else {
 		col = this->background_color;
 	}
-	Screen::drawSquare(Screen::getPositionOfWorldCoordinate(this->position), this->size, col);
+	// Screen::drawSquareFixSize(Screen::getPositionOfWorldCoordinate(this->position), this->size, col);
+	Screen::drawSquareOnWindow(this->position, this->size, col);
 
 	col = this->text_color;
-	Screen::drawString(Screen::getPositionOfWorldCoordinate(this->position), col, this->text, this->font_size);
+	//Screen::drawStringFixSize(Screen::getPositionOfWorldCoordinate(this->position), col, this->text, this->font_size);
+	Screen::drawStringOnWindow(this->position, col, this->text, this->font_size);
 }
 
 void Button::addDraw() {

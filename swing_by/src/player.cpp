@@ -32,6 +32,8 @@ void Player::initialize(Point start) {
 	this->chip_switch_time = 10;
 	this->show_chip_index = 0;
 	Screen::initTargetPositionDeltaCenter(Point(-200.0, 0.0));
+
+	this->wheel_rotation = 10;
 }
 
 void Player::update() {
@@ -68,6 +70,16 @@ void Player::update() {
 	}
 	if (Input::getKeyCodeDown(KeyType::Game_VectorTrans_CANCEL)) {
 
+	}
+	if (Input::getMouseWheelRotation() > 0) {
+		this->wheel_rotation += Input::getMouseWheelRotation();
+		if (this->wheel_rotation > 20)this->wheel_rotation = 20;
+		Screen::setZoomIn(0.1*this->wheel_rotation, 10);
+	}
+	if (Input::getMouseWheelRotation() < 0) {
+		this->wheel_rotation += Input::getMouseWheelRotation();
+		if (this->wheel_rotation < 6)this->wheel_rotation = 6;
+		Screen::setZoomIn(0.1*this->wheel_rotation, 10);
 	}
 
 	this->count++;
