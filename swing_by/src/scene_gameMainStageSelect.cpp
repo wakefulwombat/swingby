@@ -8,7 +8,7 @@ SceneGameMainStageSelect::SceneGameMainStageSelect(std::function<void(SceneInGam
 	this->setSelectStage = setSelectStage;
 	this->backToTitle = backToTitle;
 
-	this->stageMax = 20;
+	this->stageMax = 3;
 	this->selectedStage = 0;
 	this->loadHighScore();
 
@@ -52,7 +52,7 @@ void SceneGameMainStageSelect::update() {
 		this->highscore->update();
 	}
 
-	if (Input::getMouseWheelRotation() != 0)Screen::addTargetWorldPositionDelta(Point(0, -100)*Input::getMouseWheelRotation(), 10);
+	//if (Input::getMouseWheelRotation() != 0)Screen::addTargetWorldPositionDelta(Point(0, -100)*Input::getMouseWheelRotation(), 10);
 	if (Input::getKeyCodeDownOnce(KeyType::Game_VectorTrans_CANCEL)) this->backToTitle(SceneKind::Opening);
 }
 

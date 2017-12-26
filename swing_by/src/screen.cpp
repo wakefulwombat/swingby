@@ -128,7 +128,7 @@ void Screen::drawString(Point center, Color color, std::string text, int font_si
 void Screen::drawSquareOnWindow(Point center_pos, Size size, Color color, bool fill)
 {
 	SetDrawBlendMode(DX_BLENDMODE_ALPHA, 255);
-	DrawBox((int)(center_pos.x - size.width / 2), (int)(center_pos.y - size.height / 2), (int)(center_pos.x + size.width / 2), (int)(center_pos.y + size.height), GetColor(color.r, color.g, color.b), fill);
+	DrawBox((int)(center_pos.x - size.width / 2), (int)(center_pos.y - size.height / 2), (int)(center_pos.x + size.width / 2), (int)(center_pos.y + size.height / 2), GetColor(color.r, color.g, color.b), fill);
 }
 
 void Screen::drawStringOnWindow(Point center, Color color, std::string text, int font_size)

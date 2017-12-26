@@ -122,6 +122,10 @@ std::string Map::transformStageToFilename(int stage) {
 	case 1:
 		s = "asset\\map\\map_002.csv";
 		break;
+
+	case 2:
+		s = "asset\\map\\map_003.csv";
+		break;
 	}
 
 	return s;
@@ -365,10 +369,12 @@ bool Map::isHitWithWall(const std::shared_ptr<ObjectBase> &obj, double r) {
 
 		case 4:
 		case 6:
+			if (abs(obj->getPosition().x - this->map_chip[(int)p.y][(int)p.x]->getPosition().x) > 32) continue;
 			if (abs(obj->getPosition().x + obj->getPosition().y - this->map_chip[(int)p.y][(int)p.x]->getPosition().x - this->map_chip[(int)p.y][(int)p.x]->getPosition().y) / sqrt(2) < r) return true;
 			break;
 		case 5:
 		case 7:
+			if (abs(obj->getPosition().x - this->map_chip[(int)p.y][(int)p.x]->getPosition().x) > 32) continue;
 			if (abs(obj->getPosition().y - obj->getPosition().x - this->map_chip[(int)p.y][(int)p.x]->getPosition().y + this->map_chip[(int)p.y][(int)p.x]->getPosition().x) / sqrt(2) < r) return true;
 			break;
 

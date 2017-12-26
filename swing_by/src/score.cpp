@@ -42,11 +42,11 @@ void ScoreManager::loadRankTable(int stage) {
 	this->B.goal_speed = std::stod(tmp);
 
 	getline(stream, tmp, ',');
-	this->S.swing_tech = std::stoi(tmp);
+	this->S.swing_tech = std::stoi(tmp) * 60;
 	getline(stream, tmp, ',');
-	this->A.swing_tech = std::stoi(tmp);
+	this->A.swing_tech = std::stoi(tmp) * 60;
 	getline(stream, tmp, ',');
-	this->B.swing_tech = std::stoi(tmp);
+	this->B.swing_tech = std::stoi(tmp) * 60;
 }
 
 

@@ -42,10 +42,13 @@ void Player::update() {
 	this->internalController->update();
 	this->vector_trans_timer->update();
 
+	if (Input::getKeyCodeDown(KeyType::Game_Swing_OK)) {
+		this->score->addSwingCount();
+	}
 	if (Input::getKeyCodeDownOnce(KeyType::Game_Swing_OK)) {
 		if (this->internalController->isEnd()) {
 			this->internalController = this->ctrl_mgr->getInternalMoveObjectController_Ellipse(this->shared_from_this(), this->shared_from_this(), this->orbit, this->cross_target->getPosition());
-			this->score->addSwingCount();
+			//this->score->addSwingCount();
 			this->cross_target->fix();
 		}
 	}
